@@ -1,0 +1,283 @@
+/* =========================================================
+   HOTEL MANAGEMENT - DASHBOARD
+   ========================================================= */
+
+:root {
+    --hotel-primary: #1e3a5f;
+    --hotel-primary-dark: #0f172a;
+    --hotel-primary-light: #e8eef5;
+
+    --hotel-accent: #c9a227;
+    --hotel-accent-light: #f8f1d8;
+
+    --hotel-success: #059669;
+    --hotel-warning: #d97706;
+    --hotel-danger: #dc2626;
+
+    --hotel-background: #f8fafc;
+    --hotel-card: #ffffff;
+
+    --hotel-text: #1e293b;
+    --hotel-text-muted: #64748b;
+    --hotel-border: #e2e8f0;
+}
+
+
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================= */
+
+.hotel-dashboard {
+    background: var(--hotel-background);
+    color: var(--hotel-text);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.hotel-dashboard-header {
+    background: var(--hotel-card);
+    border-bottom: 1px solid var(--hotel-border);
+}
+
+
+/* =========================================================
+   BOTÓN PRINCIPAL
+   ========================================================= */
+
+.hotel-primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    background: var(--hotel-primary);
+    color: #ffffff;
+
+    padding: 0.625rem 1rem;
+    border-radius: 0.5rem;
+
+    font-size: 0.875rem;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.hotel-primary-button:hover {
+    background: var(--hotel-primary-dark);
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+.hotel-card {
+    background: var(--hotel-card);
+
+    border: 1px solid var(--hotel-border);
+    border-radius: 0.75rem;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.hotel-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   NÚMEROS DE ESTADÍSTICAS
+   ========================================================= */
+
+.hotel-stat-number {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+
+    font-weight: 700;
+
+    color: var(--hotel-primary-dark);
+}
+
+
+/* =========================================================
+   ICONOS DE ESTADÍSTICAS
+   ========================================================= */
+
+.hotel-stat-icon {
+    display: flex;
+
+    width: 3rem;
+    height: 3rem;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 0.625rem;
+
+    background: var(--hotel-primary-light);
+    color: var(--hotel-primary);
+
+    font-size: 1.25rem;
+}
+
+
+/* =========================================================
+   ACENTO DORADO
+   ========================================================= */
+
+.hotel-accent {
+    color: var(--hotel-accent);
+}
+
+.hotel-accent-background {
+    background: var(--hotel-accent);
+}
+
+
+/* =========================================================
+   BARRA DE OCUPACIÓN
+   ========================================================= */
+
+.hotel-progress {
+    width: 100%;
+    height: 0.75rem;
+
+    overflow: hidden;
+
+    background: #6e572b;
+
+    border-radius: 9999px;
+}
+
+.hotel-progress-bar {
+    height: 100%;
+
+    background: var(--hotel-primary);
+
+    border-radius: 9999px;
+
+    transition: width 0.5s ease;
+}
+
+
+/* =========================================================
+   ACCIONES RÁPIDAS
+   ========================================================= */
+
+.hotel-action {
+    display: block;
+
+    background: var(--hotel-card);
+
+    border: 1px solid var(--hotel-border);
+    border-radius: 0.75rem;
+
+    padding: 1.25rem;
+
+    transition: all 0.2s ease;
+}
+
+.hotel-action:hover {
+    border-color: var(--hotel-primary);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   RESERVAS
+   ========================================================= */
+
+.hotel-reservation {
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.75rem;
+
+    padding: 0.75rem 0;
+
+    border-bottom: 1px solid var(--hotel-border);
+}
+
+.hotel-reservation:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.hotel-avatar {
+    display: flex;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 9999px;
+
+    background: var(--hotel-primary-light);
+
+    color: var(--hotel-primary);
+
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ESTADOS
+   ========================================================= */
+
+.hotel-status-success {
+    color: var(--hotel-success);
+    background: #ecfdf5;
+}
+
+.hotel-status-warning {
+    color: var(--hotel-warning);
+    background: #fffbeb;
+}
+
+.hotel-status-danger {
+    color: var(--hotel-danger);
+    background: #fef2f2;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .hotel-stat-number {
+        font-size: 1.5rem;
+    }
+
+    .hotel-card {
+        border-radius: 0.625rem;
+    }
+
+}

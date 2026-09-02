@@ -1,0 +1,1585 @@
+/* =========================================================
+   MANTENIMIENTO
+   resources/css/mantenimiento.css
+========================================================= */
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --hotel-primary: #1e3a5f;
+    --hotel-primary-dark: #142b46;
+
+    --maintenance-blue: #2563eb;
+    --maintenance-blue-light: #eff6ff;
+
+    --maintenance-green: #16a34a;
+    --maintenance-green-light: #f0fdf4;
+
+    --maintenance-orange: #ea580c;
+    --maintenance-orange-light: #fff7ed;
+
+    --maintenance-red: #dc2626;
+    --maintenance-red-light: #fef2f2;
+
+    --maintenance-purple: #7c3aed;
+    --maintenance-purple-light: #f5f3ff;
+
+    --hotel-background: #f5f7fa;
+
+    --hotel-white: #ffffff;
+
+    --hotel-text: #111827;
+
+    --hotel-text-secondary: #374151;
+
+    --hotel-border: #d1d5db;
+
+}
+
+
+/* =========================================================
+   BASE
+========================================================= */
+
+.maintenance-page {
+
+    min-height: 100vh;
+
+    background: var(--hotel-background);
+
+    color: var(--hotel-text);
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.maintenance-page .hotel-sidebar {
+
+    position: fixed;
+
+    left: 0;
+
+    top: 0;
+
+    width: 250px;
+
+    height: 100vh;
+
+    background: var(--hotel-primary);
+
+    color: #ffffff;
+
+    display: flex;
+
+    flex-direction: column;
+
+    z-index: 1000;
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.maintenance-page .sidebar-logo {
+
+    height: 82px;
+
+    padding: 0 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border-bottom: 1px solid rgba(255,255,255,.12);
+
+}
+
+
+.maintenance-page .logo-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--hotel-primary);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+}
+
+
+.maintenance-page .logo-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.maintenance-page .logo-title {
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.maintenance-page .logo-subtitle {
+
+    font-size: 11px;
+
+    color: rgba(255,255,255,.75);
+
+    margin-top: 2px;
+
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+.maintenance-page .sidebar-navigation {
+
+    flex: 1;
+
+    padding: 20px 13px;
+
+    overflow-y: auto;
+
+}
+
+
+.maintenance-page .navigation-title {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    color: rgba(255,255,255,.55);
+
+    padding: 14px 12px 8px;
+
+}
+
+
+.maintenance-page .sidebar-link {
+
+    height: 45px;
+
+    padding: 0 12px;
+
+    margin-bottom: 4px;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: rgba(255,255,255,.82);
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: .2s ease;
+
+}
+
+
+.maintenance-page .sidebar-link:hover {
+
+    background: rgba(255,255,255,.10);
+
+    color: #ffffff;
+
+}
+
+
+.maintenance-page .sidebar-link.active {
+
+    background: #ffffff;
+
+    color: var(--hotel-primary);
+
+    box-shadow: 0 3px 10px rgba(0,0,0,.12);
+
+}
+
+
+.maintenance-page .sidebar-link-icon {
+
+    width: 25px;
+
+    text-align: center;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================================
+   USUARIO SIDEBAR
+========================================================= */
+
+.maintenance-page .sidebar-user {
+
+    padding: 16px;
+
+    border-top: 1px solid rgba(255,255,255,.12);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.maintenance-page .sidebar-user-avatar {
+
+    width: 37px;
+
+    height: 37px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: var(--hotel-primary);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.maintenance-page .sidebar-user-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+}
+
+
+.maintenance-page .sidebar-user-info span {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.maintenance-page .sidebar-user-info small {
+
+    margin-top: 2px;
+
+    font-size: 10px;
+
+    color: rgba(255,255,255,.65);
+
+}
+
+
+.maintenance-page .sidebar-user-menu {
+
+    border: none;
+
+    background: transparent;
+
+    color: rgba(255,255,255,.7);
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.maintenance-page .maintenance-main {
+
+    margin-left: 16rem;
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.maintenance-page .hotel-header {
+
+    height: 78px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid var(--hotel-border);
+
+    padding: 0 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.maintenance-page .page-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+}
+
+
+.maintenance-page .page-heading-icon {
+
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 9px;
+
+    background: var(--hotel-primary);
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+}
+
+
+.maintenance-page .page-heading h1 {
+
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+}
+
+
+.maintenance-page .page-heading p {
+
+    margin: 3px 0 0;
+
+    color: #374151;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   HEADER RIGHT
+========================================================= */
+
+.maintenance-page .header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.maintenance-page .header-icon-button {
+
+    width: 40px;
+
+    height: 40px;
+
+    border: 1px solid var(--hotel-border);
+
+    background: #ffffff;
+
+    border-radius: 8px;
+
+    color: #111827;
+
+    position: relative;
+
+    cursor: pointer;
+
+}
+
+
+.maintenance-page .notification-dot {
+
+    position: absolute;
+
+    top: 7px;
+
+    right: 7px;
+
+    width: 7px;
+
+    height: 7px;
+
+    background: var(--maintenance-red);
+
+    border-radius: 50%;
+
+}
+
+
+.maintenance-page .header-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.maintenance-page .header-user-avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: var(--hotel-primary);
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 800;
+
+}
+
+
+.maintenance-page .header-user-info strong {
+
+    font-size: 13px;
+
+    color: #111827;
+
+}
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+.maintenance-page .maintenance-content {
+
+    padding: 30px;
+
+    max-width: 1700px;
+
+    margin: auto;
+
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.maintenance-page .maintenance-page-title {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+}
+
+
+.maintenance-section-label {
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color: var(--hotel-primary);
+
+}
+
+
+.maintenance-page-title h2 {
+
+    margin: 5px 0 0;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: #111827;
+
+}
+
+
+.maintenance-page-title p {
+
+    margin: 6px 0 0;
+
+    color: #374151;
+
+    font-size: 13px;
+
+}
+
+
+.maintenance-primary-button {
+
+    height: 44px;
+
+    padding: 0 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: var(--hotel-primary);
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+}
+
+
+.maintenance-primary-button:hover {
+
+    background: var(--hotel-primary-dark);
+
+}
+
+
+/* =========================================================
+   RESUMEN
+========================================================= */
+
+.maintenance-summary {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.maintenance-summary-card {
+
+    background: #ffffff;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 11px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+
+.summary-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 19px;
+
+}
+
+
+.card-pending .summary-icon {
+
+    background: var(--maintenance-orange-light);
+
+    color: var(--maintenance-orange);
+
+}
+
+
+.card-process .summary-icon {
+
+    background: var(--maintenance-blue-light);
+
+    color: var(--maintenance-blue);
+
+}
+
+
+.card-completed .summary-icon {
+
+    background: var(--maintenance-green-light);
+
+    color: var(--maintenance-green);
+
+}
+
+
+.card-urgent .summary-icon {
+
+    background: var(--maintenance-red-light);
+
+    color: var(--maintenance-red);
+
+}
+
+
+.summary-information {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.summary-information span {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #374151;
+
+}
+
+
+.summary-information strong {
+
+    font-size: 25px;
+
+    line-height: 1.2;
+
+    margin: 2px 0;
+
+    color: #111827;
+
+}
+
+
+.summary-information small {
+
+    font-size: 11px;
+
+    color: #374151;
+
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.maintenance-filters {
+
+    background: #ffffff;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 11px;
+
+    padding: 16px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 13px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.maintenance-search {
+
+    flex: 1;
+
+    height: 43px;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 12px;
+
+}
+
+
+.maintenance-search i {
+
+    color: #111827;
+
+}
+
+
+.maintenance-search input {
+
+    border: none;
+
+    outline: none;
+
+    width: 100%;
+
+    font-size: 13px;
+
+    color: #111827;
+
+}
+
+
+.maintenance-search input::placeholder {
+
+    color: #4b5563;
+
+}
+
+
+.maintenance-filter {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.maintenance-filter label {
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    color: #111827;
+
+}
+
+
+.maintenance-filter select {
+
+    height: 43px;
+
+    min-width: 130px;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    padding: 0 10px;
+
+    font-size: 12px;
+
+}
+
+
+.maintenance-filter-button {
+
+    height: 43px;
+
+    padding: 0 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: var(--maintenance-blue);
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   GRID PRINCIPAL
+========================================================= */
+
+.maintenance-grid {
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 330px;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.maintenance-panel {
+
+    background: #ffffff;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 11px;
+
+    overflow: hidden;
+
+}
+
+
+.maintenance-panel-header {
+
+    min-height: 72px;
+
+    padding: 16px 20px;
+
+    border-bottom: 1px solid var(--hotel-border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.maintenance-panel-header h3 {
+
+    margin: 0;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    color: #111827;
+
+}
+
+
+.maintenance-panel-header p {
+
+    margin: 4px 0 0;
+
+    font-size: 11px;
+
+    color: #374151;
+
+}
+
+
+.panel-options-button {
+
+    border: none;
+
+    background: transparent;
+
+    color: #111827;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   TABLA
+========================================================= */
+
+.maintenance-table-container {
+
+    overflow-x: auto;
+
+}
+
+
+.maintenance-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+
+.maintenance-table th {
+
+    background: #f8fafc;
+
+    padding: 13px 15px;
+
+    text-align: left;
+
+    white-space: nowrap;
+
+    border-bottom: 1px solid var(--hotel-border);
+
+    color: #111827;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+}
+
+
+.maintenance-table td {
+
+    padding: 14px 15px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    color: #111827;
+
+    font-size: 12px;
+
+}
+
+
+.maintenance-table tbody tr:hover {
+
+    background: #f9fafb;
+
+}
+
+
+/* =========================================================
+   ESTADO VACÍO
+========================================================= */
+
+.maintenance-empty {
+
+    padding: 55px 20px;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+.maintenance-empty-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    border-radius: 50%;
+
+    background: var(--maintenance-blue-light);
+
+    color: var(--maintenance-blue);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.maintenance-empty strong {
+
+    color: #111827;
+
+    font-size: 14px;
+
+}
+
+
+.maintenance-empty span {
+
+    color: #374151;
+
+    font-size: 11px;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================================================
+   PANEL LATERAL
+========================================================= */
+
+.maintenance-side-panel {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+
+.side-panel {
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   ESTADOS
+========================================================= */
+
+.maintenance-status-list {
+
+    padding: 8px 17px 15px;
+
+}
+
+
+.maintenance-status-item {
+
+    min-height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+}
+
+
+.maintenance-status-item:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.status-color {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+
+}
+
+
+.status-red {
+
+    background: var(--maintenance-red);
+
+}
+
+
+.status-orange {
+
+    background: var(--maintenance-orange);
+
+}
+
+
+.status-green {
+
+    background: var(--maintenance-green);
+
+}
+
+
+.maintenance-status-item > div:nth-child(2) {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.maintenance-status-item div strong {
+
+    font-size: 12px;
+
+    color: #111827;
+
+}
+
+
+.maintenance-status-item div span {
+
+    margin-top: 3px;
+
+    font-size: 10px;
+
+    color: #374151;
+
+}
+
+
+.maintenance-status-item > strong {
+
+    font-size: 17px;
+
+    color: #111827;
+
+}
+
+
+/* =========================================================
+   HABITACIONES AFECTADAS
+========================================================= */
+
+.affected-rooms {
+
+    min-height: 190px;
+
+    padding: 15px;
+
+}
+
+
+.affected-empty {
+
+    height: 170px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+}
+
+
+.affected-empty-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    border-radius: 50%;
+
+    background: var(--maintenance-green-light);
+
+    color: var(--maintenance-green);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 19px;
+
+    margin-bottom: 11px;
+
+}
+
+
+.affected-empty strong {
+
+    font-size: 13px;
+
+    color: #111827;
+
+}
+
+
+.affected-empty span {
+
+    margin-top: 4px;
+
+    font-size: 10px;
+
+    color: #374151;
+
+}
+
+
+/* =========================================================
+   TIPOS
+========================================================= */
+
+.maintenance-types-panel {
+
+    background: #ffffff;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 11px;
+
+    overflow: hidden;
+
+}
+
+
+.maintenance-types-grid {
+
+    padding: 18px;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 12px;
+
+}
+
+
+.maintenance-type-card {
+
+    min-height: 76px;
+
+    padding: 13px;
+
+    border: 1px solid var(--hotel-border);
+
+    background: #ffffff;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+}
+
+
+.maintenance-type-card:hover {
+
+    border-color: #9ca3af;
+
+    background: #f9fafb;
+
+}
+
+
+.type-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 16px;
+
+    flex-shrink: 0;
+
+}
+
+
+.type-icon.blue {
+
+    background: var(--maintenance-blue-light);
+
+    color: var(--maintenance-blue);
+
+}
+
+
+.type-icon.orange {
+
+    background: var(--maintenance-orange-light);
+
+    color: var(--maintenance-orange);
+
+}
+
+
+.type-icon.purple {
+
+    background: var(--maintenance-purple-light);
+
+    color: var(--maintenance-purple);
+
+}
+
+
+.type-icon.green {
+
+    background: var(--maintenance-green-light);
+
+    color: var(--maintenance-green);
+
+}
+
+
+.type-icon.red {
+
+    background: var(--maintenance-red-light);
+
+    color: var(--maintenance-red);
+
+}
+
+
+.type-information {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.type-information strong {
+
+    font-size: 12px;
+
+    color: #111827;
+
+}
+
+
+.type-information small {
+
+    margin-top: 3px;
+
+    font-size: 9px;
+
+    color: #374151;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .maintenance-summary {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .maintenance-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .maintenance-types-grid {
+
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 900px) {
+    .maintenance-page .maintenance-main {
+
+        margin-left: 0;
+
+    }
+
+    .maintenance-filters {
+
+        flex-wrap: wrap;
+
+    }
+
+    .maintenance-search {
+
+        flex-basis: 100%;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .maintenance-page .hotel-sidebar {
+
+        display: none;
+
+    }
+
+    .maintenance-page .maintenance-main {
+
+        margin-left: 0;
+
+    }
+
+    .maintenance-page .hotel-header {
+
+        padding: 0 18px;
+
+    }
+
+    .maintenance-page .maintenance-content {
+
+        padding: 18px;
+
+    }
+
+    .maintenance-summary {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .maintenance-page .maintenance-page-title {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 16px;
+
+    }
+
+    .maintenance-types-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

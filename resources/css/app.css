@@ -1,0 +1,97 @@
+@import './dashboard.css';
+@import './habitaciones.css';
+@import './huespedes.css';
+
+@import './reservas.css';
+
+.hotel-dashboard .hotel-header,
+.guests-main .hotel-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 80px;
+	padding: 18px 34px;
+	border-bottom: 1px solid #15497c;
+	background: #020522;
+}
+
+.hotel-dashboard .header-left,
+.hotel-dashboard .header-right,
+.guests-main .header-left,
+.guests-main .header-right {
+	display: flex;
+	align-items: center;
+}
+
+.hotel-dashboard .header-right,
+.guests-main .header-right {
+	gap: 16px;
+}
+
+.hotel-dashboard .header-user,
+.guests-main .header-user {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+}
+
+.hotel-dashboard .header-user-info,
+.guests-main .header-user-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.hotel-dashboard .header-user-info strong,
+.guests-main .header-user-info strong {
+	color: #ecedee;
+	font-size: 15px;
+}
+
+.hotel-dashboard .header-user-avatar,
+.guests-main .header-user-avatar {
+	display: flex;
+	width: 36px;
+	height: 36px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: #c9a227;
+	color: #ffffff;
+	font-weight: 700;
+}
+
+.hotel-dashboard .header-icon-button,
+.guests-main .header-icon-button {
+	position: relative;
+	border: 0;
+	background: transparent;
+	color: #718096;
+	cursor: pointer;
+}
+
+.hotel-dashboard .notification-dot,
+.guests-main .notification-dot {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #c9a227;
+}
+
+@media (max-width: 650px) {
+	.hotel-dashboard .hotel-header,
+	.guests-main .hotel-header {
+		padding: 16px 15px;
+	}
+
+	.hotel-dashboard .header-user-info,
+	.guests-main .header-user-info {
+		display: none;
+	}
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

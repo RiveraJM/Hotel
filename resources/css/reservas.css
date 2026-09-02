@@ -1,0 +1,1490 @@
+/* =========================================================
+   RESERVAS
+   Estilos exclusivos del módulo de Reservas
+========================================================= */
+
+.reservations-page {
+    min-width: 0;
+    margin-left: 16rem;
+}
+
+.reservations-main {
+    min-width: 0;
+}
+
+.reservations-main .hotel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80px;
+    padding: 18px 34px;
+    border-bottom: 1px solid #15497c;
+    background: #020522;
+}
+
+.reservations-main .header-left,
+.reservations-main .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.reservations-main .header-left {
+    gap: 12px;
+}
+
+.reservations-main .header-right {
+    gap: 16px;
+}
+
+.reservations-main .hotel-header h1,
+.reservations-main .hotel-header p {
+    margin: 0;
+}
+
+.reservations-main .hotel-header h1 {
+    color: #e8ebf0;
+    font-size: 20px;
+}
+
+.reservations-main .hotel-header p {
+    margin-top: 4px;
+    color: #718096;
+    font-size: 13px;
+}
+
+.reservations-main .header-user {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.reservations-main .header-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.reservations-main .header-user-info strong {
+    color: #ecedee;
+    font-size: 15px;
+}
+
+.reservations-main .header-user-info span {
+    color: #8a94a6;
+    font-size: 10px;
+}
+
+.reservations-main .header-user-avatar {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #c9a227;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.reservations-main .header-icon-button {
+    position: relative;
+    border: 0;
+    background: transparent;
+    color: #718096;
+    cursor: pointer;
+}
+
+.reservations-main .notification-dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #c9a227;
+}
+
+
+/* =========================================================
+   CONTENIDO GENERAL
+========================================================= */
+
+.reservations-content {
+    padding: 30px 34px 45px;
+}
+
+
+/* =========================================================
+   CABECERA DEL MÓDULO
+========================================================= */
+
+.reservations-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.reservations-section-label {
+    display: block;
+    margin-bottom: 7px;
+
+    color: #1e5fc2;
+
+    font-size: 25px;
+    font-weight: 700;
+
+    letter-spacing: 1.0px;
+}
+
+.reservations-top h2 {
+    margin: 0 0 7px;
+
+    color: #1a202c;
+
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.reservations-top p {
+    margin: 0;
+
+    color: #010408;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BOTÓN PRINCIPAL
+========================================================= */
+
+.reservation-primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 44px;
+
+    padding: 0 18px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #1f6f5b;
+    color: #0c0202;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.reservation-primary-button:hover {
+    background: #185847;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 16px rgba(31, 111, 91, 0.18);
+}
+
+
+/* =========================================================
+   ESTADÍSTICAS
+========================================================= */
+
+.reservation-statistics {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+.reservation-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    min-height: 108px;
+
+    padding: 19px;
+
+    background: #f1f7f1;
+
+    border: 1px solid #e7ebef;
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 7px rgba(15, 23, 42, 0.035);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.reservation-stat-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(15, 23, 42, 0.07);
+}
+
+
+/* ICONOS */
+
+.reservation-stat-icon {
+    width: 47px;
+    height: 47px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+.reservation-stat-icon.total {
+    background: #4b6ba8;
+    color: #1f6f5b;
+}
+
+.reservation-stat-icon.confirmed {
+    background: #13d64d;
+    color: #31815d;
+}
+
+.reservation-stat-icon.pending {
+    background: #cc6a0d;
+    color: #b4430f;
+}
+
+.reservation-stat-icon.cancelled {
+    background: #dd0f0f;
+    color: #da0f0f;
+}
+
+
+/* INFORMACIÓN */
+
+.reservation-stat-information {
+    min-width: 10px;
+}
+
+.reservation-stat-information span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #01060e;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.reservation-stat-information strong {
+    display: block;
+
+    color: #1a202c;
+
+    font-size: 24px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.reservation-stat-information small {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #03080f;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.reservations-filter-panel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 22px;
+    padding: 15px;
+
+    background: #baced3;
+
+    border: 1px solid #e7ebef;
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 7px rgba(15, 23, 42, 0.03);
+}
+
+.reservation-search {
+    position: relative;
+
+    flex: 1;
+}
+
+.reservation-search i {
+    position: absolute;
+
+    left: 13px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #010407;
+
+    font-size: 20px;
+
+    pointer-events: none;
+}
+
+.reservation-search input {
+    width: 100%;
+    height: 39px;
+
+    box-sizing: border-box;
+
+    padding: 0 13px 0 36px;
+
+    border: 1px solid #0a0e11;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #02060c;
+
+    font-family: inherit;
+    font-size: 20px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.reservation-search input::placeholder {
+    color: #01050a;
+}
+
+.reservation-search input:focus {
+    border-color: #1f6f5b;
+
+    box-shadow:
+        0 0 0 3px rgba(31, 111, 91, 0.08);
+}
+
+
+/* SELECT */
+
+.reservation-filter {
+    position: relative;
+
+    width: 165px;
+}
+
+.reservation-filter i {
+    position: absolute;
+
+    left: 12px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #010407;
+
+    font-size: 13px;
+
+    pointer-events: none;
+}
+
+.reservation-filter select {
+    width: 100%;
+    height: 39px;
+
+    padding: 0 27px 0 32px;
+
+    border: 1px solid #01090f;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #000408; /*color del select*/
+
+    font-family: inherit;
+    font-size: 13px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MAPA DE HABITACIONES
+========================================================= */
+
+.rooms-map-panel {
+    margin-bottom: 24px;
+    
+
+    background: #1F6F7D;  /*color de fondo de habitaciones*/
+
+    border: 1px solid #e7ebef;
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.035);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CABECERA MAPA
+========================================================= */
+
+.rooms-map-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 22px 24px;
+
+    border-bottom: 2px solid #02090e;
+}
+
+.rooms-map-header h3 {
+    margin: 0 0 5px;
+
+    color: #00040c;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.rooms-map-header p {
+    margin: 0;
+
+    color: #01040a;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   LEYENDA
+========================================================= */
+
+.rooms-legend {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+
+    flex-shrink: 0;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #000205;
+
+    font-size: 18px;
+}
+
+.legend-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+}
+
+.legend-dot.available {
+    background: #09d86d;
+}
+
+.legend-dot.reserved {
+    background: #eb9e33;
+}
+
+.legend-dot.occupied {
+    background: #df0808;
+}
+
+
+/* =========================================================
+   PISO
+========================================================= */
+
+.hotel-floor {
+    padding: 22px 24px 25px;
+
+    border-bottom: 1px solid #edf0f2;
+}
+
+.hotel-floor:last-child {
+    border-bottom: 0;
+}
+
+
+/* CABECERA PISO */
+
+.floor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+}
+
+.floor-title {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.floor-number {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #edf5f2;
+
+    color: #1f6f5b;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.floor-title strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #01060e; /*color primer piso*/
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.floor-title span:not(.floor-number) {
+    display: block;
+
+    color: #01050a;
+
+    font-size: 15px;
+}
+
+
+/* RESUMEN PISO */
+
+.floor-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.floor-summary span {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.summary-available {
+    color: #12b96e;
+}
+
+.summary-reserved {
+    color: #eb9310;
+}
+
+.summary-occupied {
+    color: #db1212;
+}
+
+
+/* =========================================================
+   GRID HABITACIONES
+========================================================= */
+
+.rooms-grid {
+    display: grid;
+
+    grid-template-columns: repeat(8, minmax(105px, 1fr));
+
+    gap: 11px;
+}
+
+
+/* =========================================================
+   TARJETA HABITACIÓN
+========================================================= */
+
+.room-card {
+    position: relative;
+
+    min-height: 70px;
+
+    padding: 8px;
+
+    border: 1px solid;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.room-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 7px 17px rgba(15, 23, 42, 0.09);
+}
+
+
+/* =========================================================
+   ESTADO LIBRE
+========================================================= */
+
+.room-card.available {
+    background: #e5e9e7;
+
+    border-color: #11af53;
+
+    color: #286a4c;
+}
+
+.room-card.available:hover {
+    border-color: #075f2d;
+}
+
+.room-card.available .room-state-icon {
+    background: #0ca04f;
+
+    color: #11cf7a;
+}
+
+
+/* =========================================================
+   ESTADO RESERVADA
+========================================================= */
+
+.room-card.reserved {
+    background: #fffaf2;
+
+    border-color: #ead9b9;
+
+    color: #87652d;
+}
+
+.room-card.reserved:hover {
+    border-color: #d8b979;
+}
+
+.room-card.reserved .room-state-icon {
+    background: #f7ead2;
+
+    color: #a37838;
+}
+
+
+/* =========================================================
+   ESTADO OCUPADA
+========================================================= */
+
+.room-card.occupied {
+    background: #fff7f7;
+
+    border-color: #ebd0d0;
+
+    color: #914e4e;
+}
+
+.room-card.occupied:hover {
+    border-color: #d8a6a6;
+}
+
+.room-card.occupied .room-state-icon {
+    background: #f4dddd;
+
+    color: #a45f5f;
+}
+
+
+/* =========================================================
+   PARTE SUPERIOR TARJETA
+========================================================= */
+
+.room-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+.room-card .room-number {
+    color: #26333d;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.room-state-icon {
+    width: 26px;
+    height: 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   TIPO DE HABITACIÓN
+========================================================= */
+
+.room-type {
+    margin-bottom: 10px;
+
+    color: #718096;
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   HUÉSPED
+========================================================= */
+
+.room-guest-name {
+    overflow: hidden;
+
+    margin-bottom: 4px;
+
+    color: #4a5568;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.room-dates {
+    color: #8a94a6;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   ESTADO TARJETA
+========================================================= */
+
+.room-card-status {
+    position: absolute;
+
+    left: 13px;
+    bottom: 12px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+.room-card.available .room-card-status {
+    color: #31815d;
+}
+
+.room-card.reserved .room-card-status {
+    color: #a37838;
+}
+
+.room-card.occupied .room-card-status {
+    color: #a45f5f;
+}
+
+
+/* =========================================================
+   ACCIÓN HABITACIÓN LIBRE
+========================================================= */
+
+.room-card-action {
+    position: absolute;
+
+    right: 12px;
+    bottom: 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    color: #31815d;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    opacity: 0;
+
+    transform: translateY(3px);
+
+    transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+}
+
+.room-card.available:hover .room-card-action {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+.room-card.available:hover .room-card-status {
+    opacity: 0;
+}
+
+
+/* =========================================================
+   LISTA DE RESERVAS
+========================================================= */
+
+.reservations-list-panel {
+    background: #ffffff;
+
+    border: 1px solid #e7ebef;
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.035);
+
+    overflow: hidden;
+}
+
+
+/* CABECERA */
+
+.reservations-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 21px 24px;
+
+    border-bottom: 1px solid #edf0f2;
+}
+
+.reservations-list-header h3 {
+    margin: 0 0 5px;
+
+    color: #1a202c;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.reservations-list-header p {
+    margin: 0;
+
+    color: #8a94a6;
+
+    font-size: 11px;
+}
+
+.reservation-view-all {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #1f6f5b;
+
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.reservation-view-all:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   TABLA
+========================================================= */
+
+.reservations-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.reservations-table {
+    width: 100%;
+
+    min-width: 950px;
+
+    border-collapse: collapse;
+}
+
+.reservations-table thead {
+    background: #fafbfc;
+}
+
+.reservations-table th {
+    height: 42px;
+
+    padding: 0 18px;
+
+    border-bottom: 1px solid #e8ecef;
+
+    color: #010408;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+
+    text-align: left;
+
+    white-space: nowrap;
+}
+
+.reservations-table td {
+    height: 72px;
+
+    padding: 9px 18px;
+
+    border-bottom: 1px solid #edf0f2;
+
+    color: #030911;
+
+    font-size: 15px;
+
+    vertical-align: middle;
+}
+
+.reservations-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.reservations-table tbody tr:hover {
+    background: #fafcfb;
+}
+
+.reservations-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+
+/* =========================================================
+   CÓDIGO RESERVA
+========================================================= */
+
+.reservation-code {
+    color: #01060e;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   HUÉSPED TABLA
+========================================================= */
+
+.reservation-guest {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.reservation-avatar {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e5f1ed;
+
+    color: #1f6f5b;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.reservation-avatar.second {
+    background: #eef0f7;
+    color: #020613;
+}
+
+.reservation-avatar.third {
+    background: #f4eee6;
+    color: #94714b;
+}
+
+.reservation-guest strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #2d3748;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.reservation-guest span {
+    display: block;
+
+    color: #010408;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   HABITACIÓN TABLA
+========================================================= */
+
+.reservation-room {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 34px;
+    height: 26px;
+
+    padding: 0 7px;
+
+    border-radius: 6px;
+
+    background: #f1f5f7;
+
+    color: #465463;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ESTADOS RESERVA
+========================================================= */
+
+.reservation-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 6px 9px;
+
+    border-radius: 20px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.reservation-status > span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+}
+
+.reservation-status.confirmed {
+    background: #edf7f0;
+    color: #2f7755;
+}
+
+.reservation-status.confirmed > span {
+    background: #3e9568;
+}
+
+.reservation-status.pending {
+    background: #f6f1e8;
+    color: #95763d;
+}
+
+.reservation-status.pending > span {
+    background: #b18b45;
+}
+
+
+/* =========================================================
+   ACCIÓN TABLA
+========================================================= */
+
+.reservation-action {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #8b96a3;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.reservation-action:hover {
+    background: #edf5f2;
+
+    color: #1f6f5b;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.reservations-list-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 24px;
+
+    border-top: 1px solid #edf0f2;
+}
+
+.reservations-list-footer > span {
+    color: #8a94a6;
+
+    font-size: 10px;
+}
+
+.reservations-list-footer strong {
+    color: #596575;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   PAGINACIÓN
+========================================================= */
+
+.reservation-pagination {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.reservation-pagination button {
+    min-width: 29px;
+    height: 29px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 7px;
+
+    border: 1px solid #e1e5e8;
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #687484;
+
+    font-family: inherit;
+    font-size: 10px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.reservation-pagination button:hover:not(:disabled) {
+    border-color: #1f6f5b;
+
+    color: #1f6f5b;
+}
+
+.reservation-pagination button.active {
+    border-color: #1f6f5b;
+
+    background: #1f6f5b;
+
+    color: #ffffff;
+}
+
+.reservation-pagination button:disabled {
+    opacity: 0.45;
+
+    cursor: not-allowed;
+}
+
+.reservation-pagination > span {
+    padding: 0 3px;
+
+    color: #a0a8b2;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1350px) {
+
+    .rooms-grid {
+        grid-template-columns: repeat(4, minmax(130px, 1fr));
+    }
+
+}
+
+@media (max-width: 1023px) {
+
+    .reservations-page {
+        margin-left: 0;
+    }
+
+}
+
+
+@media (max-width: 1150px) {
+
+    .reservation-statistics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .reservations-filter-panel {
+        flex-wrap: wrap;
+    }
+
+    .reservation-search {
+        flex-basis: 100%;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .reservations-content {
+        padding: 25px 22px 35px;
+    }
+
+    .rooms-map-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .rooms-legend {
+        width: 100%;
+    }
+
+    .rooms-grid {
+        grid-template-columns: repeat(2, minmax(130px, 1fr));
+    }
+
+    .reservation-filter {
+        flex: 1;
+        width: auto;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .reservations-content {
+        padding: 20px 15px 30px;
+    }
+
+    .reservations-top {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .reservations-top h2 {
+        font-size: 22px;
+    }
+
+    .reservation-primary-button {
+        width: 100%;
+    }
+
+    .reservation-statistics {
+        grid-template-columns: 1fr;
+    }
+
+    .reservations-filter-panel {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .reservation-search {
+        flex-basis: auto;
+    }
+
+    .reservation-filter {
+        width: 100%;
+    }
+
+    .rooms-map-header {
+        padding: 18px 15px;
+    }
+
+    .rooms-legend {
+        align-items: flex-start;
+
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .hotel-floor {
+        padding: 18px 15px 20px;
+    }
+
+    .floor-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .floor-summary {
+        flex-wrap: wrap;
+    }
+
+    .rooms-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 9px;
+    }
+
+    .room-card {
+        min-height: 140px;
+    }
+
+    .reservations-list-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        padding: 18px 15px;
+    }
+
+    .reservations-list-footer {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 14px;
+
+        padding: 15px;
+    }
+
+    .reservations-main .hotel-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+        padding: 16px 15px;
+    }
+
+    .reservations-main .header-left,
+    .reservations-main .header-right {
+        width: 100%;
+    }
+
+    .reservations-main .header-right {
+        justify-content: flex-end;
+    }
+
+    .reservations-main .header-user-info {
+        display: none;
+    }
+
+    .room-card {
+        min-height: 124px;
+        padding: 10px;
+    }
+
+    .room-card-action {
+        right: 9px;
+        bottom: 9px;
+        font-size: 9px;
+    }
+
+}
+

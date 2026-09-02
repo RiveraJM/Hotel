@@ -1,0 +1,1789 @@
+/* =========================================================
+   CAJA
+   resources/css/caja.css
+========================================================= */
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --hotel-primary: #1e3a5f;
+    --hotel-primary-dark: #102a43;
+    --hotel-primary-light: #eaf2fb;
+
+    --hotel-accent: #d4a72c;
+
+    --success: #16a34a;
+    --success-light: #ecfdf3;
+
+    --warning: #f59e0b;
+    --warning-light: #fff8e6;
+
+    --danger: #dc2626;
+    --danger-light: #fff1f2;
+
+    --info: #2563eb;
+    --info-light: #eff6ff;
+
+    --background: #f4f7fb;
+    --white: #ffffff;
+
+    --text: #111827;
+    --text-secondary: #374151;
+
+    --border: #dbe3ec;
+
+    --shadow:
+        0 4px 18px rgba(15, 23, 42, 0.07);
+
+    --sidebar-width: 260px;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.hotel-layout {
+
+    display: flex;
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.hotel-sidebar {
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: var(--sidebar-width);
+
+    background: var(--hotel-primary);
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    z-index: 1000;
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.sidebar-logo {
+
+    height: 82px;
+
+    padding: 0 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.12);
+
+}
+
+
+.logo-icon {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: var(--hotel-accent);
+
+    color: #111827;
+
+    font-size: 19px;
+
+}
+
+
+.logo-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.logo-title {
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.logo-subtitle {
+
+    font-size: 11px;
+
+    opacity: .75;
+
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+.sidebar-navigation {
+
+    flex: 1;
+
+    padding: 22px 13px;
+
+    overflow-y: auto;
+
+}
+
+
+.navigation-title {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    color: rgba(255,255,255,.58);
+
+    padding: 14px 12px 8px;
+
+}
+
+
+.sidebar-link {
+
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 13px;
+
+    margin-bottom: 4px;
+
+    border-radius: 9px;
+
+    color: rgba(255,255,255,.82);
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+
+}
+
+
+.sidebar-link:hover {
+
+    background: rgba(255,255,255,.10);
+
+    color: white;
+
+    transform: translateX(2px);
+
+}
+
+
+.sidebar-link.active {
+
+    background: var(--hotel-accent);
+
+    color: #111827;
+
+    font-weight: 800;
+
+}
+
+
+.sidebar-link-icon {
+
+    width: 25px;
+
+    text-align: center;
+
+    font-size: 16px;
+
+}
+
+
+/* =========================================================
+   USUARIO SIDEBAR
+========================================================= */
+
+.sidebar-user {
+
+    min-height: 76px;
+
+    padding: 13px 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border-top:
+        1px solid rgba(255,255,255,.12);
+
+}
+
+
+.sidebar-user-avatar {
+
+    width: 39px;
+    height: 39px;
+
+    border-radius: 50%;
+
+    background: var(--hotel-accent);
+
+    color: #111827;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.sidebar-user-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+}
+
+
+.sidebar-user-info strong {
+
+    font-size: 13px;
+
+}
+
+
+.sidebar-user-info span {
+
+    font-size: 11px;
+
+    color: rgba(255,255,255,.65);
+
+}
+
+
+.sidebar-user-menu {
+
+    border: 0;
+
+    background: transparent;
+
+    color: rgba(255,255,255,.7);
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.hotel-main {
+
+    margin-left: var(--sidebar-width);
+
+    width: calc(100% - var(--sidebar-width));
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.hotel-header {
+
+    height: 82px;
+
+    padding: 0 32px;
+
+    background: white;
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.header-section {
+
+    display: block;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    color: var(--hotel-primary);
+
+    letter-spacing: 1px;
+
+}
+
+
+.header-page h1 {
+
+    font-size: 22px;
+
+    margin-top: 3px;
+
+}
+
+
+.header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+}
+
+
+.header-icon-button {
+
+    position: relative;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    background: white;
+
+    cursor: pointer;
+
+    color: var(--text);
+
+    font-size: 17px;
+
+}
+
+
+.notification-dot {
+
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--danger);
+
+    top: 8px;
+    right: 9px;
+
+}
+
+
+.header-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.header-user-avatar {
+
+    width: 39px;
+    height: 39px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: var(--hotel-primary);
+
+    color: white;
+
+    font-weight: 800;
+
+}
+
+
+.header-user-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.header-user-info strong {
+
+    font-size: 13px;
+
+}
+
+
+.header-user-info span {
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+
+}
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+.caja-content {
+
+    padding: 30px 34px 50px;
+
+}
+
+
+/* =========================================================
+   INTRODUCCIÓN
+========================================================= */
+
+.page-introduction {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+}
+
+
+.page-kicker {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.1px;
+
+    color: var(--hotel-primary);
+
+}
+
+
+.page-introduction h2 {
+
+    margin-top: 4px;
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+}
+
+
+.page-introduction p {
+
+    margin-top: 5px;
+
+    font-size: 14px;
+
+    color: var(--text-secondary);
+
+}
+
+
+.page-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.btn {
+
+    height: 42px;
+
+    padding: 0 17px;
+
+    border-radius: 8px;
+
+    border: 1px solid transparent;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.btn-primary {
+
+    background: var(--hotel-primary);
+
+    color: white;
+
+}
+
+
+.btn-primary:hover {
+
+    background: var(--hotel-primary-dark);
+
+}
+
+
+.btn-outline {
+
+    background: white;
+
+    border-color: var(--border);
+
+    color: var(--text);
+
+}
+
+
+/* =========================================================
+   ESTADO DE CAJA
+========================================================= */
+
+.cash-status-panel {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-left: 5px solid var(--success);
+
+    border-radius: 12px;
+
+    padding: 19px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 22px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.cash-status-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.cash-status-icon {
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 12px;
+
+    background: var(--success-light);
+
+    color: var(--success);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 21px;
+
+}
+
+
+.status-label {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color: var(--success);
+
+}
+
+
+.cash-status-left h3 {
+
+    font-size: 18px;
+
+    margin-top: 2px;
+
+}
+
+
+.cash-status-left p {
+
+    font-size: 12px;
+
+    color: var(--text-secondary);
+
+    margin-top: 3px;
+
+}
+
+
+.cash-status-details {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 35px;
+
+}
+
+
+.status-detail {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+}
+
+
+.status-detail span {
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+
+}
+
+
+.status-detail strong {
+
+    font-size: 13px;
+
+}
+
+
+.btn-close-cash {
+
+    height: 40px;
+
+    padding: 0 15px;
+
+    border-radius: 8px;
+
+    border: 1px solid #fecaca;
+
+    background: var(--danger-light);
+
+    color: var(--danger);
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   RESUMEN FINANCIERO
+========================================================= */
+
+.financial-summary {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.financial-card {
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 19px;
+
+    border: 1px solid var(--border);
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.financial-card-top {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.financial-icon {
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 15px;
+
+}
+
+
+.financial-label {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.financial-value {
+
+    display: block;
+
+    font-size: 25px;
+
+    margin-top: 15px;
+
+}
+
+
+.financial-description {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+
+}
+
+
+/* COLORES */
+
+.opening {
+
+    border-top: 4px solid var(--hotel-primary);
+
+}
+
+
+.opening .financial-icon {
+
+    background: var(--hotel-primary-light);
+
+    color: var(--hotel-primary);
+
+}
+
+
+.income {
+
+    border-top: 4px solid var(--success);
+
+}
+
+
+.income .financial-icon {
+
+    background: var(--success-light);
+
+    color: var(--success);
+
+}
+
+
+.expense {
+
+    border-top: 4px solid var(--danger);
+
+}
+
+
+.expense .financial-icon {
+
+    background: var(--danger-light);
+
+    color: var(--danger);
+
+}
+
+
+.balance {
+
+    border-top: 4px solid var(--hotel-accent);
+
+}
+
+
+.balance .financial-icon {
+
+    background: #fff8df;
+
+    color: #a87500;
+
+}
+
+
+/* =========================================================
+   ACCIONES
+========================================================= */
+
+.quick-actions-section {
+
+    margin-bottom: 25px;
+
+}
+
+
+.section-heading {
+
+    margin-bottom: 14px;
+
+}
+
+
+.section-heading h3 {
+
+    font-size: 19px;
+
+}
+
+
+.section-heading p {
+
+    margin-top: 3px;
+
+    font-size: 12px;
+
+    color: var(--text-secondary);
+
+}
+
+
+.quick-actions-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+
+}
+
+
+.quick-action {
+
+    min-height: 76px;
+
+    padding: 13px 16px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+.quick-action:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.quick-action-icon {
+
+    width: 43px;
+    height: 43px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.income-action .quick-action-icon {
+
+    background: var(--success-light);
+
+    color: var(--success);
+
+}
+
+
+.expense-action .quick-action-icon {
+
+    background: var(--danger-light);
+
+    color: var(--danger);
+
+}
+
+
+.payment-action .quick-action-icon {
+
+    background: var(--info-light);
+
+    color: var(--info);
+
+}
+
+
+.quick-action-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+}
+
+
+.quick-action-text strong {
+
+    font-size: 13px;
+
+    color: var(--text);
+
+}
+
+
+.quick-action-text small {
+
+    margin-top: 4px;
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+
+}
+
+
+.quick-action > i {
+
+    color: #9ca3af;
+
+}
+
+
+/* =========================================================
+   MOVIMIENTOS
+========================================================= */
+
+.movements-panel {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+
+}
+
+
+.panel-header {
+
+    padding: 20px 22px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+
+.panel-header h3 {
+
+    font-size: 18px;
+
+}
+
+
+.panel-header p {
+
+    font-size: 12px;
+
+    margin-top: 4px;
+
+    color: var(--text-secondary);
+
+}
+
+
+.btn-filter {
+
+    height: 37px;
+
+    padding: 0 13px;
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.movements-filters {
+
+    padding: 16px 22px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.8fr
+        1fr
+        1fr
+        150px;
+
+    gap: 10px;
+
+    background: #f9fbfd;
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+
+.search-box {
+
+    position: relative;
+
+}
+
+
+.search-box i {
+
+    position: absolute;
+
+    left: 13px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+}
+
+
+.search-box input {
+
+    padding-left: 37px;
+
+}
+
+
+.movements-filters input,
+.movements-filters select {
+
+    width: 100%;
+
+    height: 39px;
+
+    padding: 0 11px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    background: white;
+
+    color: var(--text);
+
+    font-size: 12px;
+
+    outline: none;
+
+}
+
+
+.movements-filters input:focus,
+.movements-filters select:focus {
+
+    border-color: var(--hotel-primary);
+
+}
+
+
+/* =========================================================
+   TABLA
+========================================================= */
+
+.table-container {
+
+    overflow-x: auto;
+
+}
+
+
+.movements-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+
+.movements-table th {
+
+    padding: 14px 16px;
+
+    background: #f8fafc;
+
+    color: var(--text);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: .5px;
+
+    text-align: left;
+
+    border-bottom: 1px solid var(--border);
+
+    white-space: nowrap;
+
+}
+
+
+.movements-table td {
+
+    padding: 16px;
+
+    border-bottom: 1px solid #edf1f5;
+
+    font-size: 12px;
+
+    color: var(--text);
+
+}
+
+
+.movements-table tbody tr:hover {
+
+    background: #fbfdff;
+
+}
+
+
+/* =========================================================
+   ESTADO VACÍO
+========================================================= */
+
+.empty-row td {
+
+    padding: 55px 20px;
+
+}
+
+
+.empty-state {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+}
+
+
+.empty-icon {
+
+    width: 54px;
+    height: 54px;
+
+    border-radius: 50%;
+
+    background: var(--hotel-primary-light);
+
+    color: var(--hotel-primary);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+
+    margin-bottom: 13px;
+
+}
+
+
+.empty-state strong {
+
+    font-size: 14px;
+
+}
+
+
+.empty-state span {
+
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    color: var(--text-secondary);
+
+}
+
+
+/* =========================================================
+   CIERRE
+========================================================= */
+
+.closing-panel {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    padding: 24px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.closing-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+
+.closing-header h3 {
+
+    font-size: 19px;
+
+    margin-top: 4px;
+
+}
+
+
+.closing-header p {
+
+    font-size: 12px;
+
+    color: var(--text-secondary);
+
+    margin-top: 4px;
+
+}
+
+
+.closing-icon {
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 10px;
+
+    background: var(--hotel-primary-light);
+
+    color: var(--hotel-primary);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 19px;
+
+}
+
+
+/* =========================================================
+   RESUMEN CIERRE
+========================================================= */
+
+.closing-summary {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    padding: 20px 0;
+
+}
+
+
+.closing-item {
+
+    padding: 15px;
+
+    border-radius: 9px;
+
+    background: #f8fafc;
+
+    border: 1px solid var(--border);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.closing-item span {
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+
+}
+
+
+.closing-item strong {
+
+    font-size: 18px;
+
+}
+
+
+.closing-item.highlight {
+
+    background: var(--hotel-primary-light);
+
+    border-color: #c9d8e8;
+
+}
+
+
+.closing-item.difference {
+
+    background: var(--success-light);
+
+    border-color: #bbf7d0;
+
+}
+
+
+.closing-item.difference strong {
+
+    color: var(--success);
+
+}
+
+
+/* =========================================================
+   OBSERVACIONES
+========================================================= */
+
+.closing-observation {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.closing-observation label {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.closing-observation textarea {
+
+    width: 100%;
+
+    min-height: 85px;
+
+    resize: vertical;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    padding: 12px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    color: var(--text);
+
+    outline: none;
+
+}
+
+
+.closing-observation textarea:focus {
+
+    border-color: var(--hotel-primary);
+
+}
+
+
+/* =========================================================
+   ACCIONES DE CIERRE
+========================================================= */
+
+.closing-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .financial-summary {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .cash-status-panel {
+
+        flex-wrap: wrap;
+
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .hotel-sidebar {
+
+        width: 220px;
+
+    }
+
+
+    .hotel-main {
+
+        margin-left: 220px;
+
+        width: calc(100% - 220px);
+
+    }
+
+
+    .quick-actions-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .movements-filters {
+
+        grid-template-columns:
+            1fr
+            1fr;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .hotel-sidebar {
+
+        display: none;
+
+    }
+
+
+    .hotel-main {
+
+        margin-left: 0;
+
+        width: 100%;
+
+    }
+
+
+    .hotel-header {
+
+        padding: 0 18px;
+
+    }
+
+
+    .caja-content {
+
+        padding: 22px 16px;
+
+    }
+
+
+    .page-introduction {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 18px;
+
+    }
+
+
+    .financial-summary {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .cash-status-details {
+
+        width: 100%;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .closing-summary {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

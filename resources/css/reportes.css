@@ -1,0 +1,2023 @@
+/* =========================================================
+   REPORTES
+   resources/css/reportes.css
+========================================================= */
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --hotel-primary: #174a7e;
+    --hotel-primary-dark: #0d355d;
+    --hotel-primary-light: #eaf3fb;
+
+    --hotel-blue: #1677d2;
+    --hotel-green: #16a56a;
+    --hotel-orange: #ed8b24;
+    --hotel-red: #df3f3f;
+    --hotel-purple: #7456d8;
+    --hotel-cyan: #139bb2;
+
+    --hotel-background: #f4f7fa;
+    --hotel-card: #ffffff;
+
+    --hotel-text: #111827;
+    --hotel-text-secondary: #374151;
+
+    --hotel-border: #dce3ea;
+
+    --sidebar-width: 265px;
+
+    --shadow-small:
+        0 2px 8px rgba(15, 23, 42, .06);
+
+    --shadow-medium:
+        0 8px 25px rgba(15, 23, 42, .08);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: var(--hotel-background);
+
+    color: var(--hotel-text);
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.hotel-layout {
+
+    display: flex;
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.hotel-sidebar {
+
+    width: var(--sidebar-width);
+
+    background:
+        linear-gradient(
+            180deg,
+            #123f6b 0%,
+            #0d355d 100%
+        );
+
+    color: #ffffff;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    z-index: 100;
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.sidebar-logo {
+
+    height: 88px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 0 22px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.12);
+
+}
+
+
+.logo-icon {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    color: var(--hotel-primary);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+
+}
+
+
+.logo-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    line-height: 1.1;
+
+}
+
+
+.logo-title {
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.logo-subtitle {
+
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    color: rgba(255,255,255,.72);
+
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+.sidebar-navigation {
+
+    padding: 24px 14px;
+
+    overflow-y: auto;
+
+    flex: 1;
+
+}
+
+
+.navigation-title {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    color: rgba(255,255,255,.48);
+
+    margin: 16px 10px 9px;
+
+}
+
+
+.navigation-title:first-child {
+    margin-top: 0;
+}
+
+
+.sidebar-link {
+
+    height: 47px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 12px;
+
+    margin-bottom: 5px;
+
+    border-radius: 9px;
+
+    color: rgba(255,255,255,.82);
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+
+}
+
+
+.sidebar-link:hover {
+
+    background:
+        rgba(255,255,255,.10);
+
+    color: #ffffff;
+
+    transform: translateX(2px);
+
+}
+
+
+.sidebar-link.active {
+
+    background: #ffffff;
+
+    color: var(--hotel-primary);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.12);
+
+}
+
+
+.sidebar-link-icon {
+
+    width: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================================
+   USUARIO SIDEBAR
+========================================================= */
+
+.sidebar-user {
+
+    padding: 17px 18px;
+
+    border-top:
+        1px solid rgba(255,255,255,.12);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+}
+
+
+.sidebar-user-avatar {
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: var(--hotel-primary);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+
+}
+
+
+.sidebar-user-info {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.sidebar-user-info strong {
+
+    font-size: 13px;
+
+    color: #ffffff;
+
+}
+
+
+.sidebar-user-info span {
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color: rgba(255,255,255,.58);
+
+}
+
+
+.sidebar-user-menu {
+
+    border: none;
+
+    background: transparent;
+
+    color: rgba(255,255,255,.65);
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.reports-main {
+
+    margin-left: var(--sidebar-width);
+
+    width: calc(100% - var(--sidebar-width));
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.hotel-header {
+
+    height: 88px;
+
+    background: #ffffff;
+
+    border-bottom:
+        1px solid var(--hotel-border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 34px;
+
+}
+
+
+.header-left {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.header-section {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color: var(--hotel-primary);
+
+}
+
+
+.header-left h1 {
+
+    font-size: 22px;
+
+    line-height: 1.2;
+
+    margin-top: 3px;
+
+    color: #111827;
+
+}
+
+
+.header-left p {
+
+    font-size: 12px;
+
+    margin-top: 2px;
+
+    color: #374151;
+
+}
+
+
+.header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+}
+
+
+.header-icon-button {
+
+    position: relative;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    cursor: pointer;
+
+}
+
+
+.notification-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--hotel-red);
+
+    position: absolute;
+
+    top: 8px;
+    right: 8px;
+
+    border: 2px solid #ffffff;
+
+}
+
+
+.header-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.header-user-avatar {
+
+    width: 37px;
+    height: 37px;
+
+    border-radius: 50%;
+
+    background: var(--hotel-primary);
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+
+}
+
+
+.header-user-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.header-user-info strong {
+
+    font-size: 13px;
+
+    color: #111827;
+
+}
+
+
+.header-user-info span {
+
+    font-size: 11px;
+
+    color: #374151;
+
+    margin-top: 2px;
+
+}
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+.reports-content {
+
+    padding: 32px 34px 50px;
+
+    max-width: 1700px;
+
+    margin: auto;
+
+}
+
+
+/* =========================================================
+   ENCABEZADO
+========================================================= */
+
+.reports-heading {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 24px;
+
+}
+
+
+.content-label {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    color: var(--hotel-primary);
+
+}
+
+
+.reports-heading h2,
+.available-reports-heading h2 {
+
+    font-size: 23px;
+
+    margin-top: 5px;
+
+    color: #111827;
+
+}
+
+
+.reports-heading p {
+
+    margin-top: 6px;
+
+    font-size: 13px;
+
+    color: #374151;
+
+}
+
+
+.reports-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+
+.report-action {
+
+    height: 42px;
+
+    padding: 0 17px;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.report-action.secondary {
+
+    background: #ffffff;
+
+    color: #111827;
+
+    border: 1px solid var(--hotel-border);
+
+}
+
+
+.report-action.primary {
+
+    background: var(--hotel-primary);
+
+    color: #ffffff;
+
+    border: 1px solid var(--hotel-primary);
+
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.report-filters {
+
+    background: #ffffff;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 11px;
+
+    padding: 17px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 14px;
+
+    margin-bottom: 22px;
+
+    box-shadow: var(--shadow-small);
+
+}
+
+
+.filter-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+
+.filter-group label {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #111827;
+
+}
+
+
+.filter-group select,
+.filter-group input {
+
+    height: 39px;
+
+    min-width: 160px;
+
+    padding: 0 11px;
+
+    border: 1px solid #cfd7df;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-size: 12px;
+
+    outline: none;
+
+}
+
+
+.filter-group select:focus,
+.filter-group input:focus {
+
+    border-color: var(--hotel-primary);
+
+}
+
+
+.filter-button {
+
+    height: 39px;
+
+    padding: 0 17px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: var(--hotel-primary);
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   RESUMEN
+========================================================= */
+
+.report-summary {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 17px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.summary-card {
+
+    background: #ffffff;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 11px;
+
+    padding: 19px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    box-shadow: var(--shadow-small);
+
+}
+
+
+.summary-icon {
+
+    width: 47px;
+    height: 47px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+
+}
+
+
+.summary-icon.blue {
+    background: #e7f1fc;
+    color: var(--hotel-blue);
+}
+
+
+.summary-icon.green {
+    background: #e5f7ef;
+    color: var(--hotel-green);
+}
+
+
+.summary-icon.orange {
+    background: #fff1df;
+    color: var(--hotel-orange);
+}
+
+
+.summary-icon.purple {
+    background: #eeeaff;
+    color: var(--hotel-purple);
+}
+
+
+.summary-information {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.summary-information span {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #374151;
+
+}
+
+
+.summary-information strong {
+
+    font-size: 22px;
+
+    line-height: 1.2;
+
+    margin: 3px 0;
+
+    color: #111827;
+
+}
+
+
+.summary-information small {
+
+    font-size: 10px;
+
+    color: #374151;
+
+}
+
+
+/* =========================================================
+   GRID REPORTES
+========================================================= */
+
+.reports-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.report-panel {
+
+    background: #ffffff;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 11px;
+
+    padding: 21px;
+
+    box-shadow: var(--shadow-small);
+
+    min-height: 260px;
+
+}
+
+
+.report-panel.large {
+
+    grid-column: span 1;
+
+}
+
+
+.panel-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+}
+
+
+.panel-label {
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color: var(--hotel-primary);
+
+}
+
+
+.panel-header h3 {
+
+    font-size: 16px;
+
+    margin-top: 4px;
+
+    color: #111827;
+
+}
+
+
+.panel-header p {
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    color: #374151;
+
+}
+
+
+.panel-menu {
+
+    width: 32px;
+    height: 32px;
+
+    border: 1px solid var(--hotel-border);
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   GRÁFICO PLACEHOLDER
+========================================================= */
+
+.chart-area {
+
+    height: 205px;
+
+    margin-top: 15px;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8fafc,
+            #ffffff
+        );
+
+    border: 1px dashed #cbd5df;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.chart-placeholder {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    color: #374151;
+
+}
+
+
+.chart-placeholder i {
+
+    font-size: 31px;
+
+    color: var(--hotel-primary);
+
+    margin-bottom: 9px;
+
+}
+
+
+.chart-placeholder span {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #111827;
+
+}
+
+
+.chart-placeholder small {
+
+    max-width: 260px;
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    color: #374151;
+
+}
+
+
+/* =========================================================
+   DONUT
+========================================================= */
+
+.donut-container {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    min-height: 200px;
+
+}
+
+
+.donut-chart {
+
+    width: 135px;
+    height: 135px;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            #cbd5e1 0deg,
+            #cbd5e1 360deg
+        );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.donut-chart::before {
+
+    content: "";
+
+    width: 88px;
+    height: 88px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    position: absolute;
+
+}
+
+
+.donut-center {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+.donut-center strong {
+
+    font-size: 20px;
+
+    color: #111827;
+
+}
+
+
+.donut-center span {
+
+    font-size: 9px;
+
+    color: #374151;
+
+}
+
+
+.chart-legend {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.chart-legend div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 11px;
+
+    color: #111827;
+
+    font-weight: 600;
+
+}
+
+
+.legend-dot {
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+}
+
+
+.legend-dot.confirmed {
+    background: var(--hotel-green);
+}
+
+
+.legend-dot.pending {
+    background: var(--hotel-orange);
+}
+
+
+.legend-dot.cancelled {
+    background: var(--hotel-red);
+}
+
+
+/* =========================================================
+   OPERACIONES
+========================================================= */
+
+.operation-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+
+    margin-top: 28px;
+
+}
+
+
+.operation-stat {
+
+    padding: 16px;
+
+    border-radius: 9px;
+
+    background: #f8fafc;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.operation-icon {
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.operation-icon.checkin {
+
+    background: #e5f7ef;
+
+    color: var(--hotel-green);
+
+}
+
+
+.operation-icon.checkout {
+
+    background: #fff0f0;
+
+    color: var(--hotel-red);
+
+}
+
+
+.operation-stat div:last-child {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.operation-stat strong {
+
+    font-size: 20px;
+
+    color: #111827;
+
+}
+
+
+.operation-stat span {
+
+    font-size: 10px;
+
+    color: #374151;
+
+}
+
+
+/* =========================================================
+   PAGOS
+========================================================= */
+
+.payment-report {
+
+    margin-top: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 17px;
+
+}
+
+
+.payment-row > div:first-child {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+
+}
+
+
+.payment-row span {
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    color: #111827;
+
+}
+
+
+.payment-row span i {
+
+    margin-right: 6px;
+
+    color: var(--hotel-primary);
+
+}
+
+
+.payment-row strong {
+
+    font-size: 11px;
+
+    color: #111827;
+
+}
+
+
+.progress {
+
+    width: 100%;
+
+    height: 7px;
+
+    background: #e7edf2;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+
+
+.progress span {
+
+    display: block;
+
+    height: 100%;
+
+    background: var(--hotel-primary);
+
+    border-radius: 20px;
+
+}
+
+
+/* =========================================================
+   LIMPIEZA
+========================================================= */
+
+.service-report {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 15px 0;
+
+    border-bottom:
+        1px solid #edf1f4;
+
+}
+
+
+.service-number {
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 9px;
+
+    background: #e7f7f9;
+
+    color: var(--hotel-cyan);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+}
+
+
+.service-report > div:last-child {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.service-report strong {
+
+    font-size: 12px;
+
+    color: #111827;
+
+}
+
+
+.service-report span {
+
+    font-size: 10px;
+
+    color: #374151;
+
+    margin-top: 4px;
+
+}
+
+
+/* =========================================================
+   MANTENIMIENTO
+========================================================= */
+
+.maintenance-report {
+
+    margin-top: 15px;
+
+}
+
+
+.maintenance-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid #edf1f4;
+
+}
+
+
+.maintenance-indicator {
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+}
+
+
+.maintenance-indicator.open {
+
+    background: var(--hotel-red);
+
+}
+
+
+.maintenance-indicator.resolved {
+
+    background: var(--hotel-green);
+
+}
+
+
+.maintenance-item div {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.maintenance-item strong {
+
+    font-size: 11px;
+
+    color: #111827;
+
+}
+
+
+.maintenance-item span {
+
+    margin-top: 3px;
+
+    font-size: 9px;
+
+    color: #374151;
+
+}
+
+
+.maintenance-item b {
+
+    font-size: 15px;
+
+    color: #111827;
+
+}
+
+
+/* =========================================================
+   RENDIMIENTO HABITACIONES
+========================================================= */
+
+.rooms-performance {
+
+    margin-top: 18px;
+
+    min-height: auto;
+
+}
+
+
+.performance-table-wrapper {
+
+    margin-top: 20px;
+
+    overflow-x: auto;
+
+}
+
+
+.performance-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+
+.performance-table th {
+
+    text-align: left;
+
+    padding: 12px;
+
+    background: #f5f8fa;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .5px;
+
+    color: #111827;
+
+}
+
+
+.performance-table td {
+
+    padding: 14px 12px;
+
+    border-bottom:
+        1px solid #edf1f4;
+
+    font-size: 11px;
+
+    color: #111827;
+
+}
+
+
+.performance-table td strong {
+
+    font-size: 12px;
+
+}
+
+
+.performance-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 5px 9px;
+
+    border-radius: 5px;
+
+    background: #e7f7ef;
+
+    color: #087746;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   REPORTES DETALLADOS
+========================================================= */
+
+.available-reports {
+
+    margin-top: 32px;
+
+}
+
+
+.available-reports-heading {
+
+    margin-bottom: 17px;
+
+}
+
+
+.report-links {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 13px;
+
+}
+
+
+.report-link {
+
+    border: 1px solid var(--hotel-border);
+
+    background: #ffffff;
+
+    border-radius: 9px;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+
+}
+
+
+.report-link:hover {
+
+    transform: translateY(-2px);
+
+    border-color: #b9c8d5;
+
+    box-shadow: var(--shadow-small);
+
+}
+
+
+.report-link-icon {
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+}
+
+
+.report-link-icon.blue {
+
+    background: #e7f1fc;
+
+    color: var(--hotel-blue);
+
+}
+
+
+.report-link-icon.orange {
+
+    background: #fff1df;
+
+    color: var(--hotel-orange);
+
+}
+
+
+.report-link-icon.green {
+
+    background: #e5f7ef;
+
+    color: var(--hotel-green);
+
+}
+
+
+.report-link-icon.purple {
+
+    background: #eeeaff;
+
+    color: var(--hotel-purple);
+
+}
+
+
+.report-link-icon.cyan {
+
+    background: #e7f7f9;
+
+    color: var(--hotel-cyan);
+
+}
+
+
+.report-link-icon.red {
+
+    background: #fff0f0;
+
+    color: var(--hotel-red);
+
+}
+
+
+.report-link > span:nth-child(2) {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.report-link strong {
+
+    font-size: 11px;
+
+    color: #111827;
+
+}
+
+
+.report-link small {
+
+    margin-top: 4px;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+
+    color: #374151;
+
+}
+
+
+.report-link > i {
+
+    color: #111827;
+
+    font-size: 10px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .report-summary {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .reports-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .report-links {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .hotel-sidebar {
+
+        width: 220px;
+
+    }
+
+
+    .reports-main {
+
+        margin-left: 220px;
+
+        width: calc(100% - 220px);
+
+    }
+
+
+    .reports-heading {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .report-filters {
+
+        flex-wrap: wrap;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .hotel-sidebar {
+
+        display: none;
+
+    }
+
+
+    .reports-main {
+
+        margin-left: 0;
+
+        width: 100%;
+
+    }
+
+
+    .hotel-header {
+
+        padding: 0 18px;
+
+    }
+
+
+    .header-user-info {
+
+        display: none;
+
+    }
+
+
+    .reports-content {
+
+        padding: 22px 16px;
+
+    }
+
+
+    .report-summary {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .report-links {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .report-filters {
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+    }
+
+
+    .filter-group select,
+    .filter-group input,
+    .filter-button {
+
+        width: 100%;
+
+    }
+
+}
