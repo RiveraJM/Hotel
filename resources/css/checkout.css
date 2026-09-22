@@ -5,9 +5,9 @@
 
 :root {
 
-    --hotel-primary: #1e3a5f;
-    --hotel-primary-dark: #142b46;
-    --hotel-primary-light: #edf3f8;
+    --hotel-primary: #007a5e;
+    --hotel-primary-dark: #063b32;
+    --hotel-primary-light: #9ad2b5;
 
     --hotel-accent: #c9a227;
 
@@ -20,13 +20,13 @@
     --hotel-danger: #b91c1c;
     --hotel-danger-light: #fef2f2;
 
-    --hotel-background: #f5f7fa;
+    --hotel-background: #dfe9e2;
     --hotel-card: #ffffff;
 
-    --hotel-text: #111827;
-    --hotel-text-secondary: #374151;
+    --hotel-text: #063b32;
+    --hotel-text-secondary: #477568;
 
-    --hotel-border: #d8dee6;
+    --hotel-border: #9ad2b5;
 
 }
 
@@ -388,9 +388,9 @@ textarea {
 
 .hotel-main {
 
-    margin-left: 16rem;
+    margin-left: 250px;
 
-    width: calc(100% - 16rem);
+    width: calc(100% - 250px);
 
     min-height: 100vh;
 
@@ -1444,9 +1444,9 @@ textarea {
 
     .hotel-main {
 
-        margin-left: 0;
+        margin-left: 70px;
 
-        width: 100%;
+        width: calc(100% - 70px);
 
         padding: 20px;
 
@@ -1519,3 +1519,168 @@ textarea {
     }
 
 }
+
+/* The application shell already provides the navigation sidebar. */
+body > main > .hotel-sidebar {
+    display: none;
+}
+
+body > main > .hotel-main {
+    margin-left: 0;
+    width: 100%;
+}
+
+.receipt-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow-y: auto;
+    background: rgba(6, 59, 50, .45);
+}
+
+.receipt-modal[hidden] {
+    display: none;
+}
+
+.receipt-paper {
+    width: min(390px, 100%);
+    padding: 28px 26px;
+    background: #fff;
+    color: #17231f;
+    box-shadow: 0 18px 55px rgba(6, 59, 50, .25);
+    font-family: "Courier New", monospace;
+}
+
+.receipt-brand,
+.receipt-title,
+.receipt-number,
+.receipt-thanks {
+    text-align: center;
+}
+
+.receipt-brand {
+    color: #063b32;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.receipt-title {
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.receipt-number {
+    margin-top: 4px;
+    color: #477568;
+    font-size: 12px;
+}
+
+.receipt-divider {
+    margin: 17px 0;
+    border-top: 1px dashed #9ad2b5;
+}
+
+.receipt-data,
+.receipt-line,
+.receipt-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.receipt-data span,
+.receipt-line span {
+    color: #477568;
+}
+
+.receipt-data strong,
+.receipt-line strong {
+    text-align: right;
+}
+
+.receipt-total {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 2px solid #063b32;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.receipt-thanks {
+    margin-top: 24px;
+    color: #477568;
+    font-size: 12px;
+}
+
+.receipt-modal-actions {
+    position: fixed;
+    top: 24px;
+    right: 28px;
+    display: flex;
+    gap: 8px;
+}
+
+.receipt-modal-actions button {
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.receipt-close { background: #fff; color: #063b32; }
+.receipt-print { background: #c9a227; color: #17231f; }
+
+@media print {
+    body * { visibility: hidden !important; }
+    #receiptModal,
+    #receiptModal * { visibility: visible !important; }
+    #receiptModal { position: absolute; inset: 0; display: block; padding: 0; background: #fff; }
+    .receipt-paper { width: 80mm; padding: 8mm 4mm; box-shadow: none; }
+    .no-print { display: none !important; }
+}
+
+.occupied-stays {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--hotel-border);
+}
+
+.occupied-stays-heading {
+    display: flex;
+    justify-content: space-between;
+    color: var(--hotel-text-secondary);
+    font-size: 12px;
+}
+
+.occupied-stays-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.occupied-stay {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 9px 12px;
+    border: 1px solid var(--hotel-border);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--hotel-text);
+    cursor: pointer;
+    text-align: left;
+}
+
+.occupied-stay:hover { border-color: var(--hotel-primary); background: var(--hotel-success-light); }
+.occupied-stay span, .occupied-stays-empty { color: var(--hotel-text-secondary); font-size: 11px; }
+.occupied-stay-warning { border-color: var(--hotel-warning); background: var(--hotel-warning-light); cursor: not-allowed; }
+.occupied-stay-warning strong, .occupied-stay-warning span { color: var(--hotel-warning); }

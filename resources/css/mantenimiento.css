@@ -10,8 +10,8 @@
 
 :root {
 
-    --hotel-primary: #1e3a5f;
-    --hotel-primary-dark: #142b46;
+    --hotel-primary: #007a5e;
+    --hotel-primary-dark: #063b32;
 
     --maintenance-blue: #2563eb;
     --maintenance-blue-light: #eff6ff;
@@ -340,7 +340,9 @@
 
 .maintenance-page .maintenance-main {
 
-    margin-left: 16rem;
+    margin-left: 0;
+
+    width: 100%;
 
     min-height: 100vh;
 
@@ -1516,6 +1518,8 @@
     .maintenance-page .maintenance-main {
 
         margin-left: 0;
+        min-width: 0;
+        overflow-x: hidden;
 
     }
 
@@ -1556,7 +1560,7 @@
 
     .maintenance-page .maintenance-content {
 
-        padding: 18px;
+        padding: 16px;
 
     }
 
@@ -1582,4 +1586,83 @@
 
     }
 
+}
+
+.maintenance-form-panel {
+    margin-bottom: 24px;
+    padding: 26px;
+    border: 1px solid var(--maintenance-border, #d1d5db);
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, .08);
+}
+
+.maintenance-form-panel[hidden] { display: none; }
+
+.maintenance-form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 18px 0;
+}
+
+.maintenance-form-grid label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #334155;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.maintenance-form-grid label::first-letter { color: var(--maintenance-blue); }
+
+.maintenance-form-grid input,
+.maintenance-form-grid select,
+.maintenance-form-grid textarea {
+    width: 100%;
+    padding: 10px 11px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+    color: #17231f;
+    font: inherit;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.maintenance-form-grid input:focus,
+.maintenance-form-grid select:focus,
+.maintenance-form-grid textarea:focus {
+    outline: none;
+    border-color: var(--maintenance-blue);
+    box-shadow: 0 0 0 3px var(--maintenance-blue-light);
+}
+
+.maintenance-form-grid .full-width { grid-column: 1 / -1; }
+.maintenance-form-panel .maintenance-primary-button { margin-left: auto; }
+.maintenance-priority, .maintenance-state { font-weight: 700; text-transform: capitalize; }
+.maintenance-priority.alta { color: var(--maintenance-red); }
+.maintenance-priority.media { color: var(--maintenance-orange); }
+.maintenance-priority.baja { color: var(--maintenance-green); }
+.maintenance-state.completado { color: var(--maintenance-green); }
+.maintenance-state.en_proceso { color: var(--maintenance-blue); }
+.maintenance-state.pendiente { color: var(--maintenance-orange); }
+.maintenance-actions { display: flex; gap: 6px; align-items: center; }
+.maintenance-edit-button, .maintenance-delete-button { padding: 6px 8px; border: 0; border-radius: 4px; cursor: pointer; font-size: 11px; }
+.maintenance-edit-button { background: var(--maintenance-blue-light); color: var(--maintenance-blue); }
+.maintenance-delete-button { background: var(--maintenance-red-light); color: var(--maintenance-red); }
+.affected-room { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid #e5e7eb; font-size: 12px; }
+.affected-room span { color: #64748b; }
+
+@media (max-width: 800px) {
+    .maintenance-form-grid { grid-template-columns: 1fr; }
+    .maintenance-form-grid .full-width { grid-column: auto; }
+}
+
+.maintenance-type-card:focus-visible,
+.maintenance-type-card.is-selected {
+    outline: 2px solid var(--maintenance-blue);
+    outline-offset: 2px;
+    border-color: var(--maintenance-blue);
+    background: var(--maintenance-blue-light);
 }

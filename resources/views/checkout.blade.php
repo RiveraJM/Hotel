@@ -223,7 +223,11 @@
          CONTENIDO PRINCIPAL
     ====================================================== --}}
 
-    <main class="hotel-main">
+    <main
+        class="hotel-main"
+        id="checkoutPage"
+        data-search-url="{{ route('checkout.search') }}"
+    >
 
 
         {{-- =================================================
@@ -256,8 +260,8 @@
                     Fecha actual
                 </span>
 
-                <strong>
-                    --
+                    <strong id="currentDate">
+                        {{ now()->format('d/m/Y') }}
                 </strong>
 
             </div>
@@ -304,7 +308,7 @@
                         Buscar por
                     </label>
 
-                    <select>
+                    <select id="searchField">
 
                         <option value="">
                             Seleccionar
@@ -338,6 +342,7 @@
                     </label>
 
                     <input
+                        id="searchValue"
                         type="text"
                         placeholder="Ingrese el dato a buscar"
                     >
@@ -348,6 +353,7 @@
                 <button
                     type="button"
                     class="primary-button"
+                    id="btnSearchCheckout"
                 >
 
                     🔎
@@ -356,6 +362,31 @@
 
                 </button>
 
+            </div>
+
+            <div class="occupied-stays" aria-live="polite">
+                <div class="occupied-stays-heading">
+                    <strong>Habitaciones ocupadas</strong>
+                    <span>{{ $habitacionesOcupadas->count() }} ocupadas</span>
+                </div>
+                <div class="occupied-stays-list">
+                    @forelse ($habitacionesOcupadas as $ocupada)
+                        @php($estadia = $ocupada->reservas->first())
+                        @if ($estadia)
+                            <button type="button" class="occupied-stay" data-occupied-stay="{{ $estadia->codigo }}">
+                                <strong>Hab. {{ $ocupada->numero }}</strong>
+                                <span>{{ $estadia->huesped?->nombre ?? 'Huésped sin datos' }} · {{ $estadia->codigo }}</span>
+                            </button>
+                        @else
+                            <span class="occupied-stay occupied-stay-warning">
+                                <strong>Hab. {{ $ocupada->numero }}</strong>
+                                <span>Sin reserva activa · revisar</span>
+                            </span>
+                        @endif
+                    @empty
+                        <span class="occupied-stays-empty">No hay habitaciones ocupadas para cerrar.</span>
+                    @endforelse
+                </div>
             </div>
 
         </section>
@@ -369,7 +400,7 @@
              solamente cuando exista una estadía activa.
         ================================================== --}}
 
-        <section class="checkout-result">
+        <section class="checkout-result" id="checkoutResult" hidden>
 
 
             <div class="result-header">
@@ -404,7 +435,7 @@
 
                 <div class="guest-main">
 
-                    <div class="guest-avatar">
+                    <div class="guest-avatar" id="checkoutAvatar">
                         --
                     </div>
 
@@ -414,11 +445,11 @@
                             Huésped
                         </span>
 
-                        <strong>
+                        <strong id="checkoutGuest">
                             --
                         </strong>
 
-                        <small>
+                        <small id="checkoutDocument">
                             Documento: --
                         </small>
 
@@ -435,7 +466,7 @@
                             Reserva
                         </span>
 
-                        <strong>
+                        <strong id="checkoutReservation">
                             --
                         </strong>
 
@@ -448,7 +479,7 @@
                             Habitación
                         </span>
 
-                        <strong>
+                        <strong id="checkoutRoom">
                             --
                         </strong>
 
@@ -461,7 +492,7 @@
                             Check-in
                         </span>
 
-                        <strong>
+                        <strong id="checkoutCheckin">
                             --
                         </strong>
 
@@ -474,7 +505,7 @@
                             Check-out previsto
                         </span>
 
-                        <strong>
+                        <strong id="checkoutExpected">
                             --
                         </strong>
 
@@ -511,6 +542,7 @@
                     <button
                         type="button"
                         class="secondary-button"
+                        id="btnAddConsumption"
                     >
 
                         + Agregar consumo
@@ -554,7 +586,7 @@
                         </thead>
 
 
-                        <tbody>
+                        <tbody id="consumptionBody">
 
                             {{--
 
@@ -619,7 +651,7 @@
                             Alojamiento
                         </span>
 
-                        <strong>
+                        <strong id="accommodationTotal">
                             S/ --
                         </strong>
 
@@ -632,7 +664,7 @@
                             Consumos
                         </span>
 
-                        <strong>
+                        <strong id="consumptionsTotal">
                             S/ --
                         </strong>
 
@@ -645,7 +677,7 @@
                             Descuentos
                         </span>
 
-                        <strong class="discount-amount">
+                        <strong class="discount-amount" id="discountTotal">
                             - S/ --
                         </strong>
 
@@ -658,7 +690,7 @@
                             Total
                         </span>
 
-                        <strong>
+                        <strong id="checkoutTotal">
                             S/ --
                         </strong>
 
@@ -683,7 +715,7 @@
                         Método de pago
                     </label>
 
-                    <select>
+                    <select id="paymentMethod">
 
                         <option value="">
                             Seleccionar método de pago
@@ -720,10 +752,18 @@
                         Estado de pago
                     </span>
 
-                    <strong>
+                    <strong id="paymentStatus">
                         Pendiente
                     </strong>
 
+                </div>
+
+                <div class="payment-method">
+                    <label for="receiptType">Comprobante</label>
+                    <select id="receiptType">
+                        <option value="ticket">Ticket de venta</option>
+                        <option value="boleta">Boleta</option>
+                    </select>
                 </div>
 
             </div>
@@ -741,6 +781,7 @@
                 </label>
 
                 <textarea
+                    id="checkoutObservations"
                     placeholder="Ingrese observaciones relacionadas con la salida del huésped..."
                 ></textarea>
 
@@ -780,6 +821,7 @@
                 <button
                     type="button"
                     class="checkout-button"
+                    id="btnConfirmCheckout"
                 >
 
                     ✓
@@ -804,7 +846,7 @@
              @endif
         ================================================== --}}
 
-        <section class="checkout-empty-state">
+        <section class="checkout-empty-state" id="checkoutEmptyState">
 
 
             <div class="empty-icon">
@@ -827,5 +869,160 @@
 
 
     </main>
+
+    <section class="receipt-modal" id="receiptModal" hidden aria-hidden="true">
+        <div class="receipt-modal-actions no-print">
+            <button type="button" class="receipt-close" id="closeReceipt">Cerrar</button>
+            <button type="button" class="receipt-print" id="printReceipt"><i class="fa-solid fa-print"></i> Imprimir comprobante</button>
+        </div>
+        <article class="receipt-paper" id="receiptPaper">
+            <div class="receipt-brand">HOTEL CIELO</div>
+            <p class="receipt-title" id="receiptTitle">TICKET DE VENTA</p>
+            <p class="receipt-number" id="receiptNumber"></p>
+            <div class="receipt-divider"></div>
+            <div class="receipt-data"><span>Fecha</span><strong id="receiptDate"></strong></div>
+            <div class="receipt-data"><span>Reserva</span><strong id="receiptReservation"></strong></div>
+            <div class="receipt-data"><span>Huésped</span><strong id="receiptGuest"></strong></div>
+            <div class="receipt-data"><span>Documento</span><strong id="receiptDocument"></strong></div>
+            <div class="receipt-data"><span>Habitación</span><strong id="receiptRoom"></strong></div>
+            <div class="receipt-divider"></div>
+            <div id="receiptLines"></div>
+            <div class="receipt-total"><span>TOTAL</span><strong id="receiptTotal"></strong></div>
+            <div class="receipt-data"><span>Método de pago</span><strong id="receiptMethod"></strong></div>
+            <p class="receipt-thanks">Gracias por su preferencia.</p>
+        </article>
+    </section>
+
+    <script>
+        (() => {
+            const page = document.getElementById('checkoutPage');
+            const csrf = document.querySelector('meta[name="csrf-token"]')?.content || '{{ csrf_token() }}';
+            const state = { stay: null, consumptions: [] };
+            const receiptModal = document.getElementById('receiptModal');
+            const money = value => `S/ ${Number(value || 0).toFixed(2)}`;
+            const showReceipt = receipt => {
+                document.getElementById('receiptTitle').textContent = receipt.type === 'boleta' ? 'BOLETA DE VENTA' : 'TICKET DE VENTA';
+                document.getElementById('receiptNumber').textContent = receipt.number;
+                document.getElementById('receiptDate').textContent = receipt.checkout;
+                document.getElementById('receiptReservation').textContent = receipt.reservation;
+                document.getElementById('receiptGuest').textContent = receipt.guest;
+                document.getElementById('receiptDocument').textContent = receipt.document;
+                document.getElementById('receiptRoom').textContent = receipt.room;
+                document.getElementById('receiptTotal').textContent = money(receipt.total);
+                document.getElementById('receiptMethod').textContent = receipt.payment_method;
+                const lines = [{ concept: 'Alojamiento', quantity: 1, price: receipt.accommodation }, ...(receipt.consumptions || [])];
+                document.getElementById('receiptLines').innerHTML = lines.map(line => `<div class="receipt-line"><span>${line.quantity} x ${line.concept}</span><strong>${money(line.quantity * line.price)}</strong></div>`).join('');
+                receiptModal.hidden = false;
+                receiptModal.setAttribute('aria-hidden', 'false');
+            };
+            const setText = (id, value) => document.getElementById(id).textContent = value || '--';
+            const message = text => window.alert(text);
+
+            const renderConsumption = () => {
+                const body = document.getElementById('consumptionBody');
+                body.innerHTML = '';
+                if (!state.consumptions.length) {
+                    body.innerHTML = '<tr class="empty-row"><td colspan="5">No hay consumos registrados.</td></tr>';
+                } else {
+                    state.consumptions.forEach((item, index) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `<td>${item.concept}</td><td>${item.quantity}</td><td>${money(item.price)}</td><td>${money(item.quantity * item.price)}</td><td><button type="button" data-remove="${index}" aria-label="Eliminar consumo">Eliminar</button></td>`;
+                        body.appendChild(row);
+                    });
+                }
+                const total = state.consumptions.reduce((sum, item) => sum + item.quantity * item.price, 0);
+                setText('consumptionsTotal', money(total));
+                setText('checkoutTotal', money((state.stay?.accommodation || 0) + total - (state.stay?.discount || 0)));
+                body.querySelectorAll('[data-remove]').forEach(button => button.addEventListener('click', () => {
+                    state.consumptions.splice(Number(button.dataset.remove), 1);
+                    renderConsumption();
+                }));
+            };
+
+            const renderStay = stay => {
+                state.stay = stay;
+                setText('checkoutGuest', stay.guest.name);
+                setText('checkoutDocument', `Documento: ${stay.guest.document}`);
+                setText('checkoutAvatar', stay.guest.name.split(' ').slice(0, 2).map(word => word[0]).join('').toUpperCase());
+                setText('checkoutReservation', stay.reservation);
+                setText('checkoutRoom', stay.room);
+                setText('checkoutCheckin', stay.checkin);
+                setText('checkoutExpected', stay.checkout);
+                setText('accommodationTotal', money(stay.accommodation));
+                setText('discountTotal', `- ${money(stay.discount)}`);
+                document.getElementById('checkoutResult').hidden = false;
+                document.getElementById('checkoutEmptyState').hidden = true;
+                state.consumptions = stay.consumptions || [];
+                renderConsumption();
+            };
+
+            document.getElementById('btnSearchCheckout').addEventListener('click', async () => {
+                const term = document.getElementById('searchValue').value.trim();
+                const button = document.getElementById('btnSearchCheckout');
+                button.disabled = true;
+                try {
+                    const params = new URLSearchParams({ buscar: term, campo: document.getElementById('searchField').value });
+                    const response = await fetch(`${page.dataset.searchUrl}?${params}`, { headers: { Accept: 'application/json' } });
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data.message || 'No se encontró la estadía.');
+                    renderStay(data);
+                } catch (error) {
+                    message(error.message);
+                } finally {
+                    button.disabled = false;
+                }
+            });
+
+            document.getElementById('searchValue').addEventListener('keydown', event => {
+                if (event.key === 'Enter') document.getElementById('btnSearchCheckout').click();
+            });
+
+            document.querySelectorAll('[data-occupied-stay]').forEach(button => button.addEventListener('click', async () => {
+                document.getElementById('searchValue').value = button.dataset.occupiedStay;
+                document.getElementById('searchField').value = 'reserva';
+                document.getElementById('btnSearchCheckout').click();
+            }));
+
+            document.getElementById('btnAddConsumption').addEventListener('click', () => {
+                const concept = window.prompt('Concepto del consumo:');
+                if (!concept?.trim()) return;
+                const quantity = Math.max(1, Number(window.prompt('Cantidad:', '1')) || 1);
+                const price = Math.max(0, Number(window.prompt('Precio unitario:', '0')) || 0);
+                state.consumptions.push({ concept: concept.trim(), quantity, price });
+                renderConsumption();
+            });
+
+            document.getElementById('btnConfirmCheckout').addEventListener('click', async () => {
+                if (!state.stay) return message('Busca una estadía activa primero.');
+                const paymentMethod = document.getElementById('paymentMethod').value;
+                if (!paymentMethod) return message('Selecciona un método de pago.');
+                const response = await fetch(`{{ url('/checkout') }}/${state.stay.id}`, {
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': csrf, 'Content-Type': 'application/json', Accept: 'application/json' },
+                    body: JSON.stringify({
+                        payment_method: paymentMethod,
+                        payment_status: 'pagado',
+                        comprobante_tipo: document.getElementById('receiptType').value,
+                        observations: document.getElementById('checkoutObservations').value,
+                        consumptions: state.consumptions,
+                    }),
+                });
+                const data = await response.json();
+                if (!response.ok) return message(data.message || 'No se pudo registrar el check-out.');
+                message(data.message);
+                showReceipt(data.receipt);
+                if (data.receipt_url) {
+                    window.open(`${data.receipt_url}?formato=${document.getElementById('receiptType').value}`, '_blank', 'noopener');
+                }
+            });
+
+            document.getElementById('closeReceipt').addEventListener('click', () => {
+                receiptModal.hidden = true;
+                receiptModal.setAttribute('aria-hidden', 'true');
+                window.location.reload();
+            });
+            document.getElementById('printReceipt').addEventListener('click', () => window.print());
+        })();
+    </script>
 
 </x-app-layout>

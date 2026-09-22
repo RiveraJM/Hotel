@@ -3,10 +3,15 @@
      HUÉSPEDES
      resources/views/huespedes.blade.php
 ========================================================= --}}
-
-@vite(['resources/css/huespedes.css'])
-
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
 <x-app-layout>
+
+    @push('styles')
+        @vite(['resources/css/huespedes.css'])
+    @endpush
 
 <div class="guests-page">
 
@@ -94,6 +99,13 @@
                 </a>
 
             </div>
+
+            @if (session('success'))
+                <div class="guest-success-message" role="status">
+                    <i class="fa-solid fa-circle-check"></i>
+                    {{ session('success') }}
+                </div>
+            @endif
 
 
 
@@ -235,7 +247,7 @@
                             type="text"
                             name="buscar"
                             value="{{ request('buscar') }}"
-                            placeholder="Buscar por nombre, DNI, pasaporte o teléfono..."
+                            placeholder="{{ request('estado') === 'reserva' ? 'Buscar una reserva por DNI, nombre o teléfono...' : 'Buscar por nombre, DNI, pasaporte o teléfono...' }}"
                             autocomplete="off"
                         >
 
@@ -245,6 +257,7 @@
                     <select
                         name="estado"
                         class="guest-filter-select"
+                        onchange="this.form.submit()"
                     >
 
                         <option value="">
@@ -585,22 +598,21 @@
 
                                         <div class="guest-actions">
 
-                                            <a
-                                                href="{{ route('huespedes.show', $huesped->id) }}"
-                                                class="guest-action-button"
-                                                title="Ver huésped"
-                                            >
-                                                <i class="fa-solid fa-eye"></i>
-                                            </a>
+                                                         <a
+    href="{{ route('huespedes.edit', $huesped) }}"
+    class="guest-action-button guest-action-edit"
+    title="Editar huésped"
+>
+    <i class="fa-solid fa-pen"></i>
+</a>
 
-
-                                            <a
-                                                href="{{ route('huespedes.edit', $huesped->id) }}"
-                                                class="guest-action-button"
-                                                title="Editar huésped"
-                                            >
-                                                <i class="fa-solid fa-pen"></i>
-                                            </a>
+                                            <form action="{{ route('huespedes.destroy', $huesped) }}" method="POST" class="guest-delete-form" onsubmit="return confirm('¿Eliminar este huésped?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="guest-action-button guest-action-delete" title="Eliminar huésped">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
 
                                         </div>
 

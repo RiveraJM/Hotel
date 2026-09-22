@@ -1,0 +1,2353 @@
+/* =========================================================
+   DETALLE DE HABITACIÓN PREMIUM
+   ========================================================= */
+
+.room-detail-page {
+    width: min(1280px, calc(100% - 24px));
+    margin: 20px auto 42px;
+    padding: 0 0 32px;
+    color: #e2e8f0;
+}
+
+.room-detail-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.9));
+    box-shadow: 0 18px 44px rgba(15, 23, 42, 0.26);
+}
+
+.room-detail-heading {
+    min-width: 0;
+}
+
+.room-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s ease;
+}
+
+.room-back-link:hover {
+    color: #facc15;
+}
+
+.room-title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.room-number-badge {
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #facc15, #d97706);
+    color: #111827;
+    font-size: 22px;
+    font-weight: 900;
+    box-shadow: 0 14px 28px rgba(234, 179, 8, 0.22);
+}
+
+.room-section-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #facc15;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+.room-title-row h1 {
+    margin: 0;
+    color: #f8fafc;
+    font-size: clamp(1.7rem, 2vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.room-title-row p {
+    margin: 7px 0 0;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.room-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.room-status-form {
+    margin: 0;
+}
+
+.room-status-select {
+    min-height: 44px;
+    padding: 0 38px 0 14px;
+    border: 1px solid rgba(250, 204, 21, 0.7);
+    border-radius: 12px;
+    background: linear-gradient(135deg, #facc15, #d97706);
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.room-status-select:focus {
+    outline: 3px solid rgba(250, 204, 21, 0.25);
+    outline-offset: 2px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.room-secondary-button,
+.room-primary-button,
+.room-modal-cancel,
+.room-modal-submit {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.room-secondary-button {
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: rgba(15, 23, 42, 0.4);
+    color: #f8fafc;
+}
+
+.room-primary-button {
+    border: 1px solid rgba(250, 204, 21, 0.7);
+    background: linear-gradient(135deg, #facc15, #d97706);
+    color: #111827;
+    box-shadow: 0 12px 22px rgba(250, 204, 21, 0.2);
+}
+
+.room-secondary-button:hover,
+.room-primary-button:hover,
+.room-modal-cancel:hover,
+.room-modal-submit:hover {
+    transform: translateY(-1px);
+}
+
+.room-status-banner {
+    min-height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 20px;
+    padding: 18px 22px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+}
+
+.room-status-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.room-status-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-size: 19px;
+    color: #fff;
+}
+
+.room-status-main span,
+.room-status-number span {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    opacity: 0.9;
+}
+
+.room-status-main strong {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.room-status-number {
+    text-align: right;
+}
+
+.room-status-number strong {
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.status-available {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(22, 163, 74, 0.08));
+    border-color: rgba(52, 211, 153, 0.35);
+    color: #d1fae5;
+}
+
+.status-available .room-status-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.status-reserved {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.18), rgba(234, 88, 12, 0.08));
+    border-color: rgba(251, 146, 60, 0.35);
+    color: #ffedd5;
+}
+
+.status-reserved .room-status-icon {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.status-occupied {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.14), rgba(220, 38, 38, 0.07));
+    border-color: rgba(248, 113, 113, 0.35);
+    color: #fee2e2;
+}
+
+.status-occupied .room-status-icon {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.status-maintenance {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(217, 119, 6, 0.07));
+    border-color: rgba(250, 204, 21, 0.35);
+    color: #fef3c7;
+}
+
+.status-maintenance .room-status-icon {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.status-default {
+    background: linear-gradient(135deg, rgba(148, 163, 184, 0.12), rgba(15, 23, 42, 0.08));
+    border-color: rgba(148, 163, 184, 0.25);
+    color: #e2e8f0;
+}
+
+.room-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.9fr);
+    gap: 20px;
+}
+
+.room-card {
+    background: rgba(15, 23, 42, 0.82);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 22px;
+    box-shadow: 0 18px 36px rgba(2, 6, 23, 0.24);
+    overflow: hidden;
+}
+
+.room-card-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    background: rgba(15, 23, 42, 0.54);
+}
+
+.room-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.room-card-title h2 {
+    margin: 0;
+    color: #f8fafc;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.room-card-title p {
+    margin: 4px 0 0;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.room-card-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.room-card-icon.blue {
+    background: rgba(59, 130, 246, 0.16);
+    color: #60a5fa;
+}
+
+.room-card-icon.gold {
+    background: rgba(250, 204, 21, 0.14);
+    color: #facc15;
+}
+
+.room-card-icon.green {
+    background: rgba(16, 185, 129, 0.16);
+    color: #34d399;
+}
+
+.room-card-icon.dark {
+    background: rgba(148, 163, 184, 0.12);
+    color: #e2e8f0;
+}
+
+.room-information-card {
+    grid-column: 1;
+}
+
+.room-information-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 10px 20px 18px;
+}
+
+.room-information-item {
+    min-height: 88px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.room-information-item:nth-child(odd) {
+    padding-right: 16px;
+    border-right: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.room-information-item:nth-child(even) {
+    padding-left: 16px;
+}
+
+.room-information-label {
+    margin-bottom: 6px;
+    color: #94a3b8;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.room-information-item strong {
+    color: #f8fafc;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.room-price-item {
+    grid-column: 1 / -1;
+}
+
+.room-price-item strong {
+    color: #facc15;
+    font-size: 18px;
+}
+
+.room-gallery-card {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+}
+
+.room-gallery-content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px;
+}
+
+.room-gallery-item {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    background: #0f172a;
+}
+
+.room-gallery-item.featured {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 7;
+}
+
+.room-gallery-item:not(.featured) {
+    aspect-ratio: 1 / 1;
+}
+
+.room-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.room-gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+.room-description-card {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.room-description-content {
+    min-height: 160px;
+    padding: 18px;
+}
+
+.room-description-content > p {
+    margin: 0;
+    color: #dfe7f3;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.room-empty-description {
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #cbd5e1;
+}
+
+.room-empty-description > div {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    border-radius: 50%;
+    background: rgba(148, 163, 184, 0.12);
+    color: #facc15;
+    font-size: 17px;
+}
+
+.room-empty-description strong {
+    color: #f8fafc;
+    font-size: 14px;
+}
+
+.room-empty-description span {
+    max-width: 260px;
+    margin-top: 6px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.room-operation-card {
+    grid-column: 1;
+}
+
+.room-operation-list {
+    padding: 8px 20px 14px;
+}
+
+.room-operation-row {
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.room-operation-row:last-child {
+    border-bottom: none;
+}
+
+.room-operation-row > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #cbd5e1;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.room-operation-row > div i {
+    width: 18px;
+    color: #facc15;
+    text-align: center;
+}
+
+.room-operation-row > strong {
+    color: #f8fafc;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.room-operation-row > strong.status-available,
+.room-operation-row > strong.status-reserved,
+.room-operation-row > strong.status-occupied,
+.room-operation-row > strong.status-maintenance {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.room-operation-row > strong.status-available {
+    color: #34d399;
+}
+
+.room-operation-row > strong.status-reserved {
+    color: #fb923c;
+}
+
+.room-operation-row > strong.status-occupied {
+    color: #f87171;
+}
+
+.room-operation-row > strong.status-maintenance {
+    color: #fbbf24;
+}
+
+.room-operation-price {
+    color: #facc15 !important;
+}
+
+.room-actions-card {
+    grid-column: 1 / -1;
+}
+
+.room-actions-grid {
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+}
+
+.room-action-button {
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.72);
+    color: #f8fafc;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.room-action-button > i {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.room-action-button span {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.room-action-button strong {
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.room-action-button small {
+    color: #cbd5e1;
+    font-size: 11px;
+}
+
+.room-action-button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(148, 163, 184, 0.22);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
+}
+
+.room-action-button.reserve > i {
+    background: rgba(16, 185, 129, 0.18);
+    color: #34d399;
+}
+
+.room-action-button.reservation > i {
+    background: rgba(249, 115, 22, 0.14);
+    color: #fb923c;
+}
+
+.room-action-button.occupied > i {
+    background: rgba(248, 113, 113, 0.14);
+    color: #f87171;
+}
+
+.room-action-button.maintenance > i {
+    background: rgba(250, 204, 21, 0.14);
+    color: #fbbf24;
+}
+
+.room-status-modal {
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 22px;
+    background: rgba(15, 23, 42, 0.98);
+    color: #f8fafc;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
+}
+
+.room-status-modal-header,
+.room-status-modal-footer {
+    border-color: rgba(148, 163, 184, 0.12);
+}
+
+.room-status-modal-header {
+    background: rgba(15, 23, 42, 0.8);
+}
+
+.room-status-modal-body {
+    padding: 20px;
+}
+
+.room-modal-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.room-modal-select {
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.7);
+    color: #f8fafc;
+    padding: 0.8rem 0.9rem;
+}
+
+.room-modal-cancel {
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: transparent;
+    color: #e2e8f0;
+}
+
+.room-modal-submit {
+    border: 1px solid rgba(250, 204, 21, 0.7);
+    background: linear-gradient(135deg, #facc15, #d97706);
+    color: #111827;
+}
+
+@media (max-width: 980px) {
+    .room-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .room-gallery-card,
+    .room-description-card,
+    .room-information-card,
+    .room-operation-card,
+    .room-actions-card {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
+
+@media (max-width: 700px) {
+    .room-detail-page {
+        width: min(100% - 16px, 100px);
+        margin-top: 12px;
+    }
+
+    .room-detail-header {
+        padding: 18px 16px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .room-header-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .room-secondary-button,
+    .room-primary-button,
+    .room-modal-cancel,
+    .room-modal-submit {
+        width: 100%;
+    }
+
+    .room-title-row {
+        align-items: flex-start;
+    }
+
+    .room-status-banner {
+        padding: 16px 18px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .room-status-number {
+        text-align: left;
+    }
+
+    .room-information-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .room-information-item:nth-child(odd),
+    .room-information-item:nth-child(even) {
+        padding-left: 0;
+        padding-right: 0;
+        border-right: none;
+    }
+
+    .room-gallery-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Shared hotel palette */
+:root {
+    --room-deep: #063b32;
+    --room-primary: #007a5e;
+    --room-green: #34a37a;
+    --room-soft: #9ad2b5;
+    --room-pale: #dfe9e2;
+}
+
+.room-detail-page {
+    color: var(--room-pale);
+}
+
+.room-detail-header,
+.room-card {
+    background: var(--room-deep);
+    border-color: rgba(154, 210, 181, 0.28);
+}
+
+.room-detail-header {
+    background: linear-gradient(135deg, var(--room-deep), var(--room-primary));
+}
+
+.room-card-header {
+    background: rgba(0, 122, 94, 0.32);
+    border-color: rgba(154, 210, 181, 0.22);
+}
+
+.room-primary-button,
+.room-status-select {
+    background: var(--room-green);
+    border-color: var(--room-green);
+}
+
+.room-secondary-button {
+    background: rgba(0, 122, 94, 0.28);
+    border-color: var(--room-soft);
+}
+
+.room-title-row h1,
+.room-card-title h2,
+.room-information-item strong,
+.room-operation-row > strong,
+.room-empty-description strong {
+    color: var(--room-pale);
+}
+
+.room-section-label,
+.room-price-item strong,
+.room-operation-price {
+    color: var(--room-soft) !important;
+}
+
+.room-gallery-item {
+    background: var(--room-primary);
+    border-color: rgba(154, 210, 181, 0.28);
+}
+
+/* Ajuste compacto para una lectura mas rapida y controles visibles. */
+.room-detail-page {
+    margin-top: 14px;
+    padding-bottom: 20px;
+}
+
+.room-detail-header {
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    border-radius: 18px;
+}
+
+.room-back-link {
+    margin-bottom: 10px;
+}
+
+.room-number-badge {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    font-size: 18px;
+}
+
+.room-title-row {
+    gap: 12px;
+}
+
+.room-title-row h1 {
+    font-size: clamp(1.35rem, 2vw, 2rem);
+}
+
+.room-title-row p {
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+.room-secondary-button,
+.room-primary-button {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 12px;
+}
+
+.room-status-banner {
+    min-height: 74px;
+    margin-bottom: 14px;
+    padding: 12px 16px;
+    border-radius: 16px;
+}
+
+.room-status-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    font-size: 15px;
+}
+
+.room-status-main {
+    gap: 10px;
+}
+
+.room-status-main strong {
+    font-size: 16px;
+}
+
+.room-status-number strong {
+    font-size: 18px;
+}
+
+.room-detail-grid {
+    gap: 14px;
+}
+
+.room-card {
+    border-radius: 16px;
+}
+
+.room-card-header {
+    padding: 13px 16px;
+}
+
+.room-card-title {
+    gap: 10px;
+}
+
+.room-card-title h2 {
+    font-size: 14px;
+}
+
+.room-card-title p {
+    margin-top: 2px;
+    font-size: 10px;
+}
+
+.room-card-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.room-information-grid {
+    padding: 4px 16px 10px;
+}
+
+.room-information-item {
+    min-height: 64px;
+}
+
+.room-information-label {
+    margin-bottom: 4px;
+    font-size: 8px;
+}
+
+.room-information-item strong {
+    font-size: 13px;
+}
+
+.room-price-item strong {
+    font-size: 16px;
+}
+
+.room-gallery-content {
+    gap: 7px;
+    padding: 12px;
+}
+
+.room-gallery-item {
+    border-radius: 11px;
+}
+
+.room-description-content {
+    min-height: 150px;
+    padding: 16px;
+}
+
+.room-description-content > p {
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.room-empty-description {
+    min-height: 120px;
+}
+
+.room-operation-list {
+    padding: 4px 16px 8px;
+}
+
+.room-operation-row {
+    min-height: 46px;
+    gap: 10px;
+}
+
+.room-operation-row > div,
+.room-operation-row > strong {
+    font-size: 12px;
+}
+
+.room-actions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px 16px;
+}
+
+.room-action-button {
+    min-height: 58px;
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 12px;
+}
+
+.room-action-button > i {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    font-size: 12px;
+}
+
+.room-action-button strong {
+    font-size: 11px;
+}
+
+.room-action-button small {
+    font-size: 9px;
+    line-height: 1.2;
+}
+
+@media (min-width: 701px) {
+    .room-actions-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .room-header-actions {
+        flex-direction: row;
+    }
+
+    .room-secondary-button,
+    .room-primary-button {
+        width: auto;
+        flex: 1;
+    }
+}
+
+@media (max-width: 430px) {
+    .room-detail-page {
+        width: calc(100% - 12px);
+    }
+
+    .room-detail-header {
+        padding: 14px;
+    }
+
+    .room-actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .room-action-button {
+        min-height: 52px;
+    }
+}
+
+/* Tarjetas compactas y accion principal en el encabezado. */
+.room-header-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.room-context-action {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 12px;
+    border: 1px solid rgba(96, 165, 250, 0.45);
+    border-radius: 12px;
+    background: rgba(30, 64, 175, 0.28);
+    color: #dbeafe;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.room-context-action:hover {
+    transform: translateY(-1px);
+    border-color: rgba(147, 197, 253, 0.8);
+    background: rgba(30, 64, 175, 0.42);
+}
+
+.room-context-action.reserve {
+    border-color: rgba(52, 211, 153, 0.45);
+    background: rgba(6, 95, 70, 0.3);
+    color: #d1fae5;
+}
+
+.room-context-action.reservation {
+    border-color: rgba(251, 146, 60, 0.5);
+    background: rgba(154, 52, 18, 0.3);
+    color: #ffedd5;
+}
+
+.room-context-action.occupied {
+    border-color: rgba(248, 113, 113, 0.5);
+    background: rgba(153, 27, 27, 0.3);
+    color: #fee2e2;
+}
+
+.room-context-action.maintenance {
+    border-color: rgba(250, 204, 21, 0.5);
+    background: rgba(133, 77, 14, 0.3);
+    color: #fef3c7;
+}
+
+.room-information-item {
+    min-height: 58px;
+}
+
+.room-information-grid {
+    padding-top: 2px;
+    padding-bottom: 8px;
+}
+
+.room-description-content {
+    min-height: 120px;
+    padding: 16px;
+}
+
+@media (max-width: 700px) {
+    .room-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .room-information-card,
+    .room-gallery-card,
+    .room-description-card,
+    .room-operation-card {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .room-status-form,
+    .room-status-select {
+        width: 100%;
+    }
+}
+
+/* Final detail layout: compact left information and description, gallery right. */
+.room-detail-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 0.72fr);
+}
+
+.room-gallery-card {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+}
+
+.room-gallery-content {
+    gap: 8px;
+    padding: 12px;
+}
+
+.room-gallery-item.featured {
+    aspect-ratio: 16 / 7;
+}
+
+.room-description-card {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.room-information-item {
+    min-height: 58px;
+}
+
+.room-description-content {
+    min-height: 120px;
+    padding: 16px;
+}
+
+.room-empty-description {
+    min-height: 100px;
+}
+
+.room-operation-list {
+    padding-top: 2px;
+    padding-bottom: 6px;
+}
+
+.room-operation-row {
+    min-height: 44px;
+}
+
+.room-actions-card,
+.room-actions-grid,
+.room-action-button {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .room-header-actions {
+        align-items: stretch;
+        justify-content: stretch;
+    }
+
+    .room-context-action {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 430px) {
+    .room-header-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .room-secondary-button,
+    .room-primary-button,
+    .room-context-action {
+        width: 100%;
+        padding: 0 8px;
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   GUÍA RÁPIDA PARA MODIFICAR TAMAÑOS
+   ---------------------------------------------------------
+   ⭐⭐⭐ = propiedad importante para el tamaño de los cards.
+   width / max-width     = ANCHO
+   height / min-height  = ALTO
+   padding               = ESPACIO INTERNO
+   margin                = ESPACIO EXTERNO
+   gap                   = SEPARACIÓN ENTRE ELEMENTOS
+   grid-template-columns = DISTRIBUCIÓN/ANCHO DE COLUMNAS
+   border-radius         = REDONDEADO DE ESQUINAS
+
+   IMPORTANTE:
+   Al final del archivo existen reglas compactas que SOBRESCRIBEN
+   algunas reglas anteriores. Por eso están claramente marcadas.
+   ========================================================= */
+
+/* =========================================================
+   DETALLE DE HABITACIÓN PREMIUM
+   ========================================================= */
+
+.room-detail-page {
+    /* ⭐ ANCHO MÁXIMO DEL CONTENEDOR PRINCIPAL: aumenta/disminuye aquí el ancho general. */
+    width: min(1280px, calc(100% - 24px));
+    /* ⭐ MÁRGENES EXTERNOS: separan el contenido de los bordes y de otros elementos. */
+    margin: 20px auto 42px;
+    padding: 0 0 32px;
+    color: #e2e8f0;
+}
+
+/* =========================================================
+   01. ENCABEZADO PRINCIPAL
+   ========================================================= */
+
+.room-detail-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    /* ⭐ SEPARACIÓN ENTRE CARDS/COLUMNAS. Reduce para acercarlos o aumenta para separarlos. */
+    gap: 20px;
+    /* ⭐ TAMAÑO INTERNO DEL ENCABEZADO: vertical | horizontal. */
+    padding: 22px 24px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(5, 90, 38, 0.18);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(7, 102, 63, 0.98), rgba(30, 41, 59, 0.9));
+    box-shadow: 0 18px 44px rgba(15, 23, 42, 0.26);
+}
+
+.room-detail-heading {
+    min-width: 0;
+}
+
+.room-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s ease;
+}
+
+.room-back-link:hover {
+    color: #facc15;
+}
+
+.room-title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.room-number-badge {
+    /* ⭐ ANCHO DEL BADGE DEL NÚMERO DE HABITACIÓN. */
+    width: 68px;
+    /* ⭐ ALTO DEL BADGE DEL NÚMERO DE HABITACIÓN. */
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #facc15, #d97706);
+    color: #111827;
+    font-size: 22px;
+    font-weight: 900;
+    box-shadow: 0 14px 28px rgba(234, 179, 8, 0.22);
+}
+
+.room-section-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #facc15;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+.room-title-row h1 {
+    margin: 0;
+    color: #f8fafc;
+    font-size: clamp(1.7rem, 2vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.room-title-row p {
+    margin: 7px 0 0;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.room-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.room-secondary-button,
+.room-primary-button,
+.room-modal-cancel,
+.room-modal-submit {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.room-secondary-button {
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: rgba(15, 23, 42, 0.4);
+    color: #f8fafc;
+}
+
+.room-primary-button {
+    border: 1px solid rgba(250, 204, 21, 0.7);
+    background: linear-gradient(135deg, #facc15, #d97706);
+    color: #111827;
+    box-shadow: 0 12px 22px rgba(250, 204, 21, 0.2);
+}
+
+.room-secondary-button:hover,
+.room-primary-button:hover,
+.room-modal-cancel:hover,
+.room-modal-submit:hover {
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   02. BANNER DE ESTADO
+   ========================================================= */
+
+.room-status-banner {
+    /* ⭐ ALTO DEL BANNER DE ESTADO. */
+    min-height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 20px;
+    padding: 18px 22px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+}
+
+.room-status-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.room-status-icon {
+    /* ⭐ ANCHO DEL ICONO DE ESTADO. */
+    width: 52px;
+    /* ⭐ ALTO DEL ICONO DE ESTADO. */
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-size: 19px;
+    color: #fff;
+}
+
+.room-status-main span,
+.room-status-number span {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    opacity: 0.9;
+}
+
+.room-status-main strong {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.room-status-number {
+    text-align: right;
+}
+
+.room-status-number strong {
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.status-available {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(22, 163, 74, 0.08));
+    border-color: rgba(52, 211, 153, 0.35);
+    color: #d1fae5;
+}
+
+.status-available .room-status-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.status-reserved {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.18), rgba(234, 88, 12, 0.08));
+    border-color: rgba(251, 146, 60, 0.35);
+    color: #ffedd5;
+}
+
+.status-reserved .room-status-icon {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.status-occupied {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.14), rgba(220, 38, 38, 0.07));
+    border-color: rgba(248, 113, 113, 0.35);
+    color: #fee2e2;
+}
+
+.status-occupied .room-status-icon {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.status-maintenance {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(217, 119, 6, 0.07));
+    border-color: rgba(250, 204, 21, 0.35);
+    color: #fef3c7;
+}
+
+.status-maintenance .room-status-icon {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.status-default {
+    background: linear-gradient(135deg, rgba(148, 163, 184, 0.12), rgba(15, 23, 42, 0.08));
+    border-color: rgba(148, 163, 184, 0.25);
+    color: #e2e8f0;
+}
+
+/* =========================================================
+   03. GRID PRINCIPAL — AQUÍ SE DEFINE EL ANCHO DE LOS CARDS
+   ========================================================= */
+
+.room-detail-grid {
+    display: grid;
+    /* ⭐⭐⭐ ANCHO DE LOS CARDS PRINCIPALES. 1.5fr = izquierda; 0.9fr = derecha. */
+    /* Puedes usar 1fr 1fr para dos columnas iguales. */
+    grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.9fr);
+    gap: 20px;
+}
+
+/* =========================================================
+   04. TARJETAS GENERALES
+   ========================================================= */
+
+.room-card {
+    background: rgba(15, 23, 42, 0.82);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    /* ⭐ REDONDEADO DEL CARD. 10px = recto, 22px = bastante redondeado. */
+    border-radius: 22px;
+    box-shadow: 0 18px 36px rgba(2, 6, 23, 0.24);
+    overflow: hidden;
+}
+
+.room-card-header {
+    /* ⭐ ALTO/ESPACIO INTERNO DEL CABECERO DEL CARD. */
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    background: rgba(15, 23, 42, 0.54);
+}
+
+.room-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.room-card-title h2 {
+    margin: 0;
+    color: #f8fafc;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.room-card-title p {
+    margin: 4px 0 0;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.room-card-icon {
+    /* ⭐ ANCHO DEL ICONO DEL CARD. */
+    width: 40px;
+    /* ⭐ ALTO DEL ICONO DEL CARD. */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.room-card-icon.blue {
+    background: rgba(59, 130, 246, 0.16);
+    color: #60a5fa;
+}
+
+.room-card-icon.gold {
+    background: rgba(250, 204, 21, 0.14);
+    color: #facc15;
+}
+
+.room-card-icon.green {
+    background: rgba(16, 185, 129, 0.16);
+    color: #34d399;
+}
+
+.room-card-icon.dark {
+    background: rgba(148, 163, 184, 0.12);
+    color: #e2e8f0;
+}
+
+/* =========================================================
+   05. CARD DE INFORMACIÓN
+   ========================================================= */
+
+.room-information-card {
+    grid-column: 1;
+}
+
+.room-information-grid {
+    display: grid;
+    /* ⭐ NÚMERO DE COLUMNAS: 2 = dos bloques por fila. */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* ⭐ ESPACIO INTERNO DEL CONTENIDO DEL CARD. */
+    padding: 10px 20px 18px;
+}
+
+.room-information-item {
+    /* ⭐⭐⭐ ALTO MÍNIMO DE CADA BLOQUE DE INFORMACIÓN. */
+    min-height: 88px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.room-information-item:nth-child(odd) {
+    padding-right: 16px;
+    border-right: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.room-information-item:nth-child(even) {
+    padding-left: 16px;
+}
+
+.room-information-label {
+    margin-bottom: 6px;
+    color: #94a3b8;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.room-information-item strong {
+    color: #f8fafc;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.room-price-item {
+    grid-column: 1 / -1;
+}
+
+.room-price-item strong {
+    color: #facc15;
+    font-size: 18px;
+}
+
+/* =========================================================
+   06. CARD DE GALERÍA
+   ========================================================= */
+
+.room-gallery-card {
+    grid-column: 2;
+}
+
+.room-gallery-content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    /* ⭐ ESPACIO INTERNO DE LA GALERÍA. */
+    padding: 18px;
+}
+
+.room-gallery-item {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    background: #0f172a;
+}
+
+.room-gallery-item.featured {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+}
+
+.room-gallery-item:not(.featured) {
+    aspect-ratio: 1 / 1;
+}
+
+.room-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.room-gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+/* =========================================================
+   07. CARD DE DESCRIPCIÓN
+   ========================================================= */
+
+.room-description-card {
+    grid-column: 2;
+    grid-row: span 2;
+}
+
+.room-description-content {
+    /* ⭐⭐⭐ ALTO MÍNIMO DEL CARD DE DESCRIPCIÓN. */
+    min-height: 230px;
+    /* ⭐ ESPACIO INTERNO DEL CARD DE DESCRIPCIÓN. */
+    padding: 22px;
+}
+
+.room-description-content > p {
+    margin: 0;
+    color: #dfe7f3;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.room-empty-description {
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #cbd5e1;
+}
+
+.room-empty-description > div {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    border-radius: 50%;
+    background: rgba(148, 163, 184, 0.12);
+    color: #facc15;
+    font-size: 17px;
+}
+
+.room-empty-description strong {
+    color: #f8fafc;
+    font-size: 14px;
+}
+
+.room-empty-description span {
+    max-width: 260px;
+    margin-top: 6px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+/* =========================================================
+   08. CARD DE INFORMACIÓN OPERATIVA
+   ========================================================= */
+
+.room-operation-card {
+    grid-column: 1;
+}
+
+.room-operation-list {
+    padding: 8px 20px 14px;
+}
+
+.room-operation-row {
+    /* ⭐⭐⭐ ALTO MÍNIMO DE CADA FILA OPERATIVA. */
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.room-operation-row:last-child {
+    border-bottom: none;
+}
+
+.room-operation-row > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #cbd5e1;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.room-operation-row > div i {
+    width: 18px;
+    color: #facc15;
+    text-align: center;
+}
+
+.room-operation-row > strong {
+    color: #f8fafc;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.room-operation-row > strong.status-available,
+.room-operation-row > strong.status-reserved,
+.room-operation-row > strong.status-occupied,
+.room-operation-row > strong.status-maintenance {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.room-operation-row > strong.status-available {
+    color: #34d399;
+}
+
+.room-operation-row > strong.status-reserved {
+    color: #fb923c;
+}
+
+.room-operation-row > strong.status-occupied {
+    color: #f87171;
+}
+
+.room-operation-row > strong.status-maintenance {
+    color: #fbbf24;
+}
+
+.room-operation-price {
+    color: #facc15 !important;
+}
+
+/* =========================================================
+   09. CARD DE ACCIONES
+   ========================================================= */
+
+.room-actions-card {
+    grid-column: 1 / -1;
+}
+
+.room-actions-grid {
+    padding: 18px 20px;
+    display: grid;
+    /* ⭐ ANCHO MÍNIMO DE CADA BOTÓN/CARD DE ACCIÓN. */
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+}
+
+.room-action-button {
+    /* ⭐ ALTO MÍNIMO DE LOS BOTONES DE ACCIÓN. */
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.72);
+    color: #f8fafc;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.room-action-button > i {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.room-action-button span {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.room-action-button strong {
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.room-action-button small {
+    color: #cbd5e1;
+    font-size: 11px;
+}
+
+.room-action-button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(148, 163, 184, 0.22);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
+}
+
+.room-action-button.reserve > i {
+    background: rgba(16, 185, 129, 0.18);
+    color: #34d399;
+}
+
+.room-action-button.reservation > i {
+    background: rgba(249, 115, 22, 0.14);
+    color: #fb923c;
+}
+
+.room-action-button.occupied > i {
+    background: rgba(248, 113, 113, 0.14);
+    color: #f87171;
+}
+
+.room-action-button.maintenance > i {
+    background: rgba(250, 204, 21, 0.14);
+    color: #fbbf24;
+}
+
+/* =========================================================
+   10. MODAL DE ESTADO
+   ========================================================= */
+
+.room-status-modal {
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 22px;
+    background: rgba(15, 23, 42, 0.98);
+    color: #f8fafc;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
+}
+
+.room-status-modal-header,
+.room-status-modal-footer {
+    border-color: rgba(148, 163, 184, 0.12);
+}
+
+.room-status-modal-header {
+    background: rgba(15, 23, 42, 0.8);
+}
+
+.room-status-modal-body {
+    padding: 20px;
+}
+
+.room-modal-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.room-modal-select {
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.7);
+    color: #f8fafc;
+    padding: 0.8rem 0.9rem;
+}
+
+.room-modal-cancel {
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: transparent;
+    color: #e2e8f0;
+}
+
+.room-modal-submit {
+    border: 1px solid rgba(250, 204, 21, 0.7);
+    background: linear-gradient(135deg, #facc15, #d97706);
+    color: #111827;
+}
+
+/* =========================================================
+   11. RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 980px) {
+    .room-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .room-gallery-card,
+    .room-description-card,
+    .room-information-card,
+    .room-operation-card,
+    .room-actions-card {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
+
+@media (max-width: 700px) {
+    .room-detail-page {
+        width: min(100% - 16px, 100px);
+        margin-top: 12px;
+    }
+
+    .room-detail-header {
+        padding: 18px 16px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .room-header-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .room-secondary-button,
+    .room-primary-button,
+    .room-modal-cancel,
+    .room-modal-submit {
+        width: 100%;
+    }
+
+    .room-title-row {
+        align-items: flex-start;
+    }
+
+    .room-status-banner {
+        padding: 16px 18px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .room-status-number {
+        text-align: left;
+    }
+
+    .room-information-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .room-information-item:nth-child(odd),
+    .room-information-item:nth-child(even) {
+        padding-left: 0;
+        padding-right: 0;
+        border-right: none;
+    }
+
+    .room-gallery-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* =========================================================
+   12. AJUSTES COMPACTOS
+   Estos valores SOBRESCRIBEN los anteriores.
+   ⭐ Si algo parece ignorar tu cambio, revisa esta sección.
+   ========================================================= *//* Ajuste compacto para una lectura mas rapida y controles visibles. */
+.room-detail-page {
+    margin-top: 14px;
+    padding-bottom: 20px;
+}
+
+.room-detail-header {
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    border-radius: 18px;
+}
+
+.room-back-link {
+    margin-bottom: 10px;
+}
+
+.room-number-badge {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    font-size: 18px;
+}
+
+.room-title-row {
+    gap: 12px;
+}
+
+.room-title-row h1 {
+    font-size: clamp(1.35rem, 2vw, 2rem);
+}
+
+.room-title-row p {
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+.room-secondary-button,
+.room-primary-button {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 12px;
+}
+
+.room-status-banner {
+    min-height: 74px;
+    margin-bottom: 14px;
+    /* ⭐ ESPACIADO INTERNO COMPACTO. */
+    padding: 12px 16px;
+    border-radius: 16px;
+}
+
+.room-status-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    font-size: 15px;
+}
+
+.room-status-main {
+    gap: 10px;
+}
+
+.room-status-main strong {
+    font-size: 16px;
+}
+
+.room-status-number strong {
+    font-size: 18px;
+}
+
+.room-detail-grid {
+    gap: 14px;
+}
+
+.room-card {
+    border-radius: 16px;
+}
+
+.room-card-header {
+    /* ⭐ ESPACIO INTERNO DEL ENCABEZADO DEL CARD EN MODO COMPACTO. */
+    padding: 13px 16px;
+}
+
+.room-card-title {
+    gap: 10px;
+}
+
+.room-card-title h2 {
+    font-size: 14px;
+}
+
+.room-card-title p {
+    margin-top: 2px;
+    font-size: 10px;
+}
+
+.room-card-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.room-information-grid {
+    padding: 4px 16px 10px;
+}
+
+.room-information-item {
+    /* ⭐ ALTO DE CADA DATO EN MODO COMPACTO. */
+    min-height: 64px;
+}
+
+.room-information-label {
+    margin-bottom: 4px;
+    font-size: 8px;
+}
+
+.room-information-item strong {
+    font-size: 13px;
+}
+
+.room-price-item strong {
+    font-size: 16px;
+}
+
+.room-gallery-content {
+    gap: 7px;
+    padding: 12px;
+}
+
+.room-gallery-item {
+    border-radius: 11px;
+}
+
+.room-description-content {
+    /* ⭐ ALTO DEL CARD DE DESCRIPCIÓN EN MODO COMPACTO. */
+    min-height: 150px;
+    /* ⭐ ESPACIO INTERNO: aumenta para cards más "aireados". */
+    padding: 16px;
+}
+
+.room-description-content > p {
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.room-empty-description {
+    min-height: 120px;
+}
+
+.room-operation-list {
+    padding: 4px 16px 8px;
+}
+
+.room-operation-row {
+    min-height: 46px;
+    gap: 10px;
+}
+
+.room-operation-row > div,
+.room-operation-row > strong {
+    font-size: 12px;
+}
+
+.room-actions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px 16px;
+}
+
+.room-action-button {
+    min-height: 58px;
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 12px;
+}
+
+.room-action-button > i {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    font-size: 12px;
+}
+
+.room-action-button strong {
+    font-size: 11px;
+}
+
+.room-action-button small {
+    font-size: 9px;
+    line-height: 1.2;
+}
+
+@media (min-width: 701px) {
+    .room-actions-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .room-header-actions {
+        flex-direction: row;
+    }
+
+    .room-secondary-button,
+    .room-primary-button {
+        width: auto;
+        flex: 1;
+    }
+}
+
+@media (max-width: 430px) {
+    .room-detail-page {
+        /* ⭐ ANCHO EN CELULAR: reduce el espacio lateral. */
+    width: calc(100% - 12px);
+    }
+
+    .room-detail-header {
+        padding: 14px;
+    }
+
+    .room-actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .room-action-button {
+        min-height: 52px;
+    }
+}
+
+/* =========================================================
+   13. ACCIONES DEL ENCABEZADO
+   ========================================================= *//* Tarjetas compactas y accion principal en el encabezado. */
+.room-header-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.room-context-action {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 12px;
+    border: 1px solid rgba(96, 165, 250, 0.45);
+    border-radius: 12px;
+    background: rgba(30, 64, 175, 0.28);
+    color: #dbeafe;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.room-context-action:hover {
+    transform: translateY(-1px);
+    border-color: rgba(147, 197, 253, 0.8);
+    background: rgba(30, 64, 175, 0.42);
+}
+
+.room-context-action.reserve {
+    border-color: rgba(52, 211, 153, 0.45);
+    background: rgba(6, 95, 70, 0.3);
+    color: #d1fae5;
+}
+
+.room-context-action.reservation {
+    border-color: rgba(251, 146, 60, 0.5);
+    background: rgba(154, 52, 18, 0.3);
+    color: #ffedd5;
+}
+
+.room-context-action.occupied {
+    border-color: rgba(248, 113, 113, 0.5);
+    background: rgba(153, 27, 27, 0.3);
+    color: #fee2e2;
+}
+
+.room-context-action.maintenance {
+    border-color: rgba(250, 204, 21, 0.5);
+    background: rgba(133, 77, 14, 0.3);
+    color: #fef3c7;
+}
+
+.room-information-item {
+    min-height: 58px;
+}
+
+.room-information-grid {
+    padding-top: 2px;
+    padding-bottom: 8px;
+}
+
+.room-description-content {
+    min-height: 120px;
+    padding: 16px;
+}
+
+.room-empty-description {
+    min-height: 100px;
+}
+
+.room-operation-list {
+    padding-top: 2px;
+    padding-bottom: 6px;
+}
+
+.room-operation-row {
+    min-height: 44px;
+}
+
+.room-actions-card,
+.room-actions-grid,
+.room-action-button {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .room-header-actions {
+        align-items: stretch;
+        justify-content: stretch;
+    }
+
+    .room-context-action {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 430px) {
+    .room-header-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .room-secondary-button,
+    .room-primary-button,
+    .room-context-action {
+        width: 100%;
+        padding: 0 8px;
+        font-size: 11px;
+    }
+}
+

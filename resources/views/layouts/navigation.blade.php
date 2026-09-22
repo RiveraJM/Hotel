@@ -1,10 +1,10 @@
 <nav x-data="{ open: false }">
 
     <!-- Mobile top bar -->
-    <div class="lg:hidden flex items-center justify-between bg-slate-950 px-4 py-4 text-white">
+    <div class="lg:hidden flex items-center justify-between bg-[#063b32] px-4 py-4 text-white">
 
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3">
-            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500 text-xl">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-[#34a37a] text-xl">
                 🏨
             </div>
 
@@ -13,7 +13,7 @@
                     HOTEL
                 </div>
 
-                <div class="text-xs text-slate-400">
+                <div class="text-xs text-[#9ad2b5]">
                     CIELO
                 </div>
             </div>
@@ -21,7 +21,7 @@
 
         <button
             @click="open = !open"
-            class="rounded-lg p-2 text-slate-300 hover:bg-slate-800"
+            class="rounded-lg p-2 text-[#9ad2b5] hover:bg-[#007a5e]"
         >
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -48,15 +48,15 @@
     <!-- Sidebar -->
     <aside
         :class="{ 'translate-x-0': open, '-translate-x-full': !open }"
-        class="fixed inset-y-0 left-0 z-50 flex w-64 transform flex-col bg-slate-950 text-white transition-transform duration-300 lg:translate-x-0"
+        class="fixed inset-y-0 left-0 z-50 flex w-64 transform flex-col bg-[#063b32] text-white shadow-[0_0_25px_rgba(6,59,50,0.35)] transition-transform duration-300 lg:translate-x-0"
     >
 
         <!-- Logo -->
-        <div class="flex h-20 items-center border-b border-slate-800 px-6">
+        <div class="flex h-20 items-center border-b border-[#007a5e] px-6 bg-[#063b32]">
 
             <a href="{{ route('dashboard') }}" class="flex items-center gap-3">
 
-                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-500 text-2xl shadow-lg">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#34a37a] text-2xl shadow-lg">
                     🏨
                 </div>
 
@@ -65,7 +65,7 @@
                         HOTEL
                     </div>
 
-                    <div class="text-xs font-medium tracking-wider text-amber-400">
+                    <div class="text-xs font-medium tracking-wider text-[#9ad2b5]">
                         CIELO
                     </div>
                 </div>
@@ -79,7 +79,7 @@
         <div class="flex-1 overflow-y-auto px-4 py-6">
 
             <!-- General -->
-            <p class="mb-3 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+            <p class="mb-3 px-3 text-[10px] font-bold uppercase tracking-widest text-emerald-200/80">
                 Principal
             </p>
 
@@ -89,15 +89,15 @@
                 <a
                     href="{{ route('dashboard') }}"
                     class="{{ request()->routeIs('dashboard')
-                        ? 'bg-slate-800 text-white shadow-sm'
-                        : 'text-slate-400 hover:bg-slate-900 hover:text-white' }}
+                        ? 'bg-[#007a5e] text-white shadow-sm'
+                        : 'text-emerald-100/80 hover:bg-[#34a37a] hover:text-white' }}
                         group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
                 >
                     <span class="text-lg">📊</span>
                     <span>Dashboard</span>
 
                     @if(request()->routeIs('dashboard'))
-                        <span class="ml-auto h-2 w-2 rounded-full bg-amber-400"></span>
+                        <span class="ml-auto h-2 w-2 rounded-full bg-[#9ad2b5]"></span>
                     @endif
                 </a>
 
@@ -106,7 +106,7 @@
                 <!-- Habitaciones -->
                 <a
                     href="{{ route('habitaciones.index') }}"
-                    class="{{ request()->routeIs('habitaciones.*') ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-400 hover:bg-slate-900 hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
+                    class="{{ request()->routeIs('habitaciones.*') ? 'bg-[#007a5e] text-white shadow-sm' : 'text-emerald-100/80 hover:bg-[#34a37a] hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
                 >
                     <span class="text-lg">🛏️</span>
                     <span>Habitaciones</span>
@@ -117,7 +117,7 @@
                 <!-- Huéspedes -->
                 <a
                     href="{{ route('huespedes.index') }}"
-                    class="{{ request()->routeIs('huespedes.*') ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-400 hover:bg-slate-900 hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
+                    class="{{ request()->routeIs('huespedes.*') ? 'bg-[#007a5e] text-white shadow-sm' : 'text-emerald-100/80 hover:bg-[#34a37a] hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
                 >
                     <span class="text-lg">👥</span>
                     <span>Huéspedes</span>
@@ -127,7 +127,7 @@
                 <!-- Reservas -->
                 <a
                     href="{{ route('reservas.index') }}"
-                    class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400 transition hover:bg-slate-900 hover:text-white"
+                    class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-emerald-100/80 transition hover:bg-[#34a37a] hover:text-white"
                 >
                     <span class="text-lg">📅</span>
                     <span>Reservas</span>
@@ -137,7 +137,7 @@
 
 
             <!-- Operaciones -->
-            <p class="mb-3 mt-8 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+            <p class="mb-3 mt-8 px-3 text-[10px] font-bold uppercase tracking-widest text-emerald-200/80">
                 Operaciones
             </p>
 
@@ -146,7 +146,7 @@
                 <!-- Check in -->
                 <a
                     href="{{ route('checkin.index') }}"
-                    class="{{ request()->routeIs('checkin.*') ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-400 hover:bg-slate-900 hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
+                    class="{{ request()->routeIs('checkin.*') ? 'bg-[#007a5e] text-white shadow-sm' : 'text-emerald-100/80 hover:bg-[#34a37a] hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
                 >
                     <span class="text-lg">🛎️</span>
                     <span>Check-in</span>
@@ -156,7 +156,7 @@
                 <!-- Check out -->
                 <a
                     href="{{ route('checkout.index') }}"
-                    class="{{ request()->routeIs('checkout.*') ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-400 hover:bg-slate-900 hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
+                    class="{{ request()->routeIs('checkout.*') ? 'bg-[#007a5e] text-white shadow-sm' : 'text-emerald-100/80 hover:bg-[#34a37a] hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
                 >
                     <span class="text-lg">🚪</span>
                     <span>Check-out</span>
@@ -165,7 +165,7 @@
                 <!-- Limpieza -->
                 <a
                     href="{{ route('limpieza.index') }}"
-                    class="{{ request()->routeIs('limpieza.*') ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-400 hover:bg-slate-900 hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
+                    class="{{ request()->routeIs('limpieza.*') ? 'bg-[#007a5e] text-white shadow-sm' : 'text-emerald-100/80 hover:bg-[#34a37a] hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
                 >
                     <span class="text-lg">🧹</span>
                     <span>Limpieza</span>
@@ -175,7 +175,7 @@
                 <!-- Mantenimiento -->
                 <a
                     href="{{ route('mantenimiento.index') }}"
-                    class="{{ request()->routeIs('mantenimiento.*') ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-400 hover:bg-slate-900 hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
+                    class="{{ request()->routeIs('mantenimiento.*') ? 'bg-[#007a5e] text-white shadow-sm' : 'text-emerald-100/80 hover:bg-[#34a37a] hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
                 >
                     <span class="text-lg">🔧</span>
                     <span>Mantenimiento</span>
@@ -185,7 +185,7 @@
 
 
             <!-- Administración -->
-            <p class="mb-3 mt-8 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+            <p class="mb-3 mt-8 px-3 text-[10px] font-bold uppercase tracking-widest text-emerald-200/80">
                 Administración
             </p>
 
@@ -194,7 +194,7 @@
                 <!-- Caja -->
                 <a
                     href="{{ route('caja.index') }}"
-                    class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400 transition hover:bg-slate-900 hover:text-white"
+                    class="{{ request()->routeIs('caja.*') ? 'bg-[#007a5e] text-white shadow-sm' : 'text-emerald-100/80 hover:bg-[#34a37a] hover:text-white' }} group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition"
                 >
                     <span class="text-lg">💰</span>
                     <span>Caja</span>
@@ -226,11 +226,11 @@
 
 
         <!-- User section -->
-        <div class="border-t border-slate-800 p-4">
+        <div class="border-t border-[#007a5e] bg-[#063b32] p-4">
 
             <div class="flex items-center gap-3">
 
-                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500 font-bold text-slate-950">
+                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[#34a37a] font-bold text-[#063b32]">
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
 
@@ -253,7 +253,7 @@
 
                 <a
                     href="{{ route('profile.edit') }}"
-                    class="rounded-lg bg-slate-900 px-3 py-2 text-center text-xs font-medium text-slate-400 transition hover:bg-slate-800 hover:text-white"
+                    class="rounded-lg bg-[#007a5e] px-3 py-2 text-center text-xs font-medium text-emerald-100/80 transition hover:bg-[#34a37a] hover:text-white"
                 >
                     Perfil
                 </a>
@@ -263,7 +263,7 @@
 
                     <button
                         type="submit"
-                        class="w-full rounded-lg bg-slate-900 px-3 py-2 text-xs font-medium text-slate-400 transition hover:bg-red-900/30 hover:text-red-400"
+                        class="w-full rounded-lg bg-[#007a5e] px-3 py-2 text-xs font-medium text-[#dfe9e2] transition hover:bg-[#34a37a] hover:text-white"
                     >
                         Salir
                     </button>
@@ -280,7 +280,7 @@
     <div
         x-show="open"
         @click="open = false"
-        class="fixed inset-0 z-40 bg-slate-950/60 lg:hidden"
+        class="fixed inset-0 z-40 bg-[#063b32]/60 lg:hidden"
         x-cloak
     ></div>
 

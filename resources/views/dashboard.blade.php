@@ -1,6 +1,9 @@
 <x-app-layout>
 
-@vite(['resources/css/dashboard.css'])
+    @push('styles')
+        @vite(['resources/css/dashboard.css'])
+    @endpush
+
     <div class="hotel-dashboard">
 
         <!-- Header -->

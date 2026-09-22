@@ -17,12 +17,24 @@ class Reserva extends Model
         'fecha_salida',
         'cantidad_huespedes',
         'estado',
+        'checked_out_at',
+        'payment_method',
+        'payment_status',
+        'comprobante_tipo',
+        'checkout_notes',
+        'consumos',
+        'descuento',
+        'total',
     ];
 
     protected $casts = [
         'fecha_entrada' => 'date',
         'fecha_salida' => 'date',
         'cantidad_huespedes' => 'integer',
+        'checked_out_at' => 'datetime',
+        'consumos' => 'array',
+        'descuento' => 'decimal:2',
+        'total' => 'decimal:2',
     ];
 
     public function huesped(): BelongsTo

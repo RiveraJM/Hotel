@@ -308,6 +308,33 @@
 
                 </section>
 
+                <section class="maintenance-form-panel" id="maintenanceFormPanel" hidden>
+                    <div class="maintenance-panel-header">
+                        <div>
+                            <span class="maintenance-section-label">REGISTRO</span>
+                            <h3 id="maintenanceFormTitle">Nuevo mantenimiento</h3>
+                        </div>
+                        <button type="button" class="panel-options-button" id="btnCerrarMantenimiento"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <form method="POST" action="{{ route('mantenimiento.store') }}" id="maintenanceForm">
+                        @csrf
+                        <input type="hidden" name="_method" value="POST" id="maintenanceMethod">
+                        <div class="maintenance-form-grid">
+                            <label>Incidencia<input name="incidencia" required maxlength="180"></label>
+                            <label>Habitación
+                                <select name="habitacion_id"><option value="">Área común</option>@foreach($habitaciones as $habitacion)<option value="{{ $habitacion->id }}">Habitación {{ $habitacion->numero }}</option>@endforeach</select>
+                            </label>
+                            <label>Tipo<select name="tipo" required><option value="preventivo">Preventivo</option><option value="correctivo" selected>Correctivo</option><option value="emergencia">Emergencia</option></select></label>
+                            <label>Prioridad<select name="prioridad" required><option value="alta">Alta</option><option value="media" selected>Media</option><option value="baja">Baja</option></select></label>
+                            <label>Estado<select name="estado" required><option value="pendiente">Pendiente</option><option value="en_proceso">En proceso</option><option value="completado">Completado</option><option value="cancelado">Cancelado</option></select></label>
+                            <label>Responsable<input name="responsable" maxlength="120"></label>
+                            <label>Fecha programada<input name="fecha_programada" type="date"></label>
+                            <label class="full-width">Descripción<textarea name="descripcion" rows="3" maxlength="2000"></textarea></label>
+                        </div>
+                        <button type="submit" class="maintenance-primary-button">Guardar mantenimiento</button>
+                    </form>
+                </section>
+
 
                 {{-- =================================================
                      TARJETAS DE RESUMEN
@@ -330,9 +357,7 @@
                                 Pendientes
                             </span>
 
-                            <strong id="totalPendientes">
-                                0
-                            </strong>
+                            <strong id="totalPendientes">{{ $resumen['pendiente'] }}</strong>
 
                             <small>
                                 Requieren atención
@@ -358,9 +383,7 @@
                                 En proceso
                             </span>
 
-                            <strong id="totalProceso">
-                                0
-                            </strong>
+                            <strong id="totalProceso">{{ $resumen['proceso'] }}</strong>
 
                             <small>
                                 Trabajos activos
@@ -386,9 +409,7 @@
                                 Completados
                             </span>
 
-                            <strong id="totalCompletados">
-                                0
-                            </strong>
+                            <strong id="totalCompletados">{{ $resumen['completado'] }}</strong>
 
                             <small>
                                 Trabajos finalizados
@@ -414,9 +435,7 @@
                                 Urgentes
                             </span>
 
-                            <strong id="totalUrgentes">
-                                0
-                            </strong>
+                            <strong id="totalUrgentes">{{ $resumen['urgentes'] }}</strong>
 
                             <small>
                                 Prioridad alta
@@ -432,7 +451,7 @@
                 {{-- =================================================
                      FILTROS
                 ================================================== --}}
-                <section class="maintenance-filters">
+                <form class="maintenance-filters" method="GET" action="{{ route('mantenimiento.index') }}">
 
 
                     <div class="maintenance-search">
@@ -444,6 +463,7 @@
                             id="buscarMantenimiento"
                             name="buscar"
                             placeholder="Buscar habitación, incidencia o responsable..."
+                            value="{{ request('buscar') }}"
                         >
 
                     </div>
@@ -462,15 +482,15 @@
                                 Todos
                             </option>
 
-                            <option value="pendiente">
+                            <option value="pendiente" {{ request('estado') === 'pendiente' ? 'selected' : '' }}>
                                 Pendiente
                             </option>
 
-                            <option value="proceso">
+                            <option value="en_proceso" {{ request('estado') === 'en_proceso' ? 'selected' : '' }}>
                                 En proceso
                             </option>
 
-                            <option value="completado">
+                            <option value="completado" {{ request('estado') === 'completado' ? 'selected' : '' }}>
                                 Completado
                             </option>
 
@@ -492,15 +512,15 @@
                                 Todas
                             </option>
 
-                            <option value="alta">
+                            <option value="alta" {{ request('prioridad') === 'alta' ? 'selected' : '' }}>
                                 Alta
                             </option>
 
-                            <option value="media">
+                            <option value="media" {{ request('prioridad') === 'media' ? 'selected' : '' }}>
                                 Media
                             </option>
 
-                            <option value="baja">
+                            <option value="baja" {{ request('prioridad') === 'baja' ? 'selected' : '' }}>
                                 Baja
                             </option>
 
@@ -522,32 +542,25 @@
                                 Todos
                             </option>
 
-                            <option value="electrico">
-                                Eléctrico
+                            <option value="preventivo" {{ request('tipo') === 'preventivo' ? 'selected' : '' }}>
+                                Preventivo
                             </option>
 
-                            <option value="fontaneria">
-                                Fontanería
+                            <option value="correctivo" {{ request('tipo') === 'correctivo' ? 'selected' : '' }}>
+                                Correctivo
                             </option>
 
-                            <option value="climatizacion">
-                                Climatización
+                            <option value="emergencia" {{ request('tipo') === 'emergencia' ? 'selected' : '' }}>
+                                Emergencia
                             </option>
 
-                            <option value="infraestructura">
-                                Infraestructura
-                            </option>
-
-                            <option value="equipamiento">
-                                Equipamiento
-                            </option>
 
                         </select>
 
                     </div>
 
 
-                    <button type="button"
+                    <button type="submit"
                             class="maintenance-filter-button">
 
                         <i class="fa-solid fa-filter"></i>
@@ -556,7 +569,7 @@
 
                     </button>
 
-                </section>
+                </form>
 
 
                 {{-- =================================================
@@ -645,75 +658,28 @@
 
 
                                 <tbody id="mantenimientosTableBody">
-
-                                    {{--
-
-                                    AQUÍ SE CONECTARÁ LA BD:
-
                                     @forelse($mantenimientos as $mantenimiento)
-
                                         <tr>
-
-                                            <td>
-                                                {{ $mantenimiento->codigo }}
+                                            <td>{{ $mantenimiento->codigo }}</td>
+                                            <td>{{ $mantenimiento->incidencia }}</td>
+                                            <td>{{ $mantenimiento->habitacion?->numero ? 'Hab. ' . $mantenimiento->habitacion->numero : 'Área común' }}</td>
+                                            <td>{{ ucfirst($mantenimiento->tipo) }}</td>
+                                            <td><span class="maintenance-priority {{ $mantenimiento->prioridad }}">{{ ucfirst($mantenimiento->prioridad) }}</span></td>
+                                            <td>{{ $mantenimiento->responsable ?: 'Sin asignar' }}</td>
+                                            <td><span class="maintenance-state {{ $mantenimiento->estado }}">{{ ucfirst($mantenimiento->estado) }}</span></td>
+                                            <td>{{ $mantenimiento->fecha_programada?->format('d/m/Y') ?: 'Sin fecha' }}</td>
+                                            <td class="maintenance-actions">
+                                                <button type="button" class="maintenance-edit-button" data-maintenance='@json($mantenimiento)'>Editar</button>
+                                                <form method="POST" action="{{ route('mantenimiento.destroy', $mantenimiento) }}" onsubmit="return confirm('¿Eliminar este mantenimiento?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="maintenance-delete-button">Eliminar</button>
+                                                </form>
                                             </td>
-
-                                            <td>
-                                                {{ $mantenimiento->incidencia }}
-                                            </td>
-
-                                            <td>
-                                                {{ $mantenimiento->ubicacion }}
-                                            </td>
-
-                                            <td>
-                                                {{ $mantenimiento->tipo }}
-                                            </td>
-
-                                            <td>
-                                                ...
-                                            </td>
-
                                         </tr>
-
                                     @empty
-
-                                    --}}
-
-
-                                    <tr id="emptyMaintenanceRow">
-
-                                        <td colspan="9">
-
-                                            <div class="maintenance-empty">
-
-                                                <div class="maintenance-empty-icon">
-
-                                                    <i class="fa-solid fa-screwdriver-wrench"></i>
-
-                                                </div>
-
-                                                <strong>
-                                                    No hay mantenimientos registrados
-                                                </strong>
-
-                                                <span>
-                                                    Los registros aparecerán aquí cuando se agreguen.
-                                                </span>
-
-                                            </div>
-
-                                        </td>
-
-                                    </tr>
-
-
-                                    {{--
-
+                                        <tr id="emptyMaintenanceRow"><td colspan="9"><div class="maintenance-empty"><div class="maintenance-empty-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div><strong>No hay mantenimientos registrados</strong><span>Los registros aparecerán aquí cuando se agreguen.</span></div></td></tr>
                                     @endforelse
-
-                                    --}}
-
                                 </tbody>
 
                             </table>
@@ -768,9 +734,7 @@
 
                                     </div>
 
-                                    <strong id="statusAlta">
-                                        0
-                                    </strong>
+                                    <strong id="statusAlta">{{ $resumen['alta'] }}</strong>
 
                                 </div>
 
@@ -791,9 +755,7 @@
 
                                     </div>
 
-                                    <strong id="statusMedia">
-                                        0
-                                    </strong>
+                                    <strong id="statusMedia">{{ $resumen['media'] }}</strong>
 
                                 </div>
 
@@ -814,9 +776,7 @@
 
                                     </div>
 
-                                    <strong id="statusBaja">
-                                        0
-                                    </strong>
+                                    <strong id="statusBaja">{{ $resumen['baja'] }}</strong>
 
                                 </div>
 
@@ -846,25 +806,12 @@
 
 
                             <div class="affected-rooms">
-
-                                <div class="affected-empty">
-
-                                    <div class="affected-empty-icon">
-
-                                        <i class="fa-solid fa-bed"></i>
-
-                                    </div>
-
-                                    <strong>
-                                        Sin incidencias
-                                    </strong>
-
-                                    <span>
-                                        No hay habitaciones afectadas.
-                                    </span>
-
-                                </div>
-
+                                @forelse ($mantenimientos->whereNotNull('habitacion_id')->groupBy('habitacion_id') as $items)
+                                    @php($item = $items->first())
+                                    <div class="affected-room"><strong>Hab. {{ $item->habitacion->numero }}</strong><span>{{ $items->count() }} incidencia(s)</span></div>
+                                @empty
+                                    <div class="affected-empty"><div class="affected-empty-icon"><i class="fa-solid fa-bed"></i></div><strong>Sin incidencias</strong><span>No hay habitaciones afectadas.</span></div>
+                                @endforelse
                             </div>
 
                         </div>
@@ -900,8 +847,7 @@
                     <div class="maintenance-types-grid">
 
 
-                        <button type="button"
-                                class="maintenance-type-card">
+                        <button type="button" class="maintenance-type-card" data-maintenance-type="preventivo">
 
                             <span class="type-icon blue">
                                 <i class="fa-solid fa-bolt"></i>
@@ -910,11 +856,11 @@
                             <span class="type-information">
 
                                 <strong>
-                                    Eléctrico
+                                    Preventivo
                                 </strong>
 
                                 <small>
-                                    Instalaciones eléctricas
+                                    Revisiones programadas
                                 </small>
 
                             </span>
@@ -922,8 +868,7 @@
                         </button>
 
 
-                        <button type="button"
-                                class="maintenance-type-card">
+                        <button type="button" class="maintenance-type-card" data-maintenance-type="correctivo">
 
                             <span class="type-icon orange">
                                 <i class="fa-solid fa-faucet"></i>
@@ -932,11 +877,11 @@
                             <span class="type-information">
 
                                 <strong>
-                                    Fontanería
+                                    Correctivo
                                 </strong>
 
                                 <small>
-                                    Agua y tuberías
+                                    Reparaciones y fallas
                                 </small>
 
                             </span>
@@ -944,8 +889,7 @@
                         </button>
 
 
-                        <button type="button"
-                                class="maintenance-type-card">
+                        <button type="button" class="maintenance-type-card" data-maintenance-type="emergencia">
 
                             <span class="type-icon purple">
                                 <i class="fa-solid fa-snowflake"></i>
@@ -954,11 +898,11 @@
                             <span class="type-information">
 
                                 <strong>
-                                    Climatización
+                                    Emergencia
                                 </strong>
 
                                 <small>
-                                    Aire acondicionado
+                                    Atención inmediata
                                 </small>
 
                             </span>
@@ -966,8 +910,7 @@
                         </button>
 
 
-                        <button type="button"
-                                class="maintenance-type-card">
+                        <button type="button" class="maintenance-type-card" data-maintenance-type="correctivo">
 
                             <span class="type-icon green">
                                 <i class="fa-solid fa-building"></i>
@@ -980,7 +923,7 @@
                                 </strong>
 
                                 <small>
-                                    Instalaciones físicas
+                                    Obras y espacios
                                 </small>
 
                             </span>
@@ -988,8 +931,7 @@
                         </button>
 
 
-                        <button type="button"
-                                class="maintenance-type-card">
+                        <button type="button" class="maintenance-type-card" data-maintenance-type="correctivo">
 
                             <span class="type-icon red">
                                 <i class="fa-solid fa-toolbox"></i>
@@ -1019,6 +961,48 @@
         </main>
 
     </div>
+
+    <script>
+        (() => {
+            const panel = document.getElementById('maintenanceFormPanel');
+            const form = document.getElementById('maintenanceForm');
+            const method = document.getElementById('maintenanceMethod');
+            const title = document.getElementById('maintenanceFormTitle');
+            const open = () => { panel.hidden = false; panel.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+            const reset = () => {
+                form.reset();
+                form.action = '{{ route('mantenimiento.store') }}';
+                method.value = 'POST';
+                title.textContent = 'Nuevo mantenimiento';
+                open();
+            };
+            document.getElementById('btnNuevoMantenimiento').addEventListener('click', reset);
+            document.getElementById('btnCerrarMantenimiento').addEventListener('click', () => panel.hidden = true);
+            document.querySelectorAll('.maintenance-edit-button').forEach(button => button.addEventListener('click', () => {
+                const item = JSON.parse(button.dataset.maintenance);
+                form.action = `/mantenimiento/${item.id}`;
+                method.value = 'PATCH';
+                title.textContent = `Editar ${item.codigo}`;
+                form.elements.incidencia.value = item.incidencia || '';
+                form.elements.habitacion_id.value = item.habitacion_id || '';
+                form.elements.tipo.value = item.tipo;
+                form.elements.prioridad.value = item.prioridad;
+                form.elements.estado.value = item.estado;
+                form.elements.responsable.value = item.responsable || '';
+                form.elements.fecha_programada.value = item.fecha_programada || '';
+                form.elements.descripcion.value = item.descripcion || '';
+                open();
+            }));
+            document.querySelectorAll('[data-maintenance-type]').forEach(button => button.addEventListener('click', () => {
+                form.reset();
+                form.action = '{{ route('mantenimiento.store') }}';
+                method.value = 'POST';
+                form.elements.tipo.value = button.dataset.maintenanceType;
+                title.textContent = `Nuevo mantenimiento: ${button.querySelector('strong').textContent}`;
+                open();
+            }));
+        })();
+    </script>
 
 
     {{-- =========================================================

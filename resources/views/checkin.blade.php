@@ -6,7 +6,12 @@
 
 @vite(['resources/css/checkin.css'])
 
-<div class="checkin-page">
+<div
+    class="checkin-page"
+    id="checkinPage"
+    data-search-url="{{ route('checkin.search') }}"
+    data-store-url="{{ route('checkin.store') }}"
+>
 
     {{-- =====================================================
          HEADER
@@ -217,21 +222,21 @@
                         class="guest-avatar"
                         id="guestAvatar"
                     >
-                        JP
+                        ?
                     </div>
 
 
                     <div class="guest-main-info">
 
                         <h2 id="guestName">
-                            Juan Pérez
+                            Selecciona un huésped
                         </h2>
 
                         <span
                             class="guest-category"
                             id="guestCategory"
                         >
-                            Huésped frecuente
+                            Sin consultar
                         </span>
 
                     </div>
@@ -248,7 +253,7 @@
                         </span>
 
                         <strong id="guestDocument">
-                            DNI 74851236
+                            —
                         </strong>
 
                     </div>
@@ -261,7 +266,7 @@
                         </span>
 
                         <strong id="guestPhone">
-                            987 654 321
+                            —
                         </strong>
 
                     </div>
@@ -274,7 +279,7 @@
                         </span>
 
                         <strong id="guestEmail">
-                            juan.perez@email.com
+                            —
                         </strong>
 
                     </div>
@@ -287,7 +292,7 @@
                         </span>
 
                         <strong id="guestNationality">
-                            Peruana
+                            No registrado
                         </strong>
 
                     </div>
@@ -506,19 +511,19 @@
                         <select
                             id="habitacion"
                             name="habitacion_id"
+                            required
                         >
 
-                            <option value="204">
-                                204 — Matrimonial
-                            </option>
-
-                            <option value="108">
-                                108 — Matrimonial
-                            </option>
-
-                            <option value="301">
-                                301 — Suite
-                            </option>
+                            <option value="">Seleccione una habitación</option>
+                            @foreach ($habitaciones as $habitacion)
+                                <option
+                                    value="{{ $habitacion->id }}"
+                                    data-number="{{ $habitacion->numero }}"
+                                    data-price="{{ $habitacion->precio }}"
+                                >
+                                    {{ $habitacion->numero }} — {{ $habitacion->tipo }} · S/ {{ number_format($habitacion->precio, 2) }}
+                                </option>
+                            @endforeach
 
                         </select>
 
@@ -535,7 +540,7 @@
                             type="text"
                             id="codigoReserva"
                             name="codigo_reserva"
-                            value="#RS-001"
+                            placeholder="Se genera automáticamente si no existe"
                         >
 
                     </div>
@@ -551,7 +556,8 @@
                             type="date"
                             id="fechaEntrada"
                             name="fecha_entrada"
-                            value="2026-08-26"
+                            value="{{ now()->format('Y-m-d') }}"
+                            required
                         >
 
                     </div>
@@ -567,7 +573,8 @@
                             type="date"
                             id="fechaSalida"
                             name="fecha_salida"
-                            value="2026-08-29"
+                            value="{{ now()->addDay()->format('Y-m-d') }}"
+                            required
                         >
 
                     </div>
@@ -753,7 +760,7 @@
                         class="history-number"
                         id="totalEstancias"
                     >
-                        12
+                        0
                     </div>
 
                     <div>
@@ -763,7 +770,7 @@
                         </strong>
 
                         <span>
-                            Cliente recurrente
+                            Consulta un huésped para ver su historial
                         </span>
 
                     </div>
@@ -786,7 +793,7 @@
                             </strong>
 
                             <span id="ultimaEstancia">
-                                15 Jun. 2026
+                                —
                             </span>
 
                         </div>
@@ -807,7 +814,7 @@
                             </strong>
 
                             <span id="totalReservas">
-                                14 reservas
+                                0 reservas
                             </span>
 
                         </div>
@@ -828,7 +835,7 @@
                             </strong>
 
                             <span id="categoriaHuesped">
-                                Huésped frecuente
+                                Sin consultar
                             </span>
 
                         </div>
@@ -876,12 +883,12 @@
                     class="discount-value"
                     id="discountValue"
                 >
-                    10%
+                    0%
                 </div>
 
 
                 <strong id="discountDescription">
-                    Descuento por huésped frecuente
+                    Sin descuento asignado
                 </strong>
 
 
@@ -898,7 +905,6 @@
                         <input
                             type="checkbox"
                             id="aplicarDescuento"
-                            checked
                         >
 
                         <span class="switch-slider"></span>
@@ -954,7 +960,7 @@
                     </span>
 
                     <strong id="summaryRoom">
-                        204
+                        —
                     </strong>
 
                 </div>
@@ -967,7 +973,7 @@
                     </span>
 
                     <strong id="summaryNights">
-                        3 noches
+                        0 noches
                     </strong>
 
                 </div>
@@ -980,7 +986,7 @@
                     </span>
 
                     <strong id="summaryRate">
-                        S/ 450.00
+                        S/ 0.00
                     </strong>
 
                 </div>
@@ -993,7 +999,7 @@
                     </span>
 
                     <strong id="summaryDiscount">
-                        - S/ 45.00
+                        - S/ 0.00
                     </strong>
 
                 </div>
@@ -1006,7 +1012,7 @@
                     </span>
 
                     <strong id="summaryTotal">
-                        S/ 405.00
+                        S/ 0.00
                     </strong>
 
                 </div>
@@ -1018,5 +1024,173 @@
     </div>
 
 </div>
+
+<script>
+    (() => {
+        const page = document.getElementById('checkinPage');
+        if (!page) return;
+
+        const csrf = document.querySelector('#formBuscarHuesped input[name="_token"]').value;
+        const state = { guest: null, reservation: null, newGuest: null, discountPercent: 0 };
+        const roomSelect = document.getElementById('habitacion');
+        const result = document.getElementById('resultadoBusqueda');
+        const searchForm = document.getElementById('formBuscarHuesped');
+
+        const showMessage = (message, type = 'success') => {
+            result.textContent = message;
+            result.className = `search-result-message ${type}`;
+            result.hidden = false;
+        };
+
+        const setText = (id, value, fallback = 'No registrado') => {
+            document.getElementById(id).textContent = value || fallback;
+        };
+
+        const updateSummary = () => {
+            const option = roomSelect.selectedOptions[0];
+            const start = new Date(`${document.getElementById('fechaEntrada').value}T00:00:00`);
+            const end = new Date(`${document.getElementById('fechaSalida').value}T00:00:00`);
+            const nights = Math.max(0, Math.round((end - start) / 86400000));
+            const rate = Number(option?.dataset.price || 0) * nights;
+            const discount = document.getElementById('aplicarDescuento').checked
+                ? rate * (state.discountPercent / 100)
+                : 0;
+
+            setText('summaryRoom', option?.dataset.number || '—');
+            setText('summaryNights', `${nights} ${nights === 1 ? 'noche' : 'noches'}`);
+            setText('summaryRate', `S/ ${rate.toFixed(2)}`);
+            setText('summaryDiscount', `- S/ ${discount.toFixed(2)}`);
+            setText('summaryTotal', `S/ ${(rate - discount).toFixed(2)}`);
+        };
+
+        const fillGuest = (guest, category = 'Huésped registrado') => {
+            state.guest = guest;
+            state.newGuest = null;
+            setText('guestName', guest.nombre);
+            setText('guestCategory', category);
+            setText('guestDocument', `${guest.tipo_documento} ${guest.numero_documento}`);
+            setText('guestPhone', guest.telefono);
+            setText('guestEmail', guest.email);
+            document.getElementById('guestAvatar').textContent = guest.nombre.split(' ').slice(0, 2).map(word => word[0]).join('').toUpperCase();
+        };
+
+        searchForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const button = document.getElementById('btnBuscarHuesped');
+            button.disabled = true;
+            try {
+                const response = await fetch(page.dataset.searchUrl, {
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': csrf, 'Accept': 'application/json' },
+                    body: new FormData(searchForm),
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || 'No se pudo realizar la búsqueda.');
+
+                state.reservation = data.reserva;
+                state.discountPercent = data.historial.descuento || 0;
+                fillGuest(data.huesped, data.historial.categoria);
+                document.getElementById('codigoReserva').value = data.reserva.codigo;
+                document.getElementById('fechaEntrada').value = data.reserva.fecha_entrada;
+                document.getElementById('fechaSalida').value = data.reserva.fecha_salida;
+                document.getElementById('adultos').value = data.reserva.cantidad_huespedes;
+                roomSelect.value = data.reserva.habitacion_id;
+                setText('totalEstancias', data.historial.total);
+                setText('ultimaEstancia', data.historial.ultima_estancia || 'Primera estancia');
+                setText('totalReservas', `${data.historial.total + 1} reservas`);
+                setText('categoriaHuesped', data.historial.categoria);
+                setText('discountValue', `${state.discountPercent}%`);
+                setText('discountDescription', state.discountPercent > 0 ? 'Descuento por historial de estancias' : 'Sin descuento asignado');
+                document.getElementById('aplicarDescuento').checked = state.discountPercent > 0;
+                showMessage(`Reserva ${data.reserva.codigo} lista para registrar.`, 'success');
+                updateSummary();
+            } catch (error) {
+                showMessage(error.message, 'warning');
+            } finally {
+                button.disabled = false;
+            }
+        });
+
+        document.getElementById('btnNuevoHuesped').addEventListener('click', () => {
+            document.getElementById('newGuestPanel').hidden = false;
+            document.getElementById('guestRegisteredPanel').hidden = true;
+            document.getElementById('newGuestPanel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        document.getElementById('btnCancelarNuevoHuesped').addEventListener('click', () => {
+            document.getElementById('newGuestPanel').hidden = true;
+            document.getElementById('guestRegisteredPanel').hidden = false;
+        });
+
+        document.getElementById('formNuevoHuesped').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const data = new FormData(event.currentTarget);
+            state.guest = null;
+            state.reservation = null;
+            state.discountPercent = 0;
+            state.newGuest = {
+                tipo_documento: data.get('tipo_documento'),
+                numero_documento: data.get('numero_documento'),
+                nombre: `${data.get('nombres')} ${data.get('apellidos')}`.trim(),
+                telefono: data.get('telefono'),
+                email: data.get('email'),
+            };
+            fillGuest(state.newGuest, 'Primera estancia');
+            setText('categoriaHuesped', 'Primera estancia');
+            setText('discountValue', '0%');
+            setText('discountDescription', 'Sin descuento asignado');
+            document.getElementById('aplicarDescuento').checked = false;
+            document.getElementById('newGuestPanel').hidden = true;
+            document.getElementById('guestRegisteredPanel').hidden = false;
+            showMessage('Huésped preparado. Completa la estadía y confirma el check-in.', 'success');
+        });
+
+        document.querySelectorAll('[data-action]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const input = document.getElementById(button.dataset.target);
+                const change = button.dataset.action === 'increase' ? 1 : -1;
+                input.value = Math.max(Number(input.min), Number(input.value) + change);
+            });
+        });
+
+        [roomSelect, document.getElementById('fechaEntrada'), document.getElementById('fechaSalida'), document.getElementById('aplicarDescuento')]
+            .forEach(input => input.addEventListener('change', updateSummary));
+
+        document.getElementById('btnConfirmarCheckin').addEventListener('click', async () => {
+            const button = document.getElementById('btnConfirmarCheckin');
+            const cantidad = Number(document.getElementById('adultos').value) + Number(document.getElementById('ninos').value);
+            const payload = {
+                reserva_id: state.reservation?.id,
+                huesped_id: state.guest?.id,
+                habitacion_id: roomSelect.value,
+                fecha_entrada: document.getElementById('fechaEntrada').value,
+                fecha_salida: document.getElementById('fechaSalida').value,
+                cantidad_huespedes: cantidad,
+                codigo_reserva: document.getElementById('codigoReserva').value,
+                nuevo_huesped: state.newGuest,
+            };
+
+            if (!payload.huesped_id && !payload.nuevo_huesped) return showMessage('Busca un huésped o regístralo antes de confirmar.', 'warning');
+            if (!payload.habitacion_id) return showMessage('Selecciona una habitación.', 'warning');
+            button.disabled = true;
+            try {
+                const response = await fetch(page.dataset.storeUrl, {
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': csrf, 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || Object.values(data.errors || {}).flat()[0] || 'No se pudo registrar el check-in.');
+                showMessage(`${data.message} Habitación ${data.habitacion}, reserva ${data.codigo}.`, 'success');
+                button.innerHTML = '<i class="fa-solid fa-circle-check"></i> Check-in registrado';
+            } catch (error) {
+                showMessage(error.message, 'warning');
+                button.disabled = false;
+            }
+        });
+
+        updateSummary();
+    })();
+</script>
 
 </x-app-layout>

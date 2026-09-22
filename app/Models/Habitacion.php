@@ -16,6 +16,11 @@ class Habitacion extends Model
         'capacidad',
         'precio',
         'estado',
+        'limpieza_estado',
+        'limpieza_prioridad',
+        'limpieza_notas',
+        'limpieza_iniciada_at',
+        'limpieza_completada_at',
         'descripcion',
     ];
 
@@ -23,6 +28,8 @@ class Habitacion extends Model
         'piso' => 'integer',
         'capacidad' => 'integer',
         'precio' => 'decimal:2',
+        'limpieza_iniciada_at' => 'datetime',
+        'limpieza_completada_at' => 'datetime',
     ];
 
     public function reservas(): HasMany

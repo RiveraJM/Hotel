@@ -7,6 +7,22 @@
 
 @vite(['resources/css/limpieza.css'])
 
+@php
+    $estadoLabels = [
+        'limpia' => 'Limpia',
+        'pendiente' => 'Pendiente',
+        'en_proceso' => 'En proceso',
+        'atencion' => 'Atención',
+    ];
+    $estadoIcons = [
+        'limpia' => 'fa-circle-check',
+        'pendiente' => 'fa-broom',
+        'en_proceso' => 'fa-spinner',
+        'atencion' => 'fa-triangle-exclamation',
+    ];
+    $counts = $habitaciones->groupBy('limpieza_estado')->map->count();
+@endphp
+
 
     {{-- =========================================================
          SIDEBAR
@@ -334,7 +350,7 @@
             </div>
 
 
-            <button class="primary-action">
+            <button class="primary-action" type="button" data-open-cleaning-panel>
 
                 <i class="fa-solid fa-broom"></i>
 
@@ -371,9 +387,7 @@
                         PENDIENTES
                     </span>
 
-                    <strong>
-                        --
-                    </strong>
+                    <strong>{{ $counts->get('pendiente', 0) }}</strong>
 
                     <small>
                         Habitaciones esperando limpieza
@@ -402,9 +416,7 @@
                         LIMPIAS
                     </span>
 
-                    <strong>
-                        --
-                    </strong>
+                    <strong>{{ $counts->get('limpia', 0) }}</strong>
 
                     <small>
                         Habitaciones disponibles
@@ -433,9 +445,7 @@
                         EN PROCESO
                     </span>
 
-                    <strong>
-                        --
-                    </strong>
+                    <strong>{{ $counts->get('en_proceso', 0) }}</strong>
 
                     <small>
                         Limpiezas en ejecución
@@ -464,9 +474,7 @@
                         ATENCIÓN
                     </span>
 
-                    <strong>
-                        --
-                    </strong>
+                    <strong>{{ $counts->get('atencion', 0) }}</strong>
 
                     <small>
                         Habitaciones que requieren revisión
@@ -496,6 +504,7 @@
                     type="text"
                     placeholder="Buscar habitación..."
                     autocomplete="off"
+                    data-room-search
                 >
 
             </div>
@@ -507,27 +516,13 @@
                     Estado
                 </label>
 
-                <select>
+                <select data-room-status-filter>
 
-                    <option>
-                        Todos los estados
-                    </option>
+                    <option value="">Todos los estados</option>
 
-                    <option>
-                        Limpia
-                    </option>
-
-                    <option>
-                        Pendiente
-                    </option>
-
-                    <option>
-                        En proceso
-                    </option>
-
-                    <option>
-                        Atención
-                    </option>
+                    @foreach ($estadoLabels as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                    @endforeach
 
                 </select>
 
@@ -540,23 +535,15 @@
                     Prioridad
                 </label>
 
-                <select>
+                <select data-room-priority-filter>
 
-                    <option>
-                        Todas
-                    </option>
+                    <option value="">Todas</option>
 
-                    <option>
-                        Normal
-                    </option>
+                    <option value="normal">Normal</option>
 
-                    <option>
-                        Alta
-                    </option>
+                    <option value="alta">Alta</option>
 
-                    <option>
-                        Urgente
-                    </option>
+                    <option value="urgente">Urgente</option>
 
                 </select>
 
@@ -573,23 +560,23 @@
 
         <div class="quick-filters">
 
-            <button class="quick-filter active">
+            <button class="quick-filter active" type="button" data-quick-filter="">
                 Todas
             </button>
 
-            <button class="quick-filter">
+            <button class="quick-filter" type="button" data-quick-filter="pendiente">
                 Pendientes
             </button>
 
-            <button class="quick-filter">
+            <button class="quick-filter" type="button" data-quick-filter="en_proceso">
                 En proceso
             </button>
 
-            <button class="quick-filter">
+            <button class="quick-filter" type="button" data-quick-filter="limpia">
                 Limpias
             </button>
 
-            <button class="quick-filter">
+            <button class="quick-filter" type="button" data-quick-filter="atencion">
                 Atención
             </button>
 
@@ -619,9 +606,7 @@
                 </div>
 
 
-                <span class="rooms-count">
-                    Habitaciones registradas
-                </span>
+                <span class="rooms-count">{{ $habitaciones->count() }} habitaciones registradas</span>
 
             </div>
 
@@ -631,82 +616,79 @@
                  GRID PREPARADO PARA BD
             ================================================== --}}
 
-            <div class="cleaning-rooms-grid">
-
-
-                {{-- HABITACIÓN --}}
-
-                <button class="cleaning-room-card clean">
-
-                    <span class="room-number">
-                        --
-                    </span>
-
-                    <span class="room-status-icon">
-                        <i class="fa-solid fa-circle-check"></i>
-                    </span>
-
-                    <span class="room-status">
-                        LIMPIA
-                    </span>
-
-                </button>
-
-
-                <button class="cleaning-room-card pending">
-
-                    <span class="room-number">
-                        --
-                    </span>
-
-                    <span class="room-status-icon">
-                        <i class="fa-solid fa-broom"></i>
-                    </span>
-
-                    <span class="room-status">
-                        PENDIENTE
-                    </span>
-
-                </button>
-
-
-                <button class="cleaning-room-card process">
-
-                    <span class="room-number">
-                        --
-                    </span>
-
-                    <span class="room-status-icon">
-                        <i class="fa-solid fa-spinner"></i>
-                    </span>
-
-                    <span class="room-status">
-                        EN PROCESO
-                    </span>
-
-                </button>
-
-
-                <button class="cleaning-room-card urgent">
-
-                    <span class="room-number">
-                        --
-                    </span>
-
-                    <span class="room-status-icon">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                    </span>
-
-                    <span class="room-status">
-                        ATENCIÓN
-                    </span>
-
-                </button>
-
-
+            <div class="cleaning-rooms-grid" data-room-grid>
+                @forelse ($habitaciones as $habitacion)
+                    @php($roomStatus = $habitacion->limpieza_estado ?: 'pendiente')
+                    <button
+                        class="cleaning-room-card {{ $roomStatus === 'en_proceso' ? 'process' : $roomStatus }}"
+                        type="button"
+                        data-room-card
+                        data-room-number="{{ $habitacion->numero }}"
+                        data-room-status="{{ $roomStatus }}"
+                        data-room-priority="{{ $habitacion->limpieza_prioridad ?: 'normal' }}"
+                        data-room-id="{{ $habitacion->id }}"
+                        data-room-notes="{{ $habitacion->limpieza_notas }}"
+                    >
+                        <span class="room-number">{{ $habitacion->numero }}</span>
+                        <span class="room-status-icon"><i class="fa-solid {{ $estadoIcons[$roomStatus] }}"></i></span>
+                        <span class="room-status">{{ strtoupper($estadoLabels[$roomStatus]) }}</span>
+                        <span class="room-priority">{{ ucfirst($habitacion->limpieza_prioridad ?: 'normal') }}</span>
+                    </button>
+                @empty
+                    <p class="cleaning-empty-state">No hay habitaciones registradas.</p>
+                @endforelse
             </div>
 
         </section>
+
+        <div class="cleaning-panel-backdrop" data-cleaning-backdrop hidden></div>
+        <aside class="cleaning-panel" data-cleaning-panel aria-hidden="true">
+            <div class="cleaning-panel-header">
+                <div>
+                    <span class="cleaning-eyebrow">ACTUALIZACIÓN</span>
+                    <h2>Gestionar limpieza</h2>
+                </div>
+                <button type="button" class="cleaning-panel-close" data-close-cleaning-panel aria-label="Cerrar panel">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <p class="cleaning-panel-help">Selecciona una habitación y registra su condición actual.</p>
+
+            <form method="POST" data-cleaning-form>
+                @csrf
+                @method('PATCH')
+                <label class="cleaning-form-label" for="cleaning-room-select">Habitación</label>
+                <select id="cleaning-room-select" class="cleaning-form-control" data-cleaning-room required>
+                    <option value="">Selecciona una habitación</option>
+                    @foreach ($habitaciones as $habitacion)
+                        <option value="{{ $habitacion->id }}">Habitación {{ $habitacion->numero }}</option>
+                    @endforeach
+                </select>
+
+                <label class="cleaning-form-label" for="cleaning-status-select">Estado</label>
+                <select id="cleaning-status-select" name="limpieza_estado" class="cleaning-form-control" required>
+                    @foreach ($estadoLabels as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+
+                <label class="cleaning-form-label" for="cleaning-priority-select">Prioridad</label>
+                <select id="cleaning-priority-select" name="limpieza_prioridad" class="cleaning-form-control" required>
+                    <option value="normal">Normal</option>
+                    <option value="alta">Alta</option>
+                    <option value="urgente">Urgente</option>
+                </select>
+
+                <label class="cleaning-form-label" for="cleaning-notes">Notas</label>
+                <textarea id="cleaning-notes" name="limpieza_notas" class="cleaning-form-control" rows="4" maxlength="500" placeholder="Ej. Reponer toallas o revisar minibar"></textarea>
+
+                <button type="submit" class="primary-action cleaning-panel-submit" data-cleaning-submit disabled>
+                    <i class="fa-solid fa-check"></i>
+                    Guardar actualización
+                </button>
+            </form>
+        </aside>
 
 
 
@@ -767,5 +749,79 @@
 
 
     </main>
+
+    <script>
+        (() => {
+            const panel = document.querySelector('[data-cleaning-panel]');
+            const backdrop = document.querySelector('[data-cleaning-backdrop]');
+            const form = document.querySelector('[data-cleaning-form]');
+            const roomSelect = document.querySelector('[data-cleaning-room]');
+            const statusSelect = document.querySelector('#cleaning-status-select');
+            const prioritySelect = document.querySelector('#cleaning-priority-select');
+            const notes = document.querySelector('#cleaning-notes');
+            const submit = document.querySelector('[data-cleaning-submit]');
+            const cards = [...document.querySelectorAll('[data-room-card]')];
+
+            const selectRoom = (card) => {
+                roomSelect.value = card.dataset.roomId;
+                statusSelect.value = card.dataset.roomStatus;
+                prioritySelect.value = card.dataset.roomPriority;
+                notes.value = card.dataset.roomNotes || '';
+                form.action = `/limpieza/${card.dataset.roomId}`;
+                submit.disabled = false;
+            };
+
+            const openPanel = (card = null) => {
+                if (card) {
+                    selectRoom(card);
+                } else {
+                    roomSelect.value = '';
+                    form.action = '';
+                    submit.disabled = true;
+                }
+                panel.hidden = false;
+                backdrop.hidden = false;
+                requestAnimationFrame(() => panel.classList.add('is-open'));
+                panel.setAttribute('aria-hidden', 'false');
+            };
+
+            const closePanel = () => {
+                panel.classList.remove('is-open');
+                panel.setAttribute('aria-hidden', 'true');
+                setTimeout(() => { panel.hidden = true; backdrop.hidden = true; }, 180);
+            };
+
+            document.querySelector('[data-open-cleaning-panel]').addEventListener('click', () => openPanel());
+            document.querySelector('[data-close-cleaning-panel]').addEventListener('click', closePanel);
+            backdrop.addEventListener('click', closePanel);
+            cards.forEach(card => card.addEventListener('click', () => openPanel(card)));
+            roomSelect.addEventListener('change', () => {
+                const card = cards.find(item => item.dataset.roomId === roomSelect.value);
+                if (card) selectRoom(card);
+            });
+
+            const applyFilters = () => {
+                const search = document.querySelector('[data-room-search]').value.toLowerCase().trim();
+                const status = document.querySelector('[data-room-status-filter]').value;
+                const priority = document.querySelector('[data-room-priority-filter]').value;
+                cards.forEach(card => {
+                    const visible = card.dataset.roomNumber.toLowerCase().includes(search)
+                        && (!status || card.dataset.roomStatus === status)
+                        && (!priority || card.dataset.roomPriority === priority);
+                    card.hidden = !visible;
+                });
+            };
+
+            document.querySelector('[data-room-search]').addEventListener('input', applyFilters);
+            document.querySelector('[data-room-status-filter]').addEventListener('change', applyFilters);
+            document.querySelector('[data-room-priority-filter]').addEventListener('change', applyFilters);
+            document.querySelectorAll('[data-quick-filter]').forEach(button => button.addEventListener('click', () => {
+                document.querySelectorAll('[data-quick-filter]').forEach(item => item.classList.remove('active'));
+                button.classList.add('active');
+                document.querySelector('[data-room-status-filter]').value = button.dataset.quickFilter;
+                applyFilters();
+            }));
+        })();
+    </script>
 
 </x-app-layout>

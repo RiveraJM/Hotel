@@ -3,9 +3,9 @@
    ========================================================= */
 
 :root {
-    --hotel-primary: #1e3a5f;
-    --hotel-primary-dark: #0f172a;
-    --hotel-primary-light: #e8eef5;
+    --hotel-primary: #007a5e;
+    --hotel-primary-dark: #063b32;
+    --hotel-primary-light: #9ad2b5;
 
     --hotel-accent: #c9a227;
     --hotel-accent-light: #f8f1d8;
@@ -14,12 +14,12 @@
     --hotel-warning: #d97706;
     --hotel-danger: #dc2626;
 
-    --hotel-background: #f8fafc;
+    --hotel-background: #dfe9e2;
     --hotel-card: #ffffff;
 
-    --hotel-text: #1e293b;
-    --hotel-text-muted: #64748b;
-    --hotel-border: #e2e8f0;
+    --hotel-text: #063b32;
+    --hotel-text-muted: #477568;
+    --hotel-border: #9ad2b5;
 }
 
 

@@ -3,6 +3,12 @@
      resources/views/caja.blade.php
 ========================================================= --}}
 
+@php
+    $currency = fn ($amount) => 'S/ ' . number_format((float) $amount, 2);
+    $lastMovement = $movimientos->first();
+    $expectedCash = $saldoInicial + $movimientos->where('tipo', 'ingreso')->where('metodo', 'efectivo')->sum('monto') - $movimientos->where('tipo', 'egreso')->where('metodo', 'efectivo')->sum('monto');
+@endphp
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -15,7 +21,8 @@
     <title>Caja | Hotel Management</title>
 
     {{-- Carga correcta mediante Vite --}}
-    @vite(['resources/css/caja.css'])
+    @vite(['resources/css/app.css', 'resources/css/caja.css'])
+    @vite(['resources/js/app.js'])
 
     {{-- Font Awesome --}}
     <link rel="stylesheet"
@@ -26,6 +33,8 @@
 
 <body>
 
+@include('layouts.navigation')
+
 <div class="hotel-layout">
 
 
@@ -33,6 +42,7 @@
          SIDEBAR
     ========================================================== --}}
 
+    @if (false)
     <aside class="hotel-sidebar">
 
         <div class="sidebar-logo">
@@ -215,6 +225,7 @@
         </div>
 
     </aside>
+    @endif
 
 
 
@@ -323,7 +334,7 @@
 
                 <div class="page-actions">
 
-                    <button class="btn btn-outline">
+                    <button class="btn btn-outline" type="button" data-open-history>
 
                         <i class="fa-solid fa-clock-rotate-left"></i>
 
@@ -332,7 +343,7 @@
                     </button>
 
 
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" type="button" data-open-movement>
 
                         <i class="fa-solid fa-plus"></i>
 
@@ -369,13 +380,10 @@
                             ESTADO DE CAJA
                         </span>
 
-                        <h3>
-                            Caja abierta
-                        </h3>
+                        <h3>{{ $caja ? 'Caja abierta' : 'Caja cerrada' }}</h3>
 
                         <p>
-                            La caja se encuentra disponible para
-                            registrar movimientos.
+                            {{ $caja ? 'La caja se encuentra disponible para registrar movimientos.' : 'Abre una caja para comenzar a registrar movimientos.' }}
                         </p>
 
                     </div>
@@ -405,9 +413,7 @@
                             Apertura
                         </span>
 
-                        <strong>
-                            —
-                        </strong>
+                        <strong>{{ $caja?->fecha_apertura?->format('d/m/Y H:i') ?? '—' }}</strong>
 
                     </div>
 
@@ -418,9 +424,7 @@
                             Último movimiento
                         </span>
 
-                        <strong>
-                            —
-                        </strong>
+                        <strong>{{ $lastMovement?->movimiento_at?->format('d/m/Y H:i') ?? '—' }}</strong>
 
                     </div>
 
@@ -428,11 +432,11 @@
                 </div>
 
 
-                <button class="btn-close-cash">
+                <button class="btn-close-cash" type="button" data-open-{{ $caja ? 'close' : 'open' }}>
 
-                    <i class="fa-solid fa-lock"></i>
+                    <i class="fa-solid fa-{{ $caja ? 'lock' : 'unlock' }}"></i>
 
-                    Cerrar caja
+                    {{ $caja ? 'Cerrar caja' : 'Abrir caja' }}
 
                 </button>
 
@@ -466,7 +470,7 @@
                     </div>
 
                     <strong class="financial-value">
-                        S/ 0.00
+                        {{ $currency($saldoInicial) }}
                     </strong>
 
                     <span class="financial-description">
@@ -496,7 +500,7 @@
                     </div>
 
                     <strong class="financial-value">
-                        S/ 0.00
+                        {{ $currency($ingresos) }}
                     </strong>
 
                     <span class="financial-description">
@@ -526,7 +530,7 @@
                     </div>
 
                     <strong class="financial-value">
-                        S/ 0.00
+                        {{ $currency($egresos) }}
                     </strong>
 
                     <span class="financial-description">
@@ -556,7 +560,7 @@
                     </div>
 
                     <strong class="financial-value">
-                        S/ 0.00
+                        {{ $currency($saldoActual) }}
                     </strong>
 
                     <span class="financial-description">
@@ -597,7 +601,7 @@
                 <div class="quick-actions-grid">
 
 
-                    <button class="quick-action income-action">
+                    <button class="quick-action income-action" type="button" data-open-movement data-movement-type="ingreso">
 
                         <span class="quick-action-icon">
 
@@ -623,7 +627,7 @@
 
 
 
-                    <button class="quick-action expense-action">
+                    <button class="quick-action expense-action" type="button" data-open-movement data-movement-type="egreso">
 
                         <span class="quick-action-icon">
 
@@ -649,7 +653,7 @@
 
 
 
-                    <button class="quick-action payment-action">
+                    <button class="quick-action payment-action" type="button" data-open-movement data-movement-type="ingreso" data-payment-movement>
 
                         <span class="quick-action-icon">
 
@@ -702,7 +706,7 @@
                     </div>
 
 
-                    <button class="btn-filter">
+                    <button class="btn-filter" type="button" data-toggle-filters>
 
                         <i class="fa-solid fa-filter"></i>
 
@@ -726,47 +730,44 @@
                         <input
                             type="text"
                             placeholder="Buscar movimiento..."
+                            data-movement-search
                         >
 
                     </div>
 
 
-                    <select>
+                    <select data-movement-type-filter>
 
                         <option value="">
                             Todos los movimientos
                         </option>
 
-                        <option value="income">
+                        <option value="ingreso">
                             Ingresos
                         </option>
 
-                        <option value="expense">
+                        <option value="egreso">
                             Egresos
-                        </option>
-
-                        <option value="payment">
-                            Pagos
                         </option>
 
                     </select>
 
 
-                    <select>
+                    <select data-movement-method-filter>
 
                         <option value="">
                             Todos los métodos
                         </option>
 
-                        <option value="cash">
+                        <option value="efectivo">
                             Efectivo
                         </option>
 
-                        <option value="card">
+                        <option value="tarjeta">
                             Tarjeta
                         </option>
 
-                        <option value="transfer">
+                        <option value="transferencia">
                             Transferencia
                         </option>
 
@@ -776,6 +777,7 @@
                     <input
                         type="date"
                         aria-label="Fecha"
+                        data-movement-date-filter
                     >
 
                 </div>
@@ -821,7 +823,7 @@
                                 </th>
 
                                 <th>
-                                    Acción
+                                    Comprobante
                                 </th>
 
                             </tr>
@@ -830,44 +832,143 @@
 
 
                         <tbody>
+    @forelse($movimientos as $movimiento)
 
-                            {{-- =================================================
-                                 AQUÍ POSTERIORMENTE IRÁ:
+        <tr
+            data-movement-row
+            data-type="{{ $movimiento->tipo }}"
+            data-method="{{ $movimiento->metodo }}"
+            data-date="{{ $movimiento->movimiento_at->format('Y-m-d') }}"
+            data-search="{{ strtolower($movimiento->concepto . ' ' . $movimiento->metodo) }}"
+        >
 
-                                 @foreach($movimientos as $movimiento)
+            {{-- Hora --}}
+            <td>
+                {{ $movimiento->movimiento_at->format('H:i') }}
+            </td>
 
-                                 La tabla está preparada para conectar
-                                 directamente con Laravel.
-                            ================================================== --}}
+            {{-- Concepto --}}
+            <td>
+                {{ $movimiento->concepto }}
+            </td>
 
-                            <tr class="empty-row">
+            {{-- Tipo --}}
+            <td>
+                <span class="movement-type {{ $movimiento->tipo }}">
+                    {{ ucfirst($movimiento->tipo) }}
+                </span>
+            </td>
 
-                                <td colspan="8">
+            {{-- Método de pago --}}
+            <td>
+                {{ ucfirst($movimiento->metodo) }}
+            </td>
 
-                                    <div class="empty-state">
+            {{-- Monto --}}
+            <td class="movement-amount {{ $movimiento->tipo }}">
 
-                                        <div class="empty-icon">
+                {{ $movimiento->tipo === 'egreso' ? '-' : '+' }}
 
-                                            <i class="fa-solid fa-receipt"></i>
+                {{ $currency($movimiento->monto) }}
 
-                                        </div>
+            </td>
 
-                                        <strong>
-                                            No hay movimientos registrados
-                                        </strong>
+            {{-- Usuario --}}
+            <td>
+                Administrador
+            </td>
 
-                                        <span>
-                                            Los movimientos de caja aparecerán
-                                            aquí cuando sean registrados.
-                                        </span>
+            {{-- Estado --}}
+            <td>
+                <span class="movement-status">
+                    {{ ucfirst($movimiento->estado) }}
+                </span>
+            </td>
 
-                                    </div>
+            {{-- Comprobante --}}
+            <td>
 
-                                </td>
+                @if (!empty($movimiento->receipt_url))
 
-                            </tr>
+                    <a
+                        class="movement-receipt-link"
+                        href="{{ route('factura.show', ['reserva' => $movimiento->id, 'formato' => 'boleta']) }}"
+                        target="_blank"
+                        rel="noopener"
+                        title="Ver boleta"
+                    >
 
-                        </tbody>
+                        <i class="fa-solid fa-file-invoice"></i>
+
+                        <span>
+                            Ver boleta
+                        </span>
+
+                    </a>
+
+                @elseif ($movimiento->tipo !== 'egreso')
+
+                    <a
+                        class="movement-receipt-link"
+                        href="{{ route('factura.movement', ['movimiento' => $movimiento->id, 'formato' => 'boleta']) }}"
+                        target="_blank"
+                        rel="noopener"
+                        title="Ver comprobante"
+                    >
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span>Ver boleta</span>
+                    </a>
+
+                @else
+
+                    <span class="movement-no-receipt">
+                        Sin comprobante
+                    </span>
+
+                @endif
+
+            </td>
+
+        </tr>
+
+    @empty
+
+        <tr class="empty-row">
+
+            <td colspan="8">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+
+                    <strong>
+                        No hay ventas pagadas para mostrar
+                    </strong>
+
+                    <span>
+                        La opción “Ver boleta” aparecerá aquí después
+                        de completar un check-out con pago.
+                    </span>
+
+                    <a
+                        class="empty-state-link"
+                        href="{{ route('checkout.index') }}"
+                    >
+                        Ir a Check-out
+                    </a>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+    @endforelse
+</tbody>
+```
+
 
                     </table>
 
@@ -923,7 +1024,7 @@
                         </span>
 
                         <strong>
-                            S/ 0.00
+                            {{ $currency($saldoInicial) }}
                         </strong>
 
                     </div>
@@ -936,7 +1037,7 @@
                         </span>
 
                         <strong>
-                            S/ 0.00
+                            {{ $currency($ingresos) }}
                         </strong>
 
                     </div>
@@ -949,7 +1050,7 @@
                         </span>
 
                         <strong>
-                            S/ 0.00
+                            {{ $currency($egresos) }}
                         </strong>
 
                     </div>
@@ -962,7 +1063,7 @@
                         </span>
 
                         <strong>
-                            S/ 0.00
+                            {{ $currency($expectedCash) }}
                         </strong>
 
                     </div>
@@ -975,7 +1076,7 @@
                         </span>
 
                         <strong>
-                            S/ 0.00
+                            <span data-counted-value>S/ 0.00</span>
                         </strong>
 
                     </div>
@@ -988,7 +1089,7 @@
                         </span>
 
                         <strong>
-                            S/ 0.00
+                            <span data-difference-value>{{ $currency(-$expectedCash) }}</span>
                         </strong>
 
                     </div>
@@ -1005,6 +1106,7 @@
                     <textarea
                         id="observaciones"
                         placeholder="Ingrese observaciones del cierre..."
+                        data-close-observations
                     ></textarea>
 
                 </div>
@@ -1012,13 +1114,13 @@
 
                 <div class="closing-actions">
 
-                    <button class="btn btn-outline">
+                    <button class="btn btn-outline" type="button" data-open-close>
 
                         Cancelar
 
                     </button>
 
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" type="button" data-open-close {{ $caja ? '' : 'disabled' }}>
 
                         <i class="fa-solid fa-lock"></i>
 
@@ -1032,6 +1134,77 @@
 
 
         </section>
+
+    @if (session('status'))
+        <div class="cash-flash-message">{{ session('status') }}</div>
+    @endif
+
+    <div class="cash-modal-backdrop" data-cash-backdrop hidden></div>
+
+    <section class="cash-modal" data-open-modal hidden aria-hidden="true">
+        <div class="cash-modal-header"><div><span class="page-kicker">INICIO DE JORNADA</span><h2>Abrir caja</h2></div><button type="button" data-close-modal aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div>
+        <p>Registra el efectivo disponible antes de comenzar la jornada.</p>
+        <form method="POST" action="{{ route('caja.open') }}">
+            @csrf
+            <label for="opening-balance">Saldo inicial</label>
+            <input id="opening-balance" name="saldo_inicial" type="number" min="0" step="0.01" required value="0">
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-unlock"></i> Abrir caja</button>
+        </form>
+    </section>
+
+    <section class="cash-modal" data-movement-modal hidden aria-hidden="true">
+        <div class="cash-modal-header"><div><span class="page-kicker">OPERACIÓN</span><h2>Registrar movimiento</h2></div><button type="button" data-close-modal aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div>
+        <form method="POST" action="{{ route('caja.movements.store') }}">
+            @csrf
+            <label for="movement-type">Tipo</label>
+            <select id="movement-type" name="tipo" required><option value="ingreso">Ingreso</option><option value="egreso">Egreso</option></select>
+            <label for="movement-concept">Concepto</label>
+            <input id="movement-concept" name="concepto" type="text" maxlength="180" required placeholder="Ej. Compra de suministros">
+            <label for="movement-method">Método</label>
+            <select id="movement-method" name="metodo" required><option value="efectivo">Efectivo</option><option value="tarjeta">Tarjeta</option><option value="transferencia">Transferencia</option><option value="yape">Yape</option><option value="plin">Plin</option><option value="otro">Otro</option></select>
+            <label for="movement-amount">Monto</label>
+            <input id="movement-amount" name="monto" type="number" min="0.01" step="0.01" required>
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-check"></i> Guardar movimiento</button>
+        </form>
+    </section>
+
+    <section class="cash-modal" data-close-modal-panel hidden aria-hidden="true">
+        <div class="cash-modal-header"><div><span class="page-kicker">CONTROL DE CIERRE</span><h2>Cerrar caja</h2></div><button type="button" data-close-modal aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div>
+        <p>Compara el efectivo físico con el efectivo esperado antes de cerrar.</p>
+        <form method="POST" action="{{ route('caja.close') }}">
+            @csrf
+            <label for="counted-cash">Efectivo contado</label>
+            <input id="counted-cash" name="efectivo_contado" type="number" min="0" step="0.01" required data-counted-cash>
+            <label for="close-notes">Observaciones</label>
+            <textarea id="close-notes" name="observaciones" rows="4" maxlength="1000" placeholder="Diferencias, incidencias o comentarios"></textarea>
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-lock"></i> Realizar cierre</button>
+        </form>
+    </section>
+
+    <script>
+        (() => {
+            const backdrop = document.querySelector('[data-cash-backdrop]');
+            const modals = document.querySelectorAll('.cash-modal');
+            const open = modal => { modals.forEach(item => item.hidden = true); modal.hidden = false; backdrop.hidden = false; modal.setAttribute('aria-hidden', 'false'); };
+            const close = () => { modals.forEach(item => { item.hidden = true; item.setAttribute('aria-hidden', 'true'); }); backdrop.hidden = true; };
+            document.querySelector('[data-open-open]')?.addEventListener('click', () => open(document.querySelector('[data-open-modal]')));
+            document.querySelector('[data-open-history]')?.addEventListener('click', () => document.querySelector('.movements-panel').scrollIntoView({ behavior: 'smooth' }));
+            document.querySelectorAll('[data-open-close]').forEach(button => button.addEventListener('click', () => open(document.querySelector('[data-close-modal-panel]'))));
+            document.querySelectorAll('[data-open-movement]').forEach(button => button.addEventListener('click', () => { const modal = document.querySelector('[data-movement-modal]'); const type = button.dataset.movementType; if (type) modal.querySelector('[name="tipo"]').value = type; open(modal); }));
+            document.querySelectorAll('[data-close-modal]').forEach(button => button.addEventListener('click', close));
+            backdrop.addEventListener('click', close);
+
+            const filterRows = () => {
+                const search = document.querySelector('[data-movement-search]').value.toLowerCase().trim();
+                const type = document.querySelector('[data-movement-type-filter]').value;
+                const method = document.querySelector('[data-movement-method-filter]').value;
+                const date = document.querySelector('[data-movement-date-filter]').value;
+                document.querySelectorAll('[data-movement-row]').forEach(row => { row.hidden = !row.dataset.search.includes(search) || Boolean(type && row.dataset.type !== type) || Boolean(method && row.dataset.method !== method) || Boolean(date && row.dataset.date !== date); });
+            };
+            document.querySelectorAll('[data-movement-search], [data-movement-type-filter], [data-movement-method-filter], [data-movement-date-filter]').forEach(input => input.addEventListener(input.tagName === 'INPUT' && input.type === 'text' ? 'input' : 'change', filterRows));
+            document.querySelector('[data-counted-cash]')?.addEventListener('input', event => { const expected = {{ $expectedCash }}; const difference = Number(event.target.value || 0) - expected; document.querySelector('[data-difference-value]').textContent = `S/ ${difference.toFixed(2)}`; });
+        })();
+    </script>
 
     </main>
 

@@ -10,9 +10,9 @@
 
 :root {
 
-    --hotel-primary: #174a7e;
-    --hotel-primary-dark: #0d355d;
-    --hotel-primary-light: #eaf3fb;
+    --hotel-primary: #007a5e;
+    --hotel-primary-dark: #063b32;
+    --hotel-primary-light: #9ad2b5;
 
     --hotel-blue: #1677d2;
     --hotel-green: #16a56a;
@@ -21,13 +21,13 @@
     --hotel-purple: #7456d8;
     --hotel-cyan: #139bb2;
 
-    --hotel-background: #f4f7fa;
+    --hotel-background: #dfe9e2;
     --hotel-card: #ffffff;
 
-    --hotel-text: #111827;
-    --hotel-text-secondary: #374151;
+    --hotel-text: #063b32;
+    --hotel-text-secondary: #477568;
 
-    --hotel-border: #dce3ea;
+    --hotel-border: #9ad2b5;
 
     --sidebar-width: 265px;
 
@@ -95,8 +95,8 @@ body {
     background:
         linear-gradient(
             180deg,
-            #123f6b 0%,
-            #0d355d 100%
+            #007a5e 0%,
+            #063b32 100%
         );
 
     color: #ffffff;
@@ -1916,16 +1916,30 @@ body {
 
     .hotel-sidebar {
 
-        width: 220px;
+        width: 72px;
 
+    }
+
+    .logo-text,
+    .navigation-title,
+    .sidebar-link span:not(.sidebar-link-icon),
+    .sidebar-user-info,
+    .sidebar-user-menu {
+        display: none;
+    }
+
+    .sidebar-logo,
+    .sidebar-link,
+    .sidebar-user {
+        justify-content: center;
     }
 
 
     .reports-main {
 
-        margin-left: 220px;
+        margin-left: 72px;
 
-        width: calc(100% - 220px);
+        width: calc(100% - 72px);
 
     }
 
@@ -2020,4 +2034,50 @@ body {
 
     }
 
+}
+
+.report-bars {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+}
+
+.report-bar-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 42px;
+    align-items: center;
+    gap: 10px;
+    color: var(--hotel-text-secondary);
+    font-size: 12px;
+}
+
+.report-bar-row strong { color: var(--hotel-text); text-align: right; }
+.report-bar { height: 10px; overflow: hidden; border-radius: 8px; background: #e5eee8; }
+.report-bar i { display: block; height: 100%; border-radius: inherit; background: var(--hotel-primary); }
+.chart-caption { color: var(--hotel-text-secondary); font-size: 11px; }
+
+@media print {
+    .hotel-sidebar, .reports-actions, .report-filters, .panel-menu, .available-reports { display: none !important; }
+    .reports-main { margin-left: 0 !important; width: 100% !important; }
+    .report-panel { break-inside: avoid; }
+}
+
+/* Reportes comparte la navegación principal con Caja y el resto del sistema. */
+.hotel-layout {
+    display: block;
+    margin-left: 16rem;
+    width: calc(100% - 16rem);
+}
+
+.hotel-layout .reports-main {
+    width: 100%;
+    margin-left: 0;
+}
+
+@media (max-width: 1023px) {
+    .hotel-layout {
+        width: 100%;
+        margin-left: 0;
+    }
 }

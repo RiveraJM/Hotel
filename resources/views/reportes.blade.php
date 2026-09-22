@@ -14,7 +14,8 @@
 
     <title>Reportes | Hotel Management</title>
 
-    @vite(['resources/css/reportes.css'])
+    @vite(['resources/css/app.css', 'resources/css/reportes.css'])
+    @vite(['resources/js/app.js'])
 
     {{-- Font Awesome --}}
     <link rel="stylesheet"
@@ -25,12 +26,15 @@
 
 <body>
 
+@include('layouts.navigation')
+
 <div class="hotel-layout">
 
     {{-- =========================================================
          SIDEBAR
     ========================================================== --}}
 
+    @if (false)
     <aside class="hotel-sidebar">
 
         <div class="sidebar-logo">
@@ -224,6 +228,7 @@
         </div>
 
     </aside>
+    @endif
 
 
 
@@ -334,7 +339,8 @@
                 <div class="reports-actions">
 
                     <button type="button"
-                            class="report-action secondary">
+                            class="report-action secondary"
+                            id="exportPdf">
 
                         <i class="fa-solid fa-file-pdf"></i>
 
@@ -344,7 +350,8 @@
 
 
                     <button type="button"
-                            class="report-action primary">
+                            class="report-action primary"
+                            id="exportExcel">
 
                         <i class="fa-solid fa-file-excel"></i>
 
@@ -362,7 +369,7 @@
                  FILTROS
             ================================================== --}}
 
-            <div class="report-filters">
+            <form class="report-filters" method="GET" action="{{ route('reportes.index') }}">
 
                 <div class="filter-group">
 
@@ -370,25 +377,25 @@
                         Período
                     </label>
 
-                    <select>
+                    <select name="periodo" id="reportPeriod">
 
-                        <option>
+                        <option value="mes" {{ $period === 'mes' ? 'selected' : '' }}>
                             Este mes
                         </option>
 
-                        <option>
+                        <option value="anio" {{ $period === 'anio' ? 'selected' : '' }}>
                             Este año
                         </option>
 
-                        <option>
+                        <option value="7_dias" {{ $period === '7_dias' ? 'selected' : '' }}>
                             Últimos 7 días
                         </option>
 
-                        <option>
+                        <option value="30_dias" {{ $period === '30_dias' ? 'selected' : '' }}>
                             Últimos 30 días
                         </option>
 
-                        <option>
+                        <option value="personalizado" {{ $period === 'personalizado' ? 'selected' : '' }}>
                             Personalizado
                         </option>
 
@@ -403,7 +410,7 @@
                         Desde
                     </label>
 
-                    <input type="date">
+                    <input type="date" name="desde" value="{{ $from->toDateString() }}">
 
                 </div>
 
@@ -414,7 +421,7 @@
                         Hasta
                     </label>
 
-                    <input type="date">
+                    <input type="date" name="hasta" value="{{ $to->toDateString() }}">
 
                 </div>
 
@@ -428,7 +435,7 @@
 
                 </button>
 
-            </div>
+            </form>
 
 
 
@@ -452,7 +459,7 @@
                         </span>
 
                         <strong>
-                            --
+                            {{ $ocupacion }}%
                         </strong>
 
                         <small>
@@ -478,7 +485,7 @@
                         </span>
 
                         <strong>
-                            S/ --
+                            S/ {{ number_format($ingresos, 2) }}
                         </strong>
 
                         <small>
@@ -504,7 +511,7 @@
                         </span>
 
                         <strong>
-                            --
+                            {{ $reservas->count() }}
                         </strong>
 
                         <small>
@@ -517,7 +524,7 @@
 
 
 
-                <div class="summary-card">
+                <div class="summary-card" id="report-guests">
 
                     <div class="summary-icon purple">
                         <i class="fa-solid fa-users"></i>
@@ -530,7 +537,7 @@
                         </span>
 
                         <strong>
-                            --
+                            {{ $reservas->pluck('huesped_id')->filter()->unique()->count() }}
                         </strong>
 
                         <small>
@@ -554,7 +561,7 @@
 
                 {{-- OCUPACIÓN --}}
 
-                <div class="report-panel large">
+                <div class="report-panel large" id="report-rooms">
 
                     <div class="panel-header">
 
@@ -577,23 +584,11 @@
                     </div>
 
 
-                    <div class="chart-area">
-
-                        <div class="chart-placeholder">
-
-                            <i class="fa-solid fa-chart-line"></i>
-
-                            <span>
-                                Gráfico de ocupación
-                            </span>
-
-                            <small>
-                                Se conectará con los datos reales
-                                de habitaciones y reservas.
-                            </small>
-
-                        </div>
-
+                    <div class="chart-area report-bars">
+                        <div class="report-bar-row"><span>Ocupadas</span><div class="report-bar"><i style="width: {{ $ocupacion }}%"></i></div><strong>{{ $ocupadas }}</strong></div>
+                        <div class="report-bar-row"><span>Libres</span><div class="report-bar"><i style="width: {{ $totalHabitaciones ? round(($habitaciones->where('estado', 'libre')->count() / $totalHabitaciones) * 100) : 0 }}%"></i></div><strong>{{ $habitaciones->where('estado', 'libre')->count() }}</strong></div>
+                        <div class="report-bar-row"><span>Reservadas</span><div class="report-bar"><i style="width: {{ $totalHabitaciones ? round(($habitaciones->where('estado', 'reservada')->count() / $totalHabitaciones) * 100) : 0 }}%"></i></div><strong>{{ $habitaciones->where('estado', 'reservada')->count() }}</strong></div>
+                        <small class="chart-caption">{{ $totalHabitaciones }} habitaciones registradas en total.</small>
                     </div>
 
                 </div>
@@ -602,7 +597,7 @@
 
                 {{-- INGRESOS --}}
 
-                <div class="report-panel">
+                <div class="report-panel" id="report-finance">
 
                     <div class="panel-header">
 
@@ -625,22 +620,13 @@
                     </div>
 
 
-                    <div class="chart-area">
-
-                        <div class="chart-placeholder">
-
-                            <i class="fa-solid fa-chart-column"></i>
-
-                            <span>
-                                Gráfico de ingresos
-                            </span>
-
-                            <small>
-                                Reservas, hospedaje y servicios.
-                            </small>
-
-                        </div>
-
+                    <div class="chart-area report-bars">
+                        @forelse ($metodosPago as $metodo => $monto)
+                            <div class="report-bar-row"><span>{{ ucfirst($metodo) }}</span><div class="report-bar"><i style="width: {{ round(($monto / $basePagos) * 100) }}%"></i></div><strong>S/ {{ number_format($monto, 0) }}</strong></div>
+                        @empty
+                            <p class="chart-caption">No hay ingresos pagados en el período.</p>
+                        @endforelse
+                        <small class="chart-caption">Total cobrado: S/ {{ number_format($ingresos, 2) }}</small>
                     </div>
 
                 </div>
@@ -649,7 +635,7 @@
 
                 {{-- RESERVAS --}}
 
-                <div class="report-panel">
+                <div class="report-panel" id="report-reservations">
 
                     <div class="panel-header">
 
@@ -675,7 +661,7 @@
                             <div class="donut-center">
 
                                 <strong>
-                                    --
+                                    {{ $reservas->count() }}
                                 </strong>
 
                                 <span>
@@ -691,17 +677,17 @@
 
                             <div>
                                 <span class="legend-dot confirmed"></span>
-                                Confirmadas
+                                Confirmadas ({{ $reservasPorEstado->get('confirmada', 0) }})
                             </div>
 
                             <div>
                                 <span class="legend-dot pending"></span>
-                                Pendientes
+                                Pendientes ({{ $reservasPorEstado->get('pendiente', 0) }})
                             </div>
 
                             <div>
                                 <span class="legend-dot cancelled"></span>
-                                Canceladas
+                                Canceladas ({{ $reservasPorEstado->get('cancelada', 0) }})
                             </div>
 
                         </div>
@@ -714,7 +700,7 @@
 
                 {{-- CHECK-IN / CHECK-OUT --}}
 
-                <div class="report-panel">
+                <div class="report-panel" id="report-operations">
 
                     <div class="panel-header">
 
@@ -744,7 +730,7 @@
                             <div>
 
                                 <strong>
-                                    --
+                                    {{ $reservas->whereBetween('fecha_entrada', [$from->toDateString(), $to->toDateString()])->count() }}
                                 </strong>
 
                                 <span>
@@ -765,7 +751,7 @@
                             <div>
 
                                 <strong>
-                                    --
+                                    {{ $pagos->count() }}
                                 </strong>
 
                                 <span>
@@ -784,7 +770,7 @@
 
                 {{-- MÉTODOS DE PAGO --}}
 
-                <div class="report-panel">
+                <div class="report-panel" id="report-payments">
 
                     <div class="panel-header">
 
@@ -815,14 +801,14 @@
                                 </span>
 
                                 <strong>
-                                    --%
+                                    {{ $basePagos ? round(($metodosPago->get('efectivo', 0) / $basePagos) * 100) : 0 }}%
                                 </strong>
 
                             </div>
 
                             <div class="progress">
 
-                                <span style="width: 0%;"></span>
+                                <span style="width: {{ $basePagos ? round(($metodosPago->get('efectivo', 0) / $basePagos) * 100) : 0 }}%;"></span>
 
                             </div>
 
@@ -839,14 +825,14 @@
                                 </span>
 
                                 <strong>
-                                    --%
+                                    {{ $basePagos ? round(($metodosPago->get('tarjeta', 0) / $basePagos) * 100) : 0 }}%
                                 </strong>
 
                             </div>
 
                             <div class="progress">
 
-                                <span style="width: 0%;"></span>
+                                <span style="width: {{ $basePagos ? round(($metodosPago->get('tarjeta', 0) / $basePagos) * 100) : 0 }}%;"></span>
 
                             </div>
 
@@ -863,14 +849,14 @@
                                 </span>
 
                                 <strong>
-                                    --%
+                                    {{ $basePagos ? round(($metodosPago->get('transferencia', 0) / $basePagos) * 100) : 0 }}%
                                 </strong>
 
                             </div>
 
                             <div class="progress">
 
-                                <span style="width: 0%;"></span>
+                                <span style="width: {{ $basePagos ? round(($metodosPago->get('transferencia', 0) / $basePagos) * 100) : 0 }}%;"></span>
 
                             </div>
 
@@ -884,7 +870,7 @@
 
                 {{-- LIMPIEZA --}}
 
-                <div class="report-panel">
+                <div class="report-panel" id="report-cleaning">
 
                     <div class="panel-header">
 
@@ -906,7 +892,7 @@
                     <div class="service-report">
 
                         <div class="service-number">
-                            --
+                            {{ $limpieza['atendidas'] }}
                         </div>
 
                         <div>
@@ -927,7 +913,7 @@
                     <div class="service-report">
 
                         <div class="service-number">
-                            --
+                            {{ $limpieza['pendientes'] }}
                         </div>
 
                         <div>
@@ -950,7 +936,7 @@
 
                 {{-- MANTENIMIENTO --}}
 
-                <div class="report-panel">
+                <div class="report-panel" id="report-maintenance">
 
                     <div class="panel-header">
 
@@ -987,9 +973,7 @@
 
                             </div>
 
-                            <b>
-                                --
-                            </b>
+                            <b>{{ $mantenimiento['abiertas'] }}</b>
 
                         </div>
 
@@ -1010,9 +994,7 @@
 
                             </div>
 
-                            <b>
-                                --
-                            </b>
+                            <b>{{ $mantenimiento['resueltas'] }}</b>
 
                         </div>
 
@@ -1095,87 +1077,18 @@
 
 
                         <tbody>
-
-                            <tr>
-
-                                <td>
-                                    <strong>--</strong>
-                                </td>
-
-                                <td>--</td>
-
-                                <td>--</td>
-
-                                <td>--%</td>
-
-                                <td>
-                                    S/ --
-                                </td>
-
-                                <td>
-
-                                    <span class="performance-badge">
-                                        --
-                                    </span>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr>
-
-                                <td>
-                                    <strong>--</strong>
-                                </td>
-
-                                <td>--</td>
-
-                                <td>--</td>
-
-                                <td>--%</td>
-
-                                <td>
-                                    S/ --
-                                </td>
-
-                                <td>
-
-                                    <span class="performance-badge">
-                                        --
-                                    </span>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr>
-
-                                <td>
-                                    <strong>--</strong>
-                                </td>
-
-                                <td>--</td>
-
-                                <td>--</td>
-
-                                <td>--%</td>
-
-                                <td>
-                                    S/ --
-                                </td>
-
-                                <td>
-
-                                    <span class="performance-badge">
-                                        --
-                                    </span>
-
-                                </td>
-
-                            </tr>
-
+                            @forelse ($rendimiento as $room)
+                                <tr>
+                                    <td><strong>{{ $room->numero }}</strong></td>
+                                    <td>{{ $room->reservas }}</td>
+                                    <td>{{ $room->noches }}</td>
+                                    <td>{{ $room->ocupacion }}%</td>
+                                    <td>S/ {{ number_format($room->ingresos, 2) }}</td>
+                                    <td><span class="performance-badge">{{ $room->rendimiento }}</span></td>
+                                </tr>
+                            @empty
+                                <tr><td colspan="6">No hay habitaciones registradas.</td></tr>
+                            @endforelse
                         </tbody>
 
                     </table>
@@ -1212,7 +1125,7 @@
                 <div class="report-links">
 
 
-                    <button class="report-link">
+                    <button class="report-link" type="button" data-report-target="report-rooms">
 
                         <span class="report-link-icon blue">
                             <i class="fa-solid fa-bed"></i>
@@ -1236,7 +1149,7 @@
 
 
 
-                    <button class="report-link">
+                    <button class="report-link" type="button" data-report-target="report-reservations">
 
                         <span class="report-link-icon orange">
                             <i class="fa-solid fa-calendar-days"></i>
@@ -1260,7 +1173,7 @@
 
 
 
-                    <button class="report-link">
+                    <button class="report-link" type="button" data-report-target="report-finance">
 
                         <span class="report-link-icon green">
                             <i class="fa-solid fa-money-bill-trend-up"></i>
@@ -1284,7 +1197,7 @@
 
 
 
-                    <button class="report-link">
+                    <button class="report-link" type="button" data-report-target="report-guests">
 
                         <span class="report-link-icon purple">
                             <i class="fa-solid fa-users"></i>
@@ -1308,7 +1221,7 @@
 
 
 
-                    <button class="report-link">
+                    <button class="report-link" type="button" data-report-target="report-cleaning">
 
                         <span class="report-link-icon cyan">
                             <i class="fa-solid fa-broom"></i>
@@ -1332,7 +1245,7 @@
 
 
 
-                    <button class="report-link">
+                    <button class="report-link" type="button" data-report-target="report-maintenance">
 
                         <span class="report-link-icon red">
                             <i class="fa-solid fa-screwdriver-wrench"></i>
@@ -1363,6 +1276,33 @@
     </main>
 
 </div>
+
+<script>
+    (() => {
+        document.getElementById('exportPdf')?.addEventListener('click', () => window.print());
+
+        document.getElementById('exportExcel')?.addEventListener('click', () => {
+            const rows = [
+                ['Reporte', 'Valor'],
+                ['Período', '{{ $from->format('d/m/Y') }} - {{ $to->format('d/m/Y') }}'],
+                ['Ocupación', '{{ $ocupacion }}%'],
+                ['Ingresos', '{{ number_format($ingresos, 2, '.', '') }}'],
+                ['Reservas', '{{ $reservas->count() }}'],
+                ['Huéspedes', '{{ $reservas->pluck('huesped_id')->filter()->unique()->count() }}'],
+            ];
+            const csv = rows.map(row => row.map(value => `"${String(value).replaceAll('"', '""')}"`).join(',')).join('\n');
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+            link.download = `reporte-hotel-{{ $from->format('Ymd') }}-{{ $to->format('Ymd') }}.csv`;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        });
+
+        document.querySelectorAll('[data-report-target]').forEach(button => button.addEventListener('click', () => {
+            document.getElementById(button.dataset.reportTarget)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }));
+    })();
+</script>
 
 </body>
 
